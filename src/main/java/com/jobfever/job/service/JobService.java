@@ -11,4 +11,11 @@ public class JobService {
     public List<Job> getJobList() {
         return JobRepository.jobList.stream().toList();
     }
+
+    public boolean deleteOfferById(int jobId) {
+        return false;
+    }
+
+    public void editJobOffer(int jobId) {
+    }
 }
