@@ -31,4 +31,26 @@ public class CandidateService {
         }
         return false;
     }
+
+    public String getCandidateById(int candidateId){
+        return "Candidate with ID: " + candidateId;
+    }
+
+    public String editProfileById(int candidateId){
+        return "Profile edited by candidate with ID: " + candidateId;
+    }
+
+    public boolean deleteCandidateById(int candidateId){
+        return false;
+    }
+
+    public String getJobOffersAppliedForByCandidateId(int candidateId){
+        return "Job offers for which applied candidate: " + candidateId;
+    }
+
+    public String getFavouritesJobsByCandidateId(int candidateId){
+        return "Favourite job offers of candidate: " + candidateId;
+    }
+
+
 }
