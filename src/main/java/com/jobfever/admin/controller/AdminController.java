@@ -26,12 +26,12 @@ public class AdminController {
         return employerService.deleteEmployerById(employerId);
     }
 
-    @PostMapping("/admin/job/{job_id}")
+    @PutMapping("/admin/job/{job_id}")
     public void editJobOffer(@RequestParam("job_id") int jobId){
         jobService.editJobOffer(jobId);
     }
 
-    @PostMapping("/admin/job/{job_id}")
+    @PutMapping("/admin/job/{job_id}")
     public void editEmployerData(@PathVariable("id") int employerId){
         employerService.editEmployerData(employerId);
     }
