@@ -12,6 +12,18 @@ public class JobService {
         return JobRepository.jobList.stream().toList();
     }
 
+    public String addJobOfferById(int employerId, int jobId) {
+        return "";
+    }
+
+    public String editJobOfferById(int employerId, int jobId) {
+        return "";
+    }
+
+    public boolean deleteJobOfferById(int employerId, int jobId) {
+        return false;
+    }
+
     public boolean deleteOfferById(int jobId) {
         return false;
     }
