@@ -30,4 +30,8 @@ public class JobService {
 
     public void editJobOffer(int jobId) {
     }
+
+    public Job getJobById(int jobId) {
+        return JobRepository.jobList.stream().filter(job -> job.getJobId()==jobId).findFirst().orElse(null);
+    }
 }
