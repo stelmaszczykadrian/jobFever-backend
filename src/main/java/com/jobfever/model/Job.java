@@ -1,6 +1,5 @@
-package com.jobfever.job.model;
+package com.jobfever.model;
 
-import com.jobfever.employer.model.Employer;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 

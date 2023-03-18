@@ -1,10 +1,7 @@
-package com.jobfever.employer.service;
+package com.jobfever.service;
 
-import com.jobfever.candidate.model.Candidate;
-import com.jobfever.candidate.repository.CandidateRepository;
-import com.jobfever.employer.model.Employer;
-import com.jobfever.employer.repository.EmployerRepository;
-import org.springframework.web.bind.annotation.RequestBody;
+import com.jobfever.model.Employer;
+import com.jobfever.repository.EmployerRepository;
 
 public class EmployerService {
     public String getEmployerById(int employerId) {

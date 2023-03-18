@@ -1,7 +1,6 @@
-package com.jobfever.employer.repository;
+package com.jobfever.repository;
 
-import com.jobfever.candidate.model.Candidate;
-import com.jobfever.employer.model.Employer;
+import com.jobfever.model.Employer;
 
 import java.util.ArrayList;
 import java.util.Arrays;

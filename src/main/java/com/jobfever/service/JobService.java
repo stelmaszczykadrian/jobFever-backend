@@ -1,7 +1,7 @@
-package com.jobfever.job.service;
+package com.jobfever.service;
 
-import com.jobfever.job.model.Job;
-import com.jobfever.job.repository.JobRepository;
+import com.jobfever.model.Job;
+import com.jobfever.repository.JobRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
