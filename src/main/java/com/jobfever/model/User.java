@@ -5,9 +5,8 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class Job {
+public abstract class User {
     private int id;
-    private String title;
-    private Employer employer;
-
+    private String name;
+    private String password;
 }

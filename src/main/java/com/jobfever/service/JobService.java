@@ -32,6 +32,6 @@ public class JobService {
     }
 
     public Job getJobById(int jobId) {
-        return JobRepository.jobList.stream().filter(job -> job.getJobId()==jobId).findFirst().orElse(null);
+        return JobRepository.jobList.stream().filter(job -> job.getId()==jobId).findFirst().orElse(null);
     }
 }
