@@ -2,7 +2,9 @@ package com.jobfever.service;
 
 import com.jobfever.model.Employer;
 import com.jobfever.repository.EmployerRepository;
+import org.springframework.stereotype.Service;
 
+@Service
 public class EmployerService {
     public String getEmployerById(int employerId) {
         return "";
