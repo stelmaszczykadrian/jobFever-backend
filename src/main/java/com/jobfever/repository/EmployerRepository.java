@@ -9,8 +9,8 @@ import java.util.List;
 public interface EmployerRepository {
 
     public final static List<Employer> employerList = new ArrayList<>(Arrays.asList(
-            new Employer(1, "Samsung"),
-            new Employer(2, "Motorola"),
-            new Employer(3, "Sony")
+            new Employer(1, "Samsung", "password"),
+            new Employer(2, "Motorola", "password"),
+            new Employer(3, "Sony", "password")
     ));
 }

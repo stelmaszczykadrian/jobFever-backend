@@ -3,11 +3,9 @@ package com.jobfever.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
-@Data
-@AllArgsConstructor
-public class Candidate {
 
-    private int candidateId;
-    private String name;
-    private String password;
+public class Candidate extends User{
+    public Candidate(int id, String name, String password) {
+        super(id, name, password);
+    }
 }
