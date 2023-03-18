@@ -31,7 +31,8 @@ public class AdminController {
         jobService.editJobOffer(jobId);
     }
 
-    @PutMapping("/admin/job/{job_id}")
+    //TODO This endpoint is changed temporary.
+    @PutMapping("/admin/employer/{job_id}")
     public void editEmployerData(@PathVariable("id") int employerId){
         employerService.editEmployerData(employerId);
     }
