@@ -1,5 +1,6 @@
-DROP TABLE IF EXISTS public.employer;
+DROP TABLE IF EXISTS public.users;
 DROP TABLE IF EXISTS public.authorities;
+DROP TABLE IF EXISTS public.jobs;
 
 CREATE TABLE public.users (
                               id serial NOT NULL PRIMARY KEY,
@@ -13,6 +14,22 @@ create table public.authorities (
                             user_id INT not null,
                             authority VARCHAR(50) not null,
                             constraint fk_authorities_users foreign key(user_id) references users(id)
+);
+
+CREATE TABLE public.jobs(
+    id SERIAL NOT NULL PRIMARY KEY,
+    user_id INT NOT NULL,
+    title VARCHAR(100) NOT NULL,
+    description VARCHAR(1000) NOT NULL,
+    technical_requirements VARCHAR(1000) NOT NULL,
+    responsibilities VARCHAR(1000) NOT NULL,
+    who_we_are_looking_for VARCHAR(1000) NOT NULL,
+    benefits VARCHAR(1000) NOT NULL,
+    city VARCHAR(500) NOT NULL,
+    address VARCHAR(1000) NOT NULL,
+    salary DECIMAL NOT NULL,
+    currency VARCHAR(200) DEFAULT 'USD',
+    posting_date DATE NOT NULL DEFAULT CURRENT_DATE
 );
 
 
