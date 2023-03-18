@@ -1,12 +1,11 @@
-package com.jobfever;
+package com.jobfever.controller;
 
-import com.jobfever.candidate.model.Candidate;
-import com.jobfever.candidate.service.CandidateService;
-import com.jobfever.employer.model.Employer;
-import com.jobfever.employer.service.EmployerService;
-import com.jobfever.job.model.Job;
-import com.jobfever.job.service.JobService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.jobfever.model.Candidate;
+import com.jobfever.service.CandidateService;
+import com.jobfever.model.Employer;
+import com.jobfever.service.EmployerService;
+import com.jobfever.model.Job;
+import com.jobfever.service.JobService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

@@ -1,8 +1,7 @@
-package com.jobfever.candidate.service;
+package com.jobfever.service;
 
-import com.jobfever.candidate.model.Candidate;
-import com.jobfever.candidate.repository.CandidateRepository;
-import com.jobfever.job.repository.JobRepository;
+import com.jobfever.model.Candidate;
+import com.jobfever.repository.CandidateRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
