@@ -38,3 +38,7 @@ VALUES ('a', 'a', '$e0804$Gv0z3n4ujRCBES/uOnuH2OrDDv+MciIaiTkhR7osNMGO0jqqRfQ6Ff
 ;
 INSERT INTO public.authorities (user_id, authority)
 VALUES (1, 'ROLE_USER')
+;
+INSERT INTO public.jobs (user_id, title, description, technical_requirements, responsibilities, who_we_are_looking_for, benefits, city, address, salary)
+VALUES (1,'title', 'description', 'tech req', 'resp', 'who we are looking for?', 'benefits', 'city', 'adress', 1000)
+
