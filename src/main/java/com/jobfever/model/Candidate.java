@@ -8,4 +8,5 @@ public class Candidate extends User{
     public Candidate(int id, String name, String password) {
         super(id, name, password);
     }
+
 }
