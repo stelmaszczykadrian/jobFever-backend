@@ -60,7 +60,7 @@ public class MainController {
     }
 
     @GetMapping("/job/{job_id}")
-    public Job getEmployer(@PathVariable("job_id") int jobId){
+    public Job getJob(@PathVariable("job_id") int jobId){
         return jobService.getJobById(jobId);
     }
 
