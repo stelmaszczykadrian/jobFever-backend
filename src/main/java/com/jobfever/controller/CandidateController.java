@@ -1,11 +1,14 @@
 package com.jobfever.controller;
 
+import com.jobfever.model.Candidate;
 import com.jobfever.service.CandidateService;
 import com.jobfever.service.JobService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-@RequestMapping("/candidate")
+import java.util.Optional;
+
+@RequestMapping("/api/candidates")
 @RestController
 public class CandidateController {
 
@@ -19,7 +22,7 @@ public class CandidateController {
     }
 
     @GetMapping("/{candidate_id}")
-    public String getCandidate(@PathVariable("candidate_id") int candidateId){
+    public Optional<Candidate> getCandidate(@PathVariable("candidate_id") int candidateId){
         return candidateService.getCandidateById(candidateId);
     }
 
@@ -41,5 +44,13 @@ public class CandidateController {
     @DeleteMapping("/{candidate_id}")
     public boolean deleteCandidateById(@PathVariable("candidate_id") int candidateId){
         return candidateService.deleteCandidateById(candidateId);
+    }
+
+    @PostMapping("/add_candidate")
+    public void addCandidate(
+            @RequestParam("email") String email,
+            @RequestParam("password") String password
+    ) {
+        candidateService.addCandidate(email, password);
     }
 }
