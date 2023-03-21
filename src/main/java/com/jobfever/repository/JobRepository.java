@@ -9,8 +9,5 @@ import java.util.Arrays;
 import java.util.List;
 
 public interface JobRepository extends JpaRepository<Job, Integer> {
-
-
-
 }
 

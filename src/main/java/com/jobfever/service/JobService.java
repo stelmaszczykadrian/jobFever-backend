@@ -18,11 +18,9 @@ public class JobService {
         this.jobRepository = jobRepository;
     }
 
-
     public List<Job> getAllJobsOffer() {
         return jobRepository.findAll();
     }
-
 
     public void addJobOffer() {
         jobRepository.save(new Job(1,"Junior Java Developer","Szukamy do pracy","SQL,JAVA",
@@ -30,7 +28,6 @@ public class JobService {
                 "Znowu cokolwiek","Kolejny raz","Jeszcze raz",
                 5000,"He he", LocalDateTime.now()));
     }
-
 
     public Optional<Job> getJobById(int id) {
         return jobRepository.findById(id);

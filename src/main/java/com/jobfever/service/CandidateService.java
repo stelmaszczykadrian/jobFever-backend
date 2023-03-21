@@ -20,13 +20,12 @@ public class CandidateService {
         this.candidateRepository = candidateRepository;
     }
 
+    public Optional<Candidate> getCandidateById(int candidateId){
+        return candidateRepository.findById(candidateId);
+    }
 
     public void addCandidate(String email, String password){
         candidateRepository.save(new Candidate(email,password));
-    }
-
-    public Optional<Candidate> getCandidateById(int candidateId){
-        return candidateRepository.findById(candidateId);
     }
 
     public boolean deleteCandidateById(int candidateId) {
