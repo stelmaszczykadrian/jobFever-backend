@@ -32,11 +32,6 @@ public class MainController {
         return jobService.getJobList();
     }
 
-//    @GetMapping("/candidates")
-//    public List<Candidate> candidateList(){
-//        return candidateService.getCandidateList();
-//    }
-
     @PostMapping("/register-candidate")
     public Candidate addCandidate(@RequestBody Candidate candidate){
         return candidateService.addCandidate(candidate);
@@ -59,17 +54,10 @@ public class MainController {
         }
     }
 
-    @GetMapping("/job/{job_id}")
+    @GetMapping("/jobs/{job_id}")
     public Job getJob(@PathVariable("job_id") int jobId){
         return jobService.getJobById(jobId);
     }
 
-
-
-
-// Czy lepiej zrobic jeden panel do logowania dla candicates i employers i sprawdzac obie listy, czy raczej dac mozliwosc wyboru kim jestes?
-
-
-//    GET:       /job/filter/{{filter_by}},{{value}}/{{filter_by}},{{value}}
 
 }
