@@ -1,40 +1,50 @@
 package com.jobfever.controller;
 
+import com.jobfever.model.Admin;
+import com.jobfever.service.AdminService;
 import com.jobfever.service.EmployerService;
 import com.jobfever.service.JobService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+@RequestMapping("/api/admin")
 @RestController
 public class AdminController {
 
     private JobService jobService;
+    private AdminService adminService;
     private EmployerService employerService;
-
-    @GetMapping("/admin/statistics")
+    @Autowired
+    public AdminController(JobService jobService, AdminService adminService, EmployerService employerService){
+        this.jobService = jobService;
+        this.employerService = employerService;
+        this.adminService = adminService;
+    }
+    @GetMapping("/{id}")
+    public Optional<Admin> getAdmin(
+        @PathVariable("id") int id
+    ){
+        return adminService.getAdminById(id);
+    }
+//TODO this root is to discuss!.
+    @PostMapping("/add")
+    public void addAdmin(
+            @RequestParam("login") String login,
+            @RequestParam("password") String password
+    ){
+        adminService.addAdmin(login, password);
+    }
+    @GetMapping("/statistics")
     public String getStatistics(){
         return "Statistics";
     }
-
-    @DeleteMapping("/admin/job/{job_id}")
-    public boolean deleteJobOffer(
-            @PathVariable("job_id") int jobId){
-        return jobService.deleteOfferById(jobId);
-    }
-
-    @DeleteMapping("/admin/employer/{id}")
-    public boolean deleteEmployer(@PathVariable("id") int employerId){
-        return employerService.deleteEmployerById(employerId);
-    }
-
-    @PutMapping("/admin/job/{job_id}")
-    public void editJobOffer(@RequestParam("job_id") int jobId){
-        jobService.editJobOffer(jobId);
-    }
-
-    //TODO This endpoint is changed temporary.
-    @PutMapping("/admin/employer/{job_id}")
-    public void editEmployerData(@PathVariable("id") int employerId){
-        employerService.editEmployerData(employerId);
+    @GetMapping("/users")
+    public List<Object> getAllUsers(){
+        return adminService.getAllUsers();
     }
 
 }
