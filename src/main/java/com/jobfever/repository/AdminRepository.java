@@ -1,4 +1,7 @@
 package com.jobfever.repository;
 
-public interface AdminRepository {
+import com.jobfever.model.Admin;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface AdminRepository extends JpaRepository<Admin, Integer> {
 }
