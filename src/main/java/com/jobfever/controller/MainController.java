@@ -27,7 +27,6 @@ public class MainController {
     }
 
 
-
     @GetMapping("/login")
     public String showLoginPage() {
         return "login";
@@ -41,12 +40,8 @@ public class MainController {
         }
     }
 
-
-
-
 // Czy lepiej zrobic jeden panel do logowania dla candicates i employers i sprawdzac obie listy, czy raczej dac mozliwosc wyboru kim jestes?
 
 
 //    GET:       /job/filter/{{filter_by}},{{value}}/{{filter_by}},{{value}}
-
 }
