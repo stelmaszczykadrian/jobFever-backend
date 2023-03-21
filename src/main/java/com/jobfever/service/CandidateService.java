@@ -17,11 +17,11 @@ public class CandidateService {
 //        CandidateRepository.candidateList.add(candidate);
 //        return candidate;
 //    }
-//
-//    public List<Candidate> getCandidateList() {
-//        return CandidateRepository.candidateList.stream().toList();
-//    }
-//
+
+    public List<Candidate> getCandidateList() {
+        return CandidateRepository.candidateList.stream().toList();
+    }
+
 //    public boolean checkIfCandidateExists(Candidate candidate){
 //        for (Candidate candidate1: CandidateRepository.candidateList) {
 //            if (candidate.getName().equals(candidate1.getName())){
@@ -30,26 +30,26 @@ public class CandidateService {
 //        }
 //        return false;
 //    }
-//
-//    public String getCandidateById(int candidateId){
-//        return "Candidate with ID: " + candidateId;
-//    }
-//
-//    public String editProfileById(int candidateId){
-//        return "Profile edited by candidate with ID: " + candidateId;
-//    }
-//
-//    public boolean deleteCandidateById(int candidateId){
-//        return false;
-//    }
-//
-//    public String getJobOffersAppliedForByCandidateId(int candidateId){
-//        return "Job offers for which applied candidate: " + candidateId;
-//    }
-//
-//    public String getFavouritesJobsByCandidateId(int candidateId){
-//        return "Favourite job offers of candidate: " + candidateId;
-//    }
+
+    public String getCandidateById(int candidateId){
+        return "Candidate with ID: " + candidateId;
+    }
+
+    public String editProfileById(int candidateId){
+        return "Profile edited by candidate with ID: " + candidateId;
+    }
+
+    public boolean deleteCandidateById(int candidateId){
+        return false;
+    }
+
+    public String getJobOffersAppliedForByCandidateId(int candidateId){
+        return "Job offers for which applied candidate: " + candidateId;
+    }
+
+    public String getFavouritesJobsByCandidateId(int candidateId){
+        return "Favourite job offers of candidate: " + candidateId;
+    }
 
 
 }
