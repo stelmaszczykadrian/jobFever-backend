@@ -67,7 +67,7 @@ public class EmployerController {
         return employerService.deleteEmployerById(employerId);
     }
 
-        @PostMapping("/add_employer")
+    @PostMapping("/register-employer")
     public void addEmployer(
             @RequestParam("email") String email,
             @RequestParam("password") String password
