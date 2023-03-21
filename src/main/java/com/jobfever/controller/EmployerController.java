@@ -1,5 +1,6 @@
 package com.jobfever.controller;
 
+import com.jobfever.model.Candidate;
 import com.jobfever.model.Employer;
 import com.jobfever.service.EmployerService;
 import com.jobfever.service.JobService;
@@ -51,13 +52,11 @@ public class EmployerController {
         employerService.addEmployer(email, password);
     }
 
-    //TODO Make this work :D
-    @PutMapping("/employer/{id}")
-    public void editEmployerData(@PathVariable("id") int employerId){
-        employerService.editEmployerData(employerId);
+    @PutMapping("/{employer_id}")
+    public void editProfileById(
+            @PathVariable("employer_id") int employerId,
+            @RequestBody Employer employer
+    ){
+        employerService.editProfileById(employerId, employer);
     }
-
-
-
-
 }
