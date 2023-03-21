@@ -30,15 +30,6 @@ public class MainController {
         return jobService.getJobList();
     }
 
-//    @GetMapping("/candidates")
-//    public List<Candidate> candidateList(){
-//        return candidateService.getCandidateList();
-//    }
-
-//    @PostMapping("/register-candidate")
-//    public Candidate addCandidate(@RequestBody Candidate candidate){
-//        return candidateService.addCandidate(candidate);
-//    }
 
     @GetMapping("/login")
     public String showLoginPage() {

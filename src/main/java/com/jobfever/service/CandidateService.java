@@ -20,18 +20,7 @@ public class CandidateService {
         this.candidateRepository = candidateRepository;
     }
 
-    public List<Candidate> getCandidateList() {
-        return CandidateRepository.candidateList.stream().toList();
-    }
 
-//    public boolean checkIfCandidateExists(Candidate candidate){
-//        for (Candidate candidate1: CandidateRepository.candidateList) {
-//            if (candidate.getName().equals(candidate1.getName())){
-//                return true;
-//            }
-//        }
-//        return false;
-//    }
     public void addCandidate(String email, String password){
         candidateRepository.save(new Candidate(email,password));
     }
