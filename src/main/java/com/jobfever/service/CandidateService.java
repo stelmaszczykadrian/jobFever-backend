@@ -10,26 +10,26 @@ import java.util.List;
 @Service
 public class CandidateService {
 
-    public Candidate addCandidate(@RequestBody Candidate candidate){
-        if (checkIfCandidateExists(candidate)){
-            throw new IllegalArgumentException("User already exists");
-        }
-        CandidateRepository.candidateList.add(candidate);
-        return candidate;
-    }
+//    public Candidate addCandidate(@RequestBody Candidate candidate){
+//        if (checkIfCandidateExists(candidate)){
+//            throw new IllegalArgumentException("User already exists");
+//        }
+//        CandidateRepository.candidateList.add(candidate);
+//        return candidate;
+//    }
 
     public List<Candidate> getCandidateList() {
         return CandidateRepository.candidateList.stream().toList();
     }
 
-    public boolean checkIfCandidateExists(Candidate candidate){
-        for (Candidate candidate1: CandidateRepository.candidateList) {
-            if (candidate.getName().equals(candidate1.getName())){
-                return true;
-            }
-        }
-        return false;
-    }
+//    public boolean checkIfCandidateExists(Candidate candidate){
+//        for (Candidate candidate1: CandidateRepository.candidateList) {
+//            if (candidate.getName().equals(candidate1.getName())){
+//                return true;
+//            }
+//        }
+//        return false;
+//    }
 
     public String getCandidateById(int candidateId){
         return "Candidate with ID: " + candidateId;

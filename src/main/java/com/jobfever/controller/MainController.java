@@ -37,10 +37,10 @@ public class MainController {
 //        return candidateService.getCandidateList();
 //    }
 
-    @PostMapping("/register-candidate")
-    public Candidate addCandidate(@RequestBody Candidate candidate){
-        return candidateService.addCandidate(candidate);
-    }
+//    @PostMapping("/register-candidate")
+//    public Candidate addCandidate(@RequestBody Candidate candidate){
+//        return candidateService.addCandidate(candidate);
+//    }
 
     @PostMapping("/register-employer")
     public Employer addEmployer(@RequestBody Employer employer) {
