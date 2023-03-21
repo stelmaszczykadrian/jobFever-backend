@@ -54,7 +54,7 @@ public class CandidateController {
         return candidateService.deleteCandidateById(candidateId);
     }
 
-    @PostMapping("/add_candidate")
+    @PostMapping("/register-candidate")
     public void addCandidate(
             @RequestParam("email") String email,
             @RequestParam("password") String password
