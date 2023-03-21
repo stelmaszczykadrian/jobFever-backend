@@ -1,11 +1,14 @@
 package com.jobfever.controller;
 
+import com.jobfever.model.Employer;
 import com.jobfever.service.EmployerService;
 import com.jobfever.service.JobService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-@RequestMapping("/employer")
+import java.util.Optional;
+
+@RequestMapping("/api/employers")
 @RestController
 public class EmployerController {
 
@@ -19,7 +22,7 @@ public class EmployerController {
     }
 
     @GetMapping("/{employer_id}")
-    public String getEmployer(
+    public Optional<Employer> getEmployer(
             @PathVariable("employer_id") int employerId
     ){
         return employerService.getEmployerById(employerId);
@@ -54,7 +57,7 @@ public class EmployerController {
             @PathVariable("job_id") int jobId,
             @PathVariable("employer_id") int employerId
     ){
-        return employerService.getApplicantsByJobOfferById(employerId,jobId);
+        return employerService.getApplicantsByJobOfferId(employerId,jobId);
     }
 
     @DeleteMapping("/{employer_id}")
@@ -64,6 +67,13 @@ public class EmployerController {
         return employerService.deleteEmployerById(employerId);
     }
 
+        @PostMapping("/add_employer")
+    public void addEmployer(
+            @RequestParam("email") String email,
+            @RequestParam("password") String password
+    ) {
+        employerService.addEmployer(email, password);
+    }
 
 
 
