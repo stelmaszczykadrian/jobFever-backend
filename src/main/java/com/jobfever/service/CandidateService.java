@@ -48,9 +48,15 @@ public class CandidateService {
         return false;
     }
 
-    //    change this method to use Hibernate!
-    public String editProfileById(int candidateId){
-        return "Profile edited by candidate with ID: " + candidateId;
+    public void editProfileById(int candidateId, Candidate candidate){
+        Optional<Candidate> candidateToUpdate = getCandidateById(candidateId);
+
+        candidateToUpdate.ifPresent(c -> {
+            c.setEmail(candidate.getEmail());
+            c.setPassword(candidate.getPassword());
+        });
+
+        candidateRepository.save(candidateToUpdate.orElseThrow(() -> new IllegalArgumentException("Cannot find candidate with id: " + candidateId)));
     }
 
     //    change this method to use Hibernate!
@@ -62,6 +68,4 @@ public class CandidateService {
     public String getFavouritesJobsByCandidateId(int candidateId){
         return "Favourite job offers of candidate: " + candidateId;
     }
-
-
 }

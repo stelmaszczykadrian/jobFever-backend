@@ -26,10 +26,18 @@ public class CandidateController {
         return candidateService.getCandidateById(candidateId);
     }
 
-    @PutMapping("/{candidate_id}/edit")
-    public String editProfile(@PathVariable("candidate_id") int candidateId){
-        return candidateService.editProfileById(candidateId);
+    @PutMapping("/{candidate_id}")
+    public void editProfileById(
+            @PathVariable("candidate_id") int candidateId,
+            @RequestBody Candidate candidate
+    ){
+        candidateService.editProfileById(candidateId, candidate);
     }
+
+//    @PutMapping("/{candidate_id}/edit")
+//    public void editProfileById(
+//            @PathVariable ("candidate_id") int candidateId)
+//    )
 
     @GetMapping("/{candidate_id}/my-jobs")
     public String getJobsOffersAppliedFor(@PathVariable("candidate_id") int candidateId){
