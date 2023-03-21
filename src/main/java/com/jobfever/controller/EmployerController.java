@@ -5,7 +5,7 @@ import com.jobfever.service.JobService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-@RequestMapping("/employer")
+@RequestMapping("/api/employers")
 @RestController
 public class EmployerController {
 
