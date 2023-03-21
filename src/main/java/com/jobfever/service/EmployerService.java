@@ -1,5 +1,6 @@
 package com.jobfever.service;
 
+import com.jobfever.model.Candidate;
 import com.jobfever.model.Employer;
 import com.jobfever.repository.EmployerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,9 +20,8 @@ public class EmployerService {
         return employerRepository.findById(employerId);
     }
 
-//    change this method to use Hibernate! (getApplicantsByJobOfferId)
-    public String getApplicantsByJobOfferId(int employerId, int jobId) {
-        return "";
+    public void addEmployer(String email, String password){
+        employerRepository.save(new Employer(email,password));
     }
 
     public boolean deleteEmployerById(int employerId) {
@@ -32,11 +32,19 @@ public class EmployerService {
         return false;
     }
 
-    public void editEmployerData(int employerId) {
+    public void editProfileById(int employerId, Employer employer){
+        Optional<Employer> employerToUpdate = getEmployerById(employerId);
+
+        employerToUpdate.ifPresent(e -> {
+            e.setEmail(employer.getEmail());
+            e.setPassword(employer.getPassword());
+        });
+
+        employerRepository.save(employerToUpdate.orElseThrow(() -> new IllegalArgumentException("Cannot find employer with id: " + employerId)));
     }
 
-    public void addEmployer(String email, String password){
-        employerRepository.save(new Employer(email,password));
+    //    change this method to use Hibernate! (getApplicantsByJobOfferId)
+    public String getApplicantsByJobOfferId(int employerId, int jobId) {
+        return "";
     }
-
 }
