@@ -26,6 +26,14 @@ public class CandidateController {
         return candidateService.getCandidateById(candidateId);
     }
 
+    @PostMapping("/register-candidate")
+    public void addCandidate(
+            @RequestParam("email") String email,
+            @RequestParam("password") String password
+    ) {
+        candidateService.addCandidate(email, password);
+    }
+
     @PutMapping("/{candidate_id}")
     public void editProfileById(
             @PathVariable("candidate_id") int candidateId,
@@ -34,10 +42,10 @@ public class CandidateController {
         candidateService.editProfileById(candidateId, candidate);
     }
 
-//    @PutMapping("/{candidate_id}/edit")
-//    public void editProfileById(
-//            @PathVariable ("candidate_id") int candidateId)
-//    )
+    @DeleteMapping("/{candidate_id}")
+    public boolean deleteCandidateById(@PathVariable("candidate_id") int candidateId){
+        return candidateService.deleteCandidateById(candidateId);
+    }
 
     @GetMapping("/{candidate_id}/my-jobs")
     public String getJobsOffersAppliedFor(@PathVariable("candidate_id") int candidateId){
@@ -47,18 +55,5 @@ public class CandidateController {
     @GetMapping("/{candidate_id}/favourites")
     public String getFavouritesJobs(@PathVariable("candidate_id") int candidateId){
         return candidateService.getFavouritesJobsByCandidateId(candidateId);
-    }
-
-    @DeleteMapping("/{candidate_id}")
-    public boolean deleteCandidateById(@PathVariable("candidate_id") int candidateId){
-        return candidateService.deleteCandidateById(candidateId);
-    }
-
-    @PostMapping("/register-candidate")
-    public void addCandidate(
-            @RequestParam("email") String email,
-            @RequestParam("password") String password
-    ) {
-        candidateService.addCandidate(email, password);
     }
 }

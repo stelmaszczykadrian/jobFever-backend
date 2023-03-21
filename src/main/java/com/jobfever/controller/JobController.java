@@ -42,13 +42,11 @@ public class JobController {
         jobService.updateJobOffer(id, job);
     }
 
-
     @DeleteMapping("/{id}")
     public void deleteJobOfferById(
             @PathVariable int id
     ){
         jobService.deleteJobOfferById(id);
     }
-
 
 }

@@ -26,7 +26,6 @@ public class MainController {
         return "Welcome on JobFever site";
     }
 
-
     @GetMapping("/login")
     public String showLoginPage() {
         return "login";
