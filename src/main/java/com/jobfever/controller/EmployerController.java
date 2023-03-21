@@ -75,6 +75,12 @@ public class EmployerController {
         employerService.addEmployer(email, password);
     }
 
+    //TODO Make this work :D
+    @PutMapping("/employer/{id}")
+    public void editEmployerData(@PathVariable("id") int employerId){
+        employerService.editEmployerData(employerId);
+    }
+
 
 
 
