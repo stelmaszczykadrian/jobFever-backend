@@ -9,6 +9,7 @@ import com.jobfever.service.JobService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class MainController {
@@ -25,10 +26,6 @@ public class MainController {
         return "Welcome on JobFever site";
     }
 
-    @GetMapping("/jobs")
-    public List<Job> jobList(){
-        return jobService.getJobList();
-    }
 
 
     @GetMapping("/login")
@@ -42,11 +39,6 @@ public class MainController {
         } else {
             throw new Exception("Wrong user or password");
         }
-    }
-
-    @GetMapping("/job/{job_id}")
-    public Job getJob(@PathVariable("job_id") int jobId){
-        return jobService.getJobById(jobId);
     }
 
 
