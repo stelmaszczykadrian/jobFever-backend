@@ -23,7 +23,7 @@ public class Candidate {
     private String password;
 
     @Enumerated(EnumType.STRING)
-    private RoleType roleType;
+    private RoleType roleType = RoleType.CANDIDATE;
 
     public Candidate(String email, String password) {
         this.email = email;

@@ -24,8 +24,8 @@ public class CandidateService {
         return candidateRepository.findById(candidateId);
     }
 
-    public void addCandidate(String email, String password){
-        candidateRepository.save(new Candidate(email,password));
+    public void addCandidate(Candidate candidate){
+        candidateRepository.save(candidate);
     }
 
     public boolean deleteCandidateById(int candidateId) {
