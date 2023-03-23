@@ -3,6 +3,7 @@ package com.jobfever.controller;
 import com.jobfever.model.Candidate;
 import com.jobfever.service.CandidateService;
 import com.jobfever.service.JobService;
+import jakarta.persistence.Access;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,6 +11,7 @@ import java.util.Optional;
 
 @RequestMapping("/api/candidates")
 @RestController
+@CrossOrigin(origins = {"http://localhost:3000/"}, allowedHeaders = "*", allowCredentials = "true")
 public class CandidateController {
 
     private JobService jobService;
@@ -28,10 +30,9 @@ public class CandidateController {
 
     @PostMapping("/register-candidate")
     public void addCandidate(
-            @RequestParam("email") String email,
-            @RequestParam("password") String password
+            @RequestBody Candidate candidate
     ) {
-        candidateService.addCandidate(email, password);
+        candidateService.addCandidate(candidate);
     }
 
     @PutMapping("/{candidate_id}")

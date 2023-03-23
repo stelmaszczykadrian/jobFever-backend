@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
+@CrossOrigin(origins = {"http://localhost:3000/"}, allowedHeaders = "*", allowCredentials = "true")
 public class MainController {
 
     private CandidateService candidateService;
@@ -31,12 +32,19 @@ public class MainController {
         return "login";
     }
     @PostMapping("/login")
-    public String submitLoginForm(@RequestParam("username") String username, @RequestParam("password") String password) throws Exception {
-        if (username.equals("myuser") && password.equals("mypassword")) {
-            return "redirect:/jobs";
-        } else {
-            throw new Exception("Wrong user or password");
-        }
+    public String submitLoginForm(@RequestBody Candidate candidate) throws Exception {
+//        if (username.equals("myuser") && password.equals("mypassword")) {
+//            return "redirect:/jobs";
+//        } else {
+//            throw new Exception("Wrong user or password");
+//        }
+//        System.out.println(username);
+//        System.out.println(password);
+        System.out.println(candidate.getEmail());
+        System.out.println(candidate.getPassword());
+
+
+        return null;
     }
 
 // Czy lepiej zrobic jeden panel do logowania dla candicates i employers i sprawdzac obie listy, czy raczej dac mozliwosc wyboru kim jestes?
