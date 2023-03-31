@@ -5,6 +5,7 @@ import com.jobfever.repository.CandidateRepository;
 import com.jobfever.service.CandidateService;
 import com.jobfever.service.JobService;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 import java.util.Objects;
 

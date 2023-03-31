@@ -10,6 +10,7 @@ import java.util.Optional;
 
 @RequestMapping("/api/jobs")
 @RestController
+@CrossOrigin(origins = {"http://localhost:3000/"}, allowedHeaders = "*", allowCredentials = "true")
 public class JobController {
 
     private JobService jobService;
@@ -17,14 +18,19 @@ public class JobController {
     public JobController(JobService jobService) {
         this.jobService = jobService;
     }
-    @GetMapping
+    @GetMapping//- > sortowanie od najnowszych
     public List<Job> getAllJobs(){
         return jobService.getAllJobsOffer();
     }
 
+
     @PostMapping
-    public void addJobOffer(){
-        jobService.addJobOffer();
+    public void addJobOffer(
+            @RequestBody Job job
+    ){
+
+        System.out.println(job.getDescription());
+        jobService.addJobOffer(job);
     }
 
     @GetMapping("/{id}")
@@ -34,7 +40,7 @@ public class JobController {
         return jobService.getJobById(id);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/{id}") // zabezpieczyć żeby employer, employerowi nie zmieniał opisu oferty
     public void updateJobOfferById(
             @PathVariable int id,
             @RequestBody Job job
