@@ -1,12 +1,14 @@
 package com.jobfever.controller;
 
 import com.jobfever.model.Candidate;
+import com.jobfever.repository.CandidateRepository;
 import com.jobfever.service.CandidateService;
 import com.jobfever.service.JobService;
-import jakarta.persistence.Access;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @RequestMapping("/api/candidates")
@@ -16,11 +18,13 @@ public class CandidateController {
 
     private JobService jobService;
     private CandidateService candidateService;
+    private CandidateRepository candidateRepository;
 
     @Autowired
-    public CandidateController(JobService jobService, CandidateService candidateService){
+    public CandidateController(JobService jobService, CandidateService candidateService, CandidateRepository candidateRepository){
         this.jobService = jobService;
         this.candidateService = candidateService;
+        this.candidateRepository = candidateRepository;
     }
 
     @GetMapping("/{candidate_id}")
@@ -28,7 +32,7 @@ public class CandidateController {
         return candidateService.getCandidateById(candidateId);
     }
 
-    @PostMapping("/register-candidate")
+    @PostMapping("/register")
     public void addCandidate(
             @RequestBody Candidate candidate
     ) {
@@ -41,6 +45,20 @@ public class CandidateController {
             @RequestBody Candidate candidate
     ){
         candidateService.editProfileById(candidateId, candidate);
+    }
+    @PostMapping("/login")
+    public String submitLoginForm(@RequestBody Candidate candidate){
+        List<Candidate> candidates = candidateRepository.findAll();
+        for (Candidate i : candidates){
+            if (Objects.equals(candidate.getEmail(), i.getEmail()) &&
+                    Objects.equals(candidate.getPassword(), i.getPassword())){
+                System.out.println("git");
+                return "Logging successful";
+            }
+        }
+
+
+        return null;
     }
 
     @DeleteMapping("/{candidate_id}")
