@@ -1,16 +1,13 @@
 package com.jobfever.model;
 
-import com.jobfever.role.Role;
 import com.jobfever.role.RoleType;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import java.util.List;
 
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
 @Table(name = "employers")
@@ -28,6 +25,9 @@ public class Employer {
 
     @Enumerated(EnumType.STRING)
     private RoleType roleType;
+
+    @OneToMany
+    private List<Job> job;
 
     public Employer(String email, String password) {
         this.email = email;

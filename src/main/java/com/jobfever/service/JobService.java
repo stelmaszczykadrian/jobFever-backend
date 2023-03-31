@@ -1,5 +1,6 @@
 package com.jobfever.service;
 
+import com.jobfever.model.Employer;
 import com.jobfever.model.Job;
 import com.jobfever.repository.JobRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,11 +23,8 @@ public class JobService {
         return jobRepository.findAll();
     }
 
-    public void addJobOffer() {
-        jobRepository.save(new Job(1,"Junior Java Developer","Szukamy do pracy","SQL,JAVA",
-                "Cokolwiek","Cokolwiek",
-                "Znowu cokolwiek","Kolejny raz","Jeszcze raz",
-                5000,"He he", LocalDateTime.now()));
+    public void addJobOffer(Job job) {
+        jobRepository.save(job);
     }
 
     public Optional<Job> getJobById(int id) {
@@ -34,23 +32,23 @@ public class JobService {
     }
 
     public void updateJobOffer(int id, Job job) {
-        Optional<Job> jobToUpdate = getJobById(id);
-
-        jobToUpdate.ifPresent(j -> {
-            j.setTitle(job.getTitle());
-            j.setDescription(job.getDescription());
-            j.setTechnicalRequirements(job.getTechnicalRequirements());
-            j.setResponsibilities(job.getResponsibilities());
-            j.setWhoWeAreLookingFor(job.getWhoWeAreLookingFor());
-            j.setBenefits(job.getBenefits());
-            j.setCity(job.getCity());
-            j.setAddress(job.getAddress());
-            j.setSalary(job.getSalary());
-            j.setCurrency(job.getCurrency());
-            j.setPostingDate(job.getPostingDate());
-        });
-
-        jobRepository.save(jobToUpdate.orElseThrow(() -> new IllegalArgumentException("Job Offer not found with id: " + id)));
+//        Optional<Job> jobToUpdate = getJobById(id);
+//
+//        jobToUpdate.ifPresent(j -> {
+//            j.setTitle(job.getTitle());
+//            j.setDescription(job.getDescription());
+//            j.setTechnicalRequirements(job.getTechnicalRequirements());
+//            j.setResponsibilities(job.getResponsibilities());
+//            j.setWhoWeAreLookingFor(job.getWhoWeAreLookingFor());
+//            j.setBenefits(job.getBenefits());
+//            j.setCity(job.getCity());
+//            j.setAddress(job.getAddress());
+//            j.setSalary(job.getSalary());
+//            j.setCurrency(job.getCurrency());
+//            j.setPostingDate(job.getPostingDate());
+//        });
+//
+//        jobRepository.save(jobToUpdate.orElseThrow(() -> new IllegalArgumentException("Job Offer not found with id: " + id)));
     }
 
     public void deleteJobOfferById(int id) {

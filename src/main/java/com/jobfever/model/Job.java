@@ -1,5 +1,4 @@
 package com.jobfever.model;
-
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -17,17 +16,24 @@ public class Job {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int jobId;
     private String title;
+    @Column(length = 2000)
     private String description;
     private String technicalRequirements;
+    @Column(length = 2000)
     private String responsibilities;
+    @Column(length = 2000)
     private String whoWeAreLookingFor;
+    @Column(length = 2000)
     private String benefits;
-    private String city;
-    private String address;
-    private float salary;
-    private String currency;
-    private LocalDateTime postingDate;
-
-//    private Employer employer;
+    private String location;
+    private float salaryFrom;
+    private float salaryTo;
+    private String jobType;
+    private String currencyType;
+    private String workOptions;
+    private LocalDateTime postingDate = LocalDateTime.now();
+    //many to one
+    @ManyToOne
+    private Employer employer;
 
 }

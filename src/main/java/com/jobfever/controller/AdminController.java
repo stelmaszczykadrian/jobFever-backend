@@ -6,13 +6,11 @@ import com.jobfever.service.EmployerService;
 import com.jobfever.service.JobService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 @RequestMapping("/api/admin")
 @RestController
+@CrossOrigin(origins = {"http://localhost:3000/"}, allowedHeaders = "*", allowCredentials = "true")
 public class AdminController {
 
     private JobService jobService;

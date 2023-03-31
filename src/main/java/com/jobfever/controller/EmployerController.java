@@ -1,6 +1,5 @@
 package com.jobfever.controller;
 
-import com.jobfever.model.Candidate;
 import com.jobfever.model.Employer;
 import com.jobfever.service.EmployerService;
 import com.jobfever.service.JobService;
@@ -11,6 +10,7 @@ import java.util.Optional;
 
 @RequestMapping("/api/employers")
 @RestController
+@CrossOrigin(origins = {"http://localhost:3000/"}, allowedHeaders = "*", allowCredentials = "true")
 public class EmployerController {
 
     private JobService jobService;
