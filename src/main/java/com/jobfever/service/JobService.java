@@ -1,12 +1,10 @@
 package com.jobfever.service;
-
-import com.jobfever.model.Employer;
 import com.jobfever.model.Job;
 import com.jobfever.repository.JobRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
-
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -53,5 +51,10 @@ public class JobService {
 
     public void deleteJobOfferById(int id) {
         jobRepository.deleteById(id);
+    }
+
+
+    public Page<Job> findJobWithPagination(int page){
+        return jobRepository.findAll(PageRequest.of(page, 5));
     }
 }
