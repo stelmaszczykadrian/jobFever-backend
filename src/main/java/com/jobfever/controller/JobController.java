@@ -3,6 +3,7 @@ package com.jobfever.controller;
 import com.jobfever.model.Job;
 import com.jobfever.service.JobService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -54,5 +55,11 @@ public class JobController {
     ){
         jobService.deleteJobOfferById(id);
     }
+
+    @GetMapping("/pagination/{page}")
+    public Page<Job> getJobsByPage(@PathVariable int page){
+        return jobService.findJobWithPagination(page);
+    }
+
 
 }
