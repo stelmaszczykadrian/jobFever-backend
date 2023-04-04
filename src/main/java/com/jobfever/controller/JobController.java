@@ -11,7 +11,7 @@ import java.util.Optional;
 
 @RequestMapping("/api/jobs")
 @RestController
-@CrossOrigin(origins = {"http://localhost:3000/"}, allowedHeaders = "*", allowCredentials = "true")
+@CrossOrigin(origins = {"http://localhost:3000/"}, allowedHeaders = "*", allowCredentials = "true", maxAge = 3600)
 public class JobController {
 
     private JobService jobService;
@@ -56,8 +56,8 @@ public class JobController {
         jobService.deleteJobOfferById(id);
     }
 
-    @GetMapping("/pagination/{page}")
-    public Page<Job> getJobsByPage(@PathVariable int page){
+    @GetMapping("/")
+    public Page<Job> getJobsByPage(@RequestParam int page){
         return jobService.findJobWithPagination(page);
     }
 
