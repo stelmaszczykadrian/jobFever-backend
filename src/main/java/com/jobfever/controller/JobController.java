@@ -57,8 +57,8 @@ public class JobController {
     }
 
     @GetMapping("/")
-    public Page<Job> getJobsByPage(@RequestParam int page, String field){
-        return jobService.findJobWithPaginationSortedByResponsibilities(page, field);
+    public Page<Job> getJobsByPage(@RequestParam int page, String sortBy, String field){
+        return jobService.findJobWithPaginationSortedByResponsibilities(page, sortBy, field);
     }
 
 

@@ -56,8 +56,8 @@ public class JobService {
     }
 
 
-    public Page<Job> findJobWithPaginationSortedByResponsibilities(int page, String field){
-        return new PageImpl<>(jobRepository.findAll(PageRequest.of(page, 10, Sort.by(Sort.Direction.ASC, "responsibilities"))).stream()
+    public Page<Job> findJobWithPaginationSortedByResponsibilities(int page, String sortBy, String field){
+        return new PageImpl<>(jobRepository.findAll(PageRequest.of(page, 10, Sort.by(sortBy))).stream()
                 .filter(i -> i.getResponsibilities().contains(field)).toList());
 
     }
