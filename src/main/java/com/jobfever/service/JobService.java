@@ -55,6 +55,6 @@ public class JobService {
 
 
     public Page<Job> findJobWithPagination(int page){
-        return jobRepository.findAll(PageRequest.of(page, 5));
+        return jobRepository.findAll(PageRequest.of(page, 10));
     }
 }
