@@ -3,7 +3,9 @@ import com.jobfever.model.Job;
 import com.jobfever.repository.JobRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
@@ -54,7 +56,9 @@ public class JobService {
     }
 
 
-    public Page<Job> findJobWithPagination(int page){
-        return jobRepository.findAll(PageRequest.of(page, 10));
+    public Page<Job> findJobWithPaginationSortedByResponsibilities(int page, String field){
+        return new PageImpl<>(jobRepository.findAll(PageRequest.of(page, 10, Sort.by(Sort.Direction.ASC, "responsibilities"))).stream()
+                .filter(i -> i.getResponsibilities().contains(field)).toList());
+
     }
 }
