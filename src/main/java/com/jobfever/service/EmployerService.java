@@ -20,8 +20,8 @@ public class EmployerService {
         return employerRepository.findById(employerId);
     }
 
-    public void addEmployer(String email, String password){
-        employerRepository.save(new Employer(email,password));
+    public void addEmployer(Employer employer){
+        employerRepository.save(employer);
     }
 
     public boolean deleteEmployerById(int employerId) {
@@ -47,4 +47,11 @@ public class EmployerService {
     public String getApplicantsByJobOfferId(int employerId, int jobId) {
         return "";
     }
+
+    public boolean isEmployerExists(String email) {
+        Employer employer = employerRepository.findEmployerByEmail(email);
+        return employer != null;
+    }
+
+
 }

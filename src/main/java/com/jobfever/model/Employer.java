@@ -2,8 +2,7 @@ package com.jobfever.model;
 
 import com.jobfever.role.RoleType;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import java.util.List;
@@ -18,6 +17,13 @@ public class Employer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @NotEmpty
+    private String companyName;
+    @NotEmpty
+    private String nameAndSurname;
+//    @NotNull
+    @Min(value=9)
+    private int phoneNumber;
     @Email
     private String email;
     @NotBlank
