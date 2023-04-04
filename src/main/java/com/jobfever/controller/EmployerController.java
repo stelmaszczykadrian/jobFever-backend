@@ -4,6 +4,8 @@ import com.jobfever.model.Employer;
 import com.jobfever.service.EmployerService;
 import com.jobfever.service.JobService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
@@ -44,12 +46,17 @@ public class EmployerController {
         return employerService.deleteEmployerById(employerId);
     }
 
-    @PostMapping("/register-employer")
-    public void addEmployer(
-            @RequestParam("email") String email,
-            @RequestParam("password") String password
+    @PostMapping()
+    public ResponseEntity<String> addEmployer(
+            @RequestBody Employer employer
     ) {
-        employerService.addEmployer(email, password);
+        if(employerService.isEmployerExists(employer.getEmail())){
+            return new ResponseEntity<>("Employer already exists.",
+                    HttpStatus.BAD_REQUEST);
+        }
+        employerService.addEmployer(employer);
+        return new ResponseEntity<>("Employer added successfully.",
+                HttpStatus.OK);
     }
 
     @PutMapping("/{employer_id}")
