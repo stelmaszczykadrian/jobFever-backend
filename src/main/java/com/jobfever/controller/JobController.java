@@ -62,8 +62,8 @@ public class JobController {
         return jobService.findJobWithPaginationSortedByResponsibilities(page, sortBy, field);
     }
     @GetMapping("/by-employer")
-    public Page<Job> getJobsByEmployer(@RequestParam int page, int employer_id){
-        return jobService.findJobWithPaginationSortedByResponsibilities(page, employer_id);
+    public Page<Job> getJobsByEmployerId(@RequestParam int id){
+        return jobService.findJobByEmployer(id);
     }
 
 

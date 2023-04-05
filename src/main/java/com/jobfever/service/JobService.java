@@ -61,8 +61,8 @@ public class JobService {
                 .filter(i -> i.getResponsibilities().contains(field)).toList());
 
     }
-    public Page<Job> findJobWithPaginationSortedByResponsibilities(int page, int employerId){
-        return new PageImpl<>(jobRepository.findAll(PageRequest.of(page, 10, Sort.by("postingDate")))
+    public Page<Job> findJobByEmployer(int employerId){
+        return new PageImpl<>(jobRepository.findAll()
                 .stream()
                 .filter(i ->
                         i.getEmployer().getId() == employerId)
