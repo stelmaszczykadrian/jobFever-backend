@@ -8,9 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 @RequestMapping("/api/candidates")
@@ -55,18 +52,18 @@ public class CandidateController {
         candidateService.editProfileById(candidateId, candidate);
     }
     @PostMapping("/login")
-    public String submitLoginForm(@RequestBody Candidate candidate){
-        List<Candidate> candidates = candidateRepository.findAll();
-        for (Candidate i : candidates){
-            if (Objects.equals(candidate.getEmail(), i.getEmail()) &&
-                    Objects.equals(candidate.getPassword(), i.getPassword())){
-                System.out.println("git");
-                return "Logging successful";
-            }
+    public ResponseEntity<String> submitLoginForm(@RequestBody Candidate candidate){
+        Candidate existingCandidate = candidateService.login(candidate.getEmail(),candidate.getPassword());
+
+        if (existingCandidate != null) {
+            // Perform login logic
+            return new ResponseEntity<>("Login successful.",
+                    HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>("Invalid email or password.",
+                    HttpStatus.BAD_REQUEST);
         }
 
-
-        return null;
     }
 
     @DeleteMapping("/{candidate_id}")

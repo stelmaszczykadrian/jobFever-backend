@@ -57,4 +57,15 @@ public class CandidateService {
         Candidate candidate = candidateRepository.findCandidateByEmail(email);
         return candidate != null;
     }
+
+    public Candidate login(String email, String password) {
+        Candidate existingCandidate = candidateRepository.findByEmailAndPassword(email,password);
+
+        if(existingCandidate != null){
+            return existingCandidate;
+        }else{
+            return null;
+        }
+
+    }
 }
