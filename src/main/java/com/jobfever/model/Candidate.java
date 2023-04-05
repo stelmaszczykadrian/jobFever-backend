@@ -4,6 +4,8 @@ import com.jobfever.role.RoleType;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -16,9 +18,10 @@ public class Candidate {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @NotEmpty
     @Email
     private String email;
-    @NotBlank
+    @NotEmpty
     private String password;
 
     @Enumerated(EnumType.STRING)

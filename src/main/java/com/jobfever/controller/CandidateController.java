@@ -5,6 +5,8 @@ import com.jobfever.repository.CandidateRepository;
 import com.jobfever.service.CandidateService;
 import com.jobfever.service.JobService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -32,11 +34,17 @@ public class CandidateController {
         return candidateService.getCandidateById(candidateId);
     }
 
-    @PostMapping("/register")
-    public void addCandidate(
+    @PostMapping()
+    public ResponseEntity<String> addCandidate(
             @RequestBody Candidate candidate
     ) {
+        if(candidateService.isCandidateExists(candidate.getEmail())){
+            return new ResponseEntity<>("Candidate already exists.",
+                    HttpStatus.BAD_REQUEST);
+        }
         candidateService.addCandidate(candidate);
+        return new ResponseEntity<>("Candidate added successfully.",
+                HttpStatus.OK);
     }
 
     @PutMapping("/{candidate_id}")
