@@ -1,6 +1,5 @@
 package com.jobfever.service;
 
-import com.jobfever.model.Candidate;
 import com.jobfever.model.Employer;
 import com.jobfever.repository.EmployerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,9 +48,17 @@ public class EmployerService {
     }
 
     public boolean isEmployerExists(String email) {
-        Employer employer = employerRepository.findEmployerByEmail(email);
+        Employer employer = employerRepository.findByEmail(email);
         return employer != null;
     }
 
 
+    public Employer login(String email, String password) {
+        Employer existingEmployer = employerRepository.findByEmailAndPassword(email,password);
+        if(existingEmployer != null){
+            return existingEmployer;
+        }else{
+            return null;
+        }
+    }
 }
