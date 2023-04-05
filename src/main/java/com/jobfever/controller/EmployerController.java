@@ -1,5 +1,6 @@
 package com.jobfever.controller;
 
+import com.jobfever.model.Candidate;
 import com.jobfever.model.Employer;
 import com.jobfever.service.EmployerService;
 import com.jobfever.service.JobService;
@@ -8,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @RequestMapping("/api/employers")
@@ -66,4 +69,21 @@ public class EmployerController {
     ){
         employerService.editProfileById(employerId, employer);
     }
+
+
+    @PostMapping("/login")
+    public ResponseEntity<String> submitLoginForm(@RequestBody Employer employer){
+        Employer existingEmployer = employerService.login(employer.getEmail(),employer.getPassword());
+        if (existingEmployer != null) {
+            // Perform login logic
+            return new ResponseEntity<>("Login successful.",
+                    HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>("Invalid email or password.",
+                    HttpStatus.BAD_REQUEST);
+        }
+
+    }
+
+
 }
