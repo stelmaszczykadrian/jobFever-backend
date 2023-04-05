@@ -9,6 +9,8 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Entity
 @Table(name = "candidates")
 @Data
@@ -26,6 +28,15 @@ public class Candidate {
 
     @Enumerated(EnumType.STRING)
     private RoleType roleType = RoleType.CANDIDATE;
+
+    private String name;
+    private String city;
+    private String linkedinLink;
+    private String githubLink;
+    @OneToMany
+    private List<CandidateEducation> candidateEducations;
+    @OneToMany
+    private List<CandidateExperience> candidateExperiences;
 
     public Candidate(String email, String password) {
         this.email = email;
