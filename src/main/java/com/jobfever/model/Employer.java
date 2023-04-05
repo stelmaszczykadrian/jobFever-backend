@@ -21,12 +21,13 @@ public class Employer {
     private String companyName;
     @NotEmpty
     private String nameAndSurname;
-//    @NotNull
+
     @Min(value=9)
     private int phoneNumber;
+    @NotEmpty
     @Email
     private String email;
-    @NotBlank
+    @NotEmpty
     private String password;
 
     @Enumerated(EnumType.STRING)

@@ -1,14 +1,10 @@
 package com.jobfever.service;
 
 import com.jobfever.model.Candidate;
-import com.jobfever.model.Employer;
 import com.jobfever.repository.CandidateRepository;
-import com.jobfever.repository.EmployerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -55,5 +51,10 @@ public class CandidateService {
     //    change this method to use Hibernate!
     public String getFavouritesJobsByCandidateId(int candidateId){
         return "Favourite job offers of candidate: " + candidateId;
+    }
+
+    public boolean isCandidateExists(String email) {
+        Candidate candidate = candidateRepository.findCandidateByEmail(email);
+        return candidate != null;
     }
 }
