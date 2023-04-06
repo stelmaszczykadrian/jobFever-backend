@@ -14,7 +14,6 @@ import java.util.Optional;
 @RestController
 @CrossOrigin(origins = {"http://localhost:3000/"}, allowedHeaders = "*", allowCredentials = "true")
 public class CandidateController {
-
     private JobService jobService;
     private CandidateService candidateService;
     private CandidateRepository candidateRepository;
@@ -44,9 +43,9 @@ public class CandidateController {
                 HttpStatus.OK);
     }
 
-    @PutMapping("/{candidate_id}")
+    @PutMapping("/")
     public void editProfileById(
-            @PathVariable("candidate_id") int candidateId,
+            @RequestParam("id") int candidateId,
             @RequestBody Candidate candidate
     ){
         candidateService.editProfileById(candidateId, candidate);
