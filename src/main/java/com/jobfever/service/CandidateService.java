@@ -36,8 +36,10 @@ public class CandidateService {
         Optional<Candidate> candidateToUpdate = getCandidateById(candidateId);
 
         candidateToUpdate.ifPresent(c -> {
-            c.setEmail(candidate.getEmail());
-            c.setPassword(candidate.getPassword());
+            c.setName(candidate.getName());
+            c.setCity(candidate.getCity());
+            c.setLinkedin(candidate.getLinkedin());
+            c.setGithub(candidate.getGithub());
         });
 
         candidateRepository.save(candidateToUpdate.orElseThrow(() -> new IllegalArgumentException("Cannot find candidate with id: " + candidateId)));
