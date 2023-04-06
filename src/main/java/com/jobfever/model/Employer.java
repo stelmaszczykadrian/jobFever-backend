@@ -21,7 +21,6 @@ public class Employer {
     private String companyName;
     @NotEmpty
     private String nameAndSurname;
-
     @Min(value=9)
     private int phoneNumber;
     @NotEmpty
@@ -29,10 +28,14 @@ public class Employer {
     private String email;
     @NotEmpty
     private String password;
-
     @Enumerated(EnumType.STRING)
     private RoleType roleType;
-
+    @Column(length = 2000)
+    private String aboutUs;
+    @Column(length = 2000)
+    private String whyWorthWorkingWithUs;
+    @Column(length = 500)
+    private String localization;
     @OneToMany
     private List<Job> job;
 

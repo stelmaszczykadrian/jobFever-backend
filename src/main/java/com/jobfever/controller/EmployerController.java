@@ -58,9 +58,9 @@ public class EmployerController {
                 HttpStatus.OK);
     }
 
-    @PutMapping("/{employer_id}")
+    @PutMapping("/")
     public void editProfileById(
-            @PathVariable("employer_id") int employerId,
+            @RequestParam("id") int employerId,
             @RequestBody Employer employer
     ){
         employerService.editProfileById(employerId, employer);

@@ -35,10 +35,11 @@ public class EmployerService {
         Optional<Employer> employerToUpdate = getEmployerById(employerId);
 
         employerToUpdate.ifPresent(e -> {
-            e.setEmail(employer.getEmail());
-            e.setPassword(employer.getPassword());
+            e.setCompanyName(employer.getCompanyName());
+            e.setNameAndSurname(employer.getNameAndSurname());
+            e.setPhoneNumber(employer.getPhoneNumber()
+            );
         });
-
         employerRepository.save(employerToUpdate.orElseThrow(() -> new IllegalArgumentException("Cannot find employer with id: " + employerId)));
     }
 
