@@ -31,8 +31,8 @@ public class Candidate {
 
     private String name;
     private String city;
-    private String linkedinLink;
-    private String githubLink;
+    private String linkedin;
+    private String github;
     @OneToMany
     private List<CandidateEducation> candidateEducations;
     @OneToMany
