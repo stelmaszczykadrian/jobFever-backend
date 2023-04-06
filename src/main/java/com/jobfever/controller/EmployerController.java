@@ -1,6 +1,4 @@
 package com.jobfever.controller;
-
-import com.jobfever.model.Candidate;
 import com.jobfever.model.Employer;
 import com.jobfever.service.EmployerService;
 import com.jobfever.service.JobService;
@@ -8,14 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 @RequestMapping("/api/employers")
 @RestController
-@CrossOrigin(origins = {"http://localhost:3000/"}, allowedHeaders = "*", allowCredentials = "true")
+@CrossOrigin(origins = {"http://localhost:3000/"}, allowedHeaders = "*", allowCredentials = "true", maxAge = 3600)
 public class EmployerController {
 
     private JobService jobService;
@@ -27,11 +22,12 @@ public class EmployerController {
         this.employerService = employerService;
     }
 
-    @GetMapping("/{employer_id}")
+    @GetMapping("/")
     public Optional<Employer> getEmployer(
-            @PathVariable("employer_id") int employerId
+            @RequestParam("id") int id
     ){
-        return employerService.getEmployerById(employerId);
+        System.out.println("jestem tu");
+        return employerService.getEmployerById(id);
     }
 
     @GetMapping("/{employer_id}/job/{job_id}/applicants")
