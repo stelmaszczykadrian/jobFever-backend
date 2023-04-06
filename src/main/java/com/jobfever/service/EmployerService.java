@@ -33,12 +33,18 @@ public class EmployerService {
 
     public void editProfileById(int employerId, Employer employer){
         Optional<Employer> employerToUpdate = getEmployerById(employerId);
-
+        System.out.println(employer.getAboutUs());
         employerToUpdate.ifPresent(e -> {
-            e.setCompanyName(employer.getCompanyName());
-            e.setNameAndSurname(employer.getNameAndSurname());
-            e.setPhoneNumber(employer.getPhoneNumber()
-            );
+            if (employer.getAboutUs() == null){
+                e.setCompanyName(employer.getCompanyName());
+                e.setNameAndSurname(employer.getNameAndSurname());
+                e.setPhoneNumber(employer.getPhoneNumber());
+                e.setLocalization(employer.getLocalization());
+            }else{
+                e.setAboutUs(employer.getAboutUs());
+            }
+
+
         });
         employerRepository.save(employerToUpdate.orElseThrow(() -> new IllegalArgumentException("Cannot find employer with id: " + employerId)));
     }
