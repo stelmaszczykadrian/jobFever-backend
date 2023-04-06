@@ -26,8 +26,8 @@ public class CandidateController {
         this.candidateRepository = candidateRepository;
     }
 
-    @GetMapping("/{candidate_id}")
-    public Optional<Candidate> getCandidate(@PathVariable("candidate_id") int candidateId){
+    @GetMapping("/")
+    public Optional<Candidate> getCandidate(@RequestParam("id") int candidateId){
         return candidateService.getCandidateById(candidateId);
     }
 
