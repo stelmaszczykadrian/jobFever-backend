@@ -21,6 +21,7 @@ public class CandidateEducation {
     @Column(length = 2000)
     private String description;
     @ManyToOne
+    @JoinColumn(name = "candidate_id")
     private Candidate candidate;
 }
 
