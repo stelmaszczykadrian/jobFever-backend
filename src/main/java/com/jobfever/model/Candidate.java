@@ -1,13 +1,13 @@
 package com.jobfever.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.jobfever.role.RoleType;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import java.util.List;
 
@@ -33,7 +33,9 @@ public class Candidate {
     private String city;
     private String linkedin;
     private String github;
-    @OneToMany
+    @JsonIgnore
+    @ToString.Exclude
+    @OneToMany(mappedBy = "candidate")
     private List<CandidateEducation> candidateEducations;
     @OneToMany
     private List<CandidateExperience> candidateExperiences;
