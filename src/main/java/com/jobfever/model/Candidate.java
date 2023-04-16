@@ -1,6 +1,5 @@
 package com.jobfever.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.jobfever.role.RoleType;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
@@ -9,6 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -33,10 +33,9 @@ public class Candidate {
     private String city;
     private String linkedin;
     private String github;
-    @JsonIgnore
     @ToString.Exclude
-    @OneToMany(mappedBy = "candidate")
-    private List<CandidateEducation> candidateEducations;
+    @OneToMany(mappedBy = "candidate", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<CandidateEducation> candidateEducations = new ArrayList<>();
     @OneToMany
     private List<CandidateExperience> candidateExperiences;
 
