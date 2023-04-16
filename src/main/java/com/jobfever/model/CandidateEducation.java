@@ -1,8 +1,8 @@
 package com.jobfever.model;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import java.time.LocalDateTime;
 
 @Entity
@@ -21,7 +21,7 @@ public class CandidateEducation {
     @Column(length = 2000)
     private String description;
     @ManyToOne
-    @JoinColumn(name = "candidate_id")
+    @JsonIgnore
     private Candidate candidate;
 }
 
