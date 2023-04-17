@@ -36,10 +36,10 @@ public class CandidateController {
     public ResponseEntity<String> addCandidate(
             @RequestBody Candidate candidate
     ) {
-        if (candidateService.isCandidateExists(candidate.getEmail())) {
-            return new ResponseEntity<>("Candidate already exists.",
-                    HttpStatus.BAD_REQUEST);
-        }
+//        if (candidateService.isCandidateExists(candidate.getEmail())) {
+//            return new ResponseEntity<>("Candidate already exists.",
+//                    HttpStatus.BAD_REQUEST);
+//        }
         candidateService.addCandidate(candidate);
         return new ResponseEntity<>("Candidate added successfully.",
                 HttpStatus.OK);

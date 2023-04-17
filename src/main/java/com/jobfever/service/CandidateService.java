@@ -56,10 +56,10 @@ public class CandidateService {
         return "Favourite job offers of candidate: " + candidateId;
     }
 
-    public boolean isCandidateExists(String email) {
-        Candidate candidate = candidateRepository.findCandidateByEmail(email);
-        return candidate != null;
-    }
+//    public boolean isCandidateExists(String email) {
+//        Candidate candidate = candidateRepository.findByEmail(email);
+//        return candidate != null;
+//    }
 
     public Candidate login(String email, String password) {
         Candidate existingCandidate = candidateRepository.findByEmailAndPassword(email, password);
