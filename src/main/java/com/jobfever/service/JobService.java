@@ -1,5 +1,9 @@
 package com.jobfever.service;
 import com.jobfever.model.Job;
+import com.jobfever.model.dto.JobDto;
+import com.jobfever.model.enums.CurrencyType;
+import com.jobfever.model.enums.JobType;
+import com.jobfever.model.enums.WorkType;
 import com.jobfever.repository.JobRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -23,7 +27,22 @@ public class JobService {
         return jobRepository.findAll();
     }
 
-    public void addJobOffer(Job job) {
+    public void addJobOffer(JobDto jobDto) {
+        Job job = Job.builder()
+                .title(jobDto.getTitle())
+                .description(jobDto.getDescription())
+                .technicalRequirements(jobDto.getTechnicalRequirements())
+                .responsibilities(jobDto.getResponsibilities())
+                .whoWeAreLookingFor(jobDto.getWhoWeAreLookingFor())
+                .benefits(jobDto.getBenefits())
+                .location(jobDto.getLocation())
+                .salaryFrom(jobDto.getSalaryFrom())
+                .salaryTo(jobDto.getSalaryTo())
+                .jobType(JobType.from(jobDto.getJobType()))
+                .currencyType(CurrencyType.from(jobDto.getCurrencyType()))
+                .workType(WorkType.from(jobDto.getWorkType()))
+                .build();
+
         jobRepository.save(job);
     }
 
