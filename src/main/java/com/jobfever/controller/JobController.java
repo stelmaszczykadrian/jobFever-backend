@@ -2,10 +2,13 @@ package com.jobfever.controller;
 
 import com.jobfever.model.Job;
 import com.jobfever.service.JobService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -29,11 +32,18 @@ public class JobController {
 
     @PostMapping
     public ResponseEntity<String> createJob(
-            @RequestBody Job job
+            @Valid @RequestBody Job job, BindingResult bindingResult
     ){
+        if (bindingResult.hasErrors()) {
+            StringBuilder errorMessageBuilder = new StringBuilder();
+            for (ObjectError error : bindingResult.getAllErrors()) {
+                errorMessageBuilder.append(error.getDefaultMessage()).append(". ");
+            }
+            String errorMessage = errorMessageBuilder.toString();
+            return ResponseEntity.badRequest().body(errorMessage);
+        }
         jobService.addJobOffer(job);
-        return new ResponseEntity<>("Job added successfully.",
-                HttpStatus.OK);
+        return ResponseEntity.ok("Job added successfully.");
     }
 
     @GetMapping("/{id}")
