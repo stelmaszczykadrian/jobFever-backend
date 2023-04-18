@@ -39,6 +39,8 @@ public class AuthenticationService {
         return AuthenticationResponse.builder()
                 .accessToken(jwtToken)
                 .refreshToken(refreshToken)
+                .name(user.getEmail())
+                .role(RoleType.CANDIDATE)
                 .build();
     }
 
@@ -58,6 +60,8 @@ public class AuthenticationService {
         return AuthenticationResponse.builder()
                 .accessToken(jwtToken)
                 .refreshToken(refreshToken)
+                .name(user.getEmail())
+                .role(RoleType.CANDIDATE)
                 .build();
     }
 
