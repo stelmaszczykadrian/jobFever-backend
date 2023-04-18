@@ -24,39 +24,39 @@ public class Job {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int jobId;
 
-    @NotEmpty
+//    @NotEmpty
     private String title;
 
-    @NotEmpty
-    @Column(length = 2000)
+//    @NotEmpty
+//    @Column(length = 2000)
     private String description;
 
     @ElementCollection
     @Size(min = 1)
     private List<String> technicalRequirements;
 
-    @NotEmpty
-    @Column(length = 2000)
+//    @NotEmpty
+//    @Column(length = 2000)
     private String responsibilities;
 
-    @NotEmpty
-    @Column(length = 2000)
-    @Size(max = 2000)
+//    @NotEmpty
+//    @Column(length = 2000)
+//    @Size(max = 2000)
     private String whoWeAreLookingFor;
 
-    @NotEmpty
-    @Column(length = 2000)
-    @Size(max = 2000)
+//    @NotEmpty
+//    @Column(length = 2000)
+//    @Size(max = 2000)
     private String benefits;
 
-    @NotEmpty
+//    @NotEmpty
     private String location;
 
-    @DecimalMin("0.0")
+//    @DecimalMin("0.0")
     private float salaryFrom;
 
 
-    @DecimalMax("100000.0")
+//    @DecimalMax("100000.0")
     private float salaryTo;
 
     @Enumerated(EnumType.STRING)

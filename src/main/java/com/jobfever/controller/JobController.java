@@ -4,6 +4,8 @@ import com.jobfever.model.Job;
 import com.jobfever.service.JobService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -26,12 +28,12 @@ public class JobController {
 
 
     @PostMapping
-    public void addJobOffer(
+    public ResponseEntity<String> createJob(
             @RequestBody Job job
     ){
-
-        System.out.println(job.getDescription());
         jobService.addJobOffer(job);
+        return new ResponseEntity<>("Job added successfully.",
+                HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
