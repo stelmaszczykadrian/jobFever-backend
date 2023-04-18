@@ -6,6 +6,8 @@ import com.jobfever.repository.CandidateRepository;
 import com.jobfever.service.CandidateService;
 import com.jobfever.service.JobService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
@@ -56,18 +58,17 @@ public class CandidateController {
             @PathVariable("candidate-id") int candidateId,
             @RequestBody CandidateEducation candidateEducation,
             @PathVariable("education-id") int educationId
-            ) {
+    ) {
         System.out.println("Candidate Education " + candidateEducation);
         candidateService.editCandidateEducation(candidateId, educationId, candidateEducation);
     }
 
     @PostMapping("/{candidate-id}/education")
-    public void addCandidateEducation(
+    public int addCandidateEducation(
             @PathVariable("candidate-id") int candidateId,
             @RequestBody CandidateEducation candidateEducation
     ) {
-        System.out.println("Candidate Education " + candidateEducation);
-        candidateService.addCandidateEducation(candidateId, candidateEducation);
+        return candidateService.addCandidateEducation(candidateId, candidateEducation);
     }
 
 //    @PostMapping("/login")
