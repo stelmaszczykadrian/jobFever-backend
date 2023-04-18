@@ -4,6 +4,7 @@ import com.jobfever.model.Candidate;
 import com.jobfever.model.CandidateEducation;
 import com.jobfever.repository.CandidateRepository;
 import jakarta.persistence.EntityManager;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.Optional;
@@ -93,6 +94,7 @@ public class CandidateService {
         });
     }
 
+    @Transactional
     public int addCandidateEducation(int candidateId, CandidateEducation candidateEducation) {
         Candidate tempCandidate = new Candidate();
         tempCandidate.setId(candidateId);
