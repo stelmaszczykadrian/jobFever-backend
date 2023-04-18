@@ -2,6 +2,7 @@ package com.jobfever.controller;
 
 import com.jobfever.model.Candidate;
 import com.jobfever.model.CandidateEducation;
+import com.jobfever.model.CandidateExperience;
 import com.jobfever.repository.CandidateRepository;
 import com.jobfever.service.CandidateService;
 import com.jobfever.service.JobService;
@@ -66,6 +67,23 @@ public class CandidateController {
             @RequestBody CandidateEducation candidateEducation
     ) {
         return candidateService.addCandidateEducation(candidateId, candidateEducation);
+    }
+
+    @PutMapping("/{candidate-id}/experience/{experience-id}")
+    public void editCandidateExperienceById(
+            @PathVariable("candidate-id") int candidateId,
+            @RequestBody CandidateExperience candidateExperience,
+            @PathVariable("experience-id") int experienceId
+    ) {
+        candidateService.editCandidateExperience(candidateId, experienceId, candidateExperience);
+    }
+
+    @PostMapping("/{candidate-id}/experience")
+    public int addCandidateExperience(
+            @PathVariable("candidate-id") int candidateId,
+            @RequestBody CandidateExperience candidateExperience
+    ) {
+        return candidateService.addCandidateExperience(candidateId, candidateExperience);
     }
 
 //    @PostMapping("/login")
