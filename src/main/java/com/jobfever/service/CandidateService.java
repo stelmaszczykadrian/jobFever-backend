@@ -3,18 +3,21 @@ package com.jobfever.service;
 import com.jobfever.model.Candidate;
 import com.jobfever.model.CandidateEducation;
 import com.jobfever.repository.CandidateRepository;
+import jakarta.persistence.EntityManager;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import java.util.List;
 import java.util.Optional;
 
 @Service
 public class CandidateService {
+    private EntityManager entityManager;
     private CandidateRepository candidateRepository;
 
     @Autowired
-    public CandidateService(CandidateRepository candidateRepository) {
+    public CandidateService(CandidateRepository candidateRepository, EntityManager entityManager) {
         this.candidateRepository = candidateRepository;
+        this.entityManager = entityManager;
     }
 
     public Optional<Candidate> getCandidateById(int candidateId) {
@@ -91,19 +94,13 @@ public class CandidateService {
         });
     }
 
-    public void addCandidateEducation(int candidateId, CandidateEducation candidateEducation) {
-        Optional<Candidate> candidateToUpdate = getCandidateById(candidateId);
-
+    @Transactional
+    public int addCandidateEducation(int candidateId, CandidateEducation candidateEducation) {
         Candidate tempCandidate = new Candidate();
         tempCandidate.setId(candidateId);
         candidateEducation.setCandidate(tempCandidate);
 
-        candidateToUpdate.ifPresent(c -> {
-            List<CandidateEducation> candidateEducations = c.getCandidateEducations();
-            candidateEducations.add(candidateEducation);
-            c.setCandidateEducations(candidateEducations);
-
-            candidateRepository.save(c);
-        });
+        entityManager.persist(candidateEducation);
+        return candidateEducation.getId();
     }
 }
