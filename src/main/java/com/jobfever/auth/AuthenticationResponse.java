@@ -1,5 +1,6 @@
 package com.jobfever.auth;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.jobfever.role.RoleType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -15,4 +16,8 @@ public class AuthenticationResponse {
     private String accessToken;
     @JsonProperty("refresh_token")
     private String refreshToken;
+    @JsonProperty("name")
+    private String name;
+    @JsonProperty("role")
+    private RoleType role;
 }
