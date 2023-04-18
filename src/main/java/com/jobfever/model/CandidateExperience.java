@@ -1,5 +1,6 @@
 package com.jobfever.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -23,5 +24,6 @@ public class CandidateExperience {
     @Column(length = 2000)
     private String description;
     @ManyToOne
+    @JsonIgnore
     private Candidate candidate;
 }

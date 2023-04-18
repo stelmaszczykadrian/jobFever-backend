@@ -2,6 +2,7 @@ package com.jobfever.service;
 
 import com.jobfever.model.Candidate;
 import com.jobfever.model.CandidateEducation;
+import com.jobfever.model.CandidateExperience;
 import com.jobfever.repository.CandidateRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
@@ -102,5 +103,35 @@ public class CandidateService {
 
         entityManager.persist(candidateEducation);
         return candidateEducation.getId();
+    }
+
+    public void editCandidateExperience(int candidateId, int experienceId, CandidateExperience candidateExperience) {
+        Optional<Candidate> candidateToUpdate = getCandidateById(candidateId);
+        candidateToUpdate.ifPresent(c -> {
+            for (CandidateExperience experience : c.getCandidateExperiences()) {
+                CandidateExperience existingExperience = c.getCandidateExperiences().stream()
+                        .filter(e -> e.getId() == experienceId)
+                        .findFirst()
+                        .orElseThrow(() -> new IllegalArgumentException("Cannot find experience with id: " + experienceId));
+                existingExperience.setPosition(candidateExperience.getPosition());
+                existingExperience.setCompanyName(candidateExperience.getCompanyName());
+                existingExperience.setLocation(candidateExperience.getLocation());
+                existingExperience.setStartDate(candidateExperience.getStartDate());
+                existingExperience.setEndDate(candidateExperience.getEndDate());
+                existingExperience.setIndustry(candidateExperience.getIndustry());
+                existingExperience.setDescription(candidateExperience.getDescription());
+            }
+            candidateRepository.save(c);
+        });
+    }
+
+    @Transactional
+    public int addCandidateExperience(int candidateId, CandidateExperience candidateExperience) {
+        Candidate tempCandidate = new Candidate();
+        tempCandidate.setId(candidateId);
+        candidateExperience.setCandidate(tempCandidate);
+
+        entityManager.persist(candidateExperience);
+        return candidateExperience.getId();
     }
 }

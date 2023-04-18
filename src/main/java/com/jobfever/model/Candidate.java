@@ -41,8 +41,9 @@ public class Candidate  implements UserDetails{
     @ToString.Exclude
     @OneToMany(mappedBy = "candidate", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CandidateEducation> candidateEducations = new ArrayList<>();
-    @OneToMany
-    private List<CandidateExperience> candidateExperiences;
+    @ToString.Exclude
+    @OneToMany(mappedBy = "candidate", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<CandidateExperience> candidateExperiences = new ArrayList<>();
     @OneToMany(mappedBy = "candidate")
     private List<Token> tokens;
     @Override
