@@ -2,6 +2,7 @@ package com.jobfever.controller;
 
 import com.jobfever.model.Job;
 import com.jobfever.service.JobService;
+import jakarta.persistence.EntityManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
@@ -17,6 +18,7 @@ import java.util.Optional;
 public class JobController {
 
     private JobService jobService;
+    private EntityManager entityManager;
     @Autowired
     public JobController(JobService jobService) {
         this.jobService = jobService;
@@ -25,7 +27,6 @@ public class JobController {
     public List<Job> getAllJobs(){
         return jobService.getAllJobsOffer();
     }
-
 
     @PostMapping
     public ResponseEntity<String> createJob(
@@ -68,7 +69,11 @@ public class JobController {
         return jobService.findJobByEmployer(id);
     }
 
+    @PutMapping("/{id}/apply")
+    public void applyForJobOffer(@PathVariable int id, @RequestParam int candidateId) {
+        jobService.applyForJobOffer(id, candidateId);
 
+    }
 
 
 }
