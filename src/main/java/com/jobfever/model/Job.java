@@ -37,6 +37,9 @@ public class Job {
     @Size(min = 1)
     private List<String> technicalRequirements;
 
+    @ElementCollection
+    private List<Integer> candidateIds;
+
     @NotEmpty
     @Size(max = 2000)
     private String responsibilities;

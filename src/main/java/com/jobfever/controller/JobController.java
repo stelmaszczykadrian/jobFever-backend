@@ -29,7 +29,6 @@ public class JobController {
         return jobService.getAllJobsOffer();
     }
 
-
     @PostMapping
     public ResponseEntity<String> createJob(
             @Valid @RequestBody JobDto job, BindingResult bindingResult){
@@ -78,7 +77,11 @@ public class JobController {
         return jobService.findJobByEmployer(id);
     }
 
+    @PutMapping("/{id}/apply")
+    public void applyForJobOffer(@PathVariable int id, @RequestParam int candidateId) {
+        jobService.applyForJobOffer(id, candidateId);
 
+    }
 
 
 }

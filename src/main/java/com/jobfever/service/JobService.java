@@ -86,6 +86,16 @@ public class JobService {
                 .filter(i ->
                         i.getEmployer().getId() == employerId)
                 .toList());
+    }
 
+    public void applyForJobOffer(int id, int candidateId){
+        Optional<Job> jobToUpdate = jobRepository.findById(id);
+        jobToUpdate.ifPresent(j -> {
+            j.getCandidateIds().add(candidateId);
+        });
+        jobRepository.save(jobToUpdate.orElseThrow(() -> new IllegalArgumentException("Job Offer not found with id: " + id)));
     }
 }
+
+
+
