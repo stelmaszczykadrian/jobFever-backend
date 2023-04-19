@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.io.IOException;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/authentication")
 @CrossOrigin(origins = {"http://localhost:3000/"}, allowedHeaders = "*", allowCredentials = "true")
 @RequiredArgsConstructor
 public class AuthenticationController {
