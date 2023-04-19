@@ -26,7 +26,7 @@ import org.springframework.security.web.authentication.logout.LogoutHandler;
                     .csrf()
                     .disable()
                     .authorizeHttpRequests()
-                    .requestMatchers("/api/authentication/**")
+                    .requestMatchers("/api/**")
                     .permitAll()
                     .anyRequest()
                     .authenticated()
