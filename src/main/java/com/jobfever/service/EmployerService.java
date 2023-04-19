@@ -51,18 +51,26 @@ public class EmployerService {
         return "";
     }
 
-    public boolean isEmployerExists(String email) {
-        Employer employer = employerRepository.findByEmail(email);
-        return employer != null;
-    }
+//    public boolean isEmployerExists(String email) {
+//        Employer employer = employerRepository.findByEmail(email);
+//        return employer != null;
+//    }
 
 
-    public Employer login(String email, String password) {
-        Employer existingEmployer = employerRepository.findByEmailAndPassword(email,password);
-        if(existingEmployer != null){
-            return existingEmployer;
-        }else{
-            return null;
-        }
+//    public Employer login(String email, String password) {
+//        Employer existingEmployer = employerRepository.findByEmailAndPassword(email,password);
+//        if(existingEmployer != null){
+//            return existingEmployer;
+//        }else{
+//            return null;
+//        }
+//    }
+////TODO nie wiem czy to bedzie potrzebne
+//    public Employer getEmployerByEmail(String email) {
+//        return employerRepository.findByEmail(email);
+//    }
+
+    public Employer getEmployerByName(String companyName) {
+        return employerRepository.findByCompanyName(companyName);
     }
 }
