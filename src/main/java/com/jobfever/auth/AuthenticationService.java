@@ -1,9 +1,12 @@
 package com.jobfever.auth;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.jobfever.config.JwtService;
 import com.jobfever.model.Candidate;
+import com.jobfever.model.Employer;
 import com.jobfever.model.User;
 import com.jobfever.repository.CandidateRepository;
+import com.jobfever.repository.EmployerRepository;
 import com.jobfever.repository.UserRepository;
 import com.jobfever.role.RoleType;
 import com.jobfever.token.Token;
@@ -24,6 +27,7 @@ import java.io.IOException;
 @RequiredArgsConstructor
 public class AuthenticationService {
     private final UserRepository repository;
+    private final EmployerRepository employerRepository;
     private final CandidateRepository candidateRepository;
     private final TokenRepository tokenRepository;
     private final PasswordEncoder passwordEncoder;
@@ -41,6 +45,26 @@ public class AuthenticationService {
                 .roleType(RoleType.CANDIDATE)
                 .candidate_id(repository.findCandidateLastId())
                 .build();
+        return getAuthenticationResponse(user);
+    }
+    public AuthenticationResponse registerEmployer(RegisterRequest request) {
+        var employer = Employer.builder()
+                .companyName(request.getCompanyName())
+                .nameAndSurname(request.getNameAndSurname())
+                .phoneNumber(request.getPhoneNumber())
+                .build();
+        employerRepository.save(employer);
+
+        var user = User.builder()
+                .email(request.getEmail())
+                .password(passwordEncoder.encode(request.getPassword()))
+                .roleType(RoleType.EMPLOYER)
+                .candidate_id(repository.findEmployerLastId())
+                .build();
+        return getAuthenticationResponse(user);
+    }
+
+    private AuthenticationResponse getAuthenticationResponse(User user) {
         var savedUser = repository.save(user);
         var jwtToken = jwtService.generateToken(user);
         var refreshToken = jwtService.generateRefreshToken(user);
@@ -49,7 +73,7 @@ public class AuthenticationService {
                 .accessToken(jwtToken)
                 .refreshToken(refreshToken)
                 .name(user.getEmail())
-                .role(RoleType.CANDIDATE)
+                .role(user.getRoleType())
                 .build();
     }
 

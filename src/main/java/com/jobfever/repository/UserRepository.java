@@ -12,6 +12,7 @@ import java.util.Optional;
 public interface UserRepository extends JpaRepository<User, Integer> {
     Optional<User> findByEmail(String email);
     @Query("SELECT max(ch.id) FROM Candidate ch")
-    int findCandidateLastId();
-
+    Integer findCandidateLastId();
+    @Query("SELECT max(ch.id) FROM Employer ch")
+    Integer findEmployerLastId();
 }
