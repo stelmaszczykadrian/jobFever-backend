@@ -3,6 +3,8 @@ package com.jobfever.model;
 import com.jobfever.role.RoleType;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import java.util.List;
@@ -11,6 +13,8 @@ import java.util.List;
 @Entity
 @Table(name = "employers")
 @Data
+@Builder
+@AllArgsConstructor
 @NoArgsConstructor
 public class Employer {
     @Id
@@ -23,11 +27,11 @@ public class Employer {
     private String nameAndSurname;
     @Min(value=9)
     private int phoneNumber;
-    @NotEmpty
-    @Email
-    private String email;
-    @NotEmpty
-    private String password;
+//    @NotEmpty
+//    @Email
+//    private String email;
+//    @NotEmpty
+//    private String password;
     @Enumerated(EnumType.STRING)
     private RoleType roleType;
     @Column(length = 2000)
@@ -39,9 +43,7 @@ public class Employer {
     @OneToMany
     private List<Job> job;
 
-    public Employer(String email, String password) {
-        this.email = email;
-        this.password = password;
-        this.roleType = RoleType.EMPLOYER;
-    }
+//    public Employer(String email, String password) {
+//        this.roleType = RoleType.EMPLOYER;
+//    }
 }

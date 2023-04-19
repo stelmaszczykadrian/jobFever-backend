@@ -1,7 +1,11 @@
 package com.jobfever.controller;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.jobfever.model.Employer;
+import com.jobfever.model.User;
+import com.jobfever.role.RoleType;
 import com.jobfever.service.EmployerService;
 import com.jobfever.service.JobService;
+import com.jobfever.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,11 +19,13 @@ public class EmployerController {
 
     private JobService jobService;
     private EmployerService employerService;
+    private UserService userService;
 
     @Autowired
-    public EmployerController(JobService jobService, EmployerService employerService) {
+    public EmployerController(JobService jobService, EmployerService employerService, UserService userService) {
         this.jobService = jobService;
         this.employerService = employerService;
+        this.userService = userService;
     }
 
     @GetMapping("/")
@@ -45,15 +51,27 @@ public class EmployerController {
         return employerService.deleteEmployerById(employerId);
     }
 
-    @PostMapping()
+    @PostMapping("/")
     public ResponseEntity<String> addEmployer(
-            @RequestBody Employer employer
+            @RequestBody ObjectNode json
     ) {
-        if(employerService.isEmployerExists(employer.getEmail())){
-            return new ResponseEntity<>("Employer already exists.",
-                    HttpStatus.BAD_REQUEST);
-        }
-        employerService.addEmployer(employer);
+//        if(employerService.isEmployerExists(employer.getEmail())){
+//            return new ResponseEntity<>("Employer already exists.",
+//                    HttpStatus.BAD_REQUEST);
+//        }
+//        userService.addUser(employer);
+        employerService.addEmployer(Employer.builder()
+                .companyName(json.get("companyName").asText())
+                .nameAndSurname(json.get("nameAndSurname").asText())
+                .phoneNumber(json.get("phoneNumber").asInt()).build());
+        Employer savedEmployer = employerService.getEmployerByName(json.get("companyName").asText());
+        userService.addUser(User.builder()
+                .employer_id(savedEmployer.getId())
+                .email(json.get("email").asText())
+                .candidate_id(null)
+                .roleType(RoleType.EMPLOYER)
+                .password(json.get("password").asText())
+                .build());
         return new ResponseEntity<>("Employer added successfully.",
                 HttpStatus.OK);
     }
@@ -67,19 +85,19 @@ public class EmployerController {
     }
 
 
-    @PostMapping("/login")
-    public ResponseEntity<String> submitLoginForm(@RequestBody Employer employer){
-        Employer existingEmployer = employerService.login(employer.getEmail(),employer.getPassword());
-        if (existingEmployer != null) {
-            // Perform login logic
-            return new ResponseEntity<>("Login successful.",
-                    HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>("Invalid email or password.",
-                    HttpStatus.BAD_REQUEST);
-        }
-
-    }
+//    @PostMapping("/login")
+//    public ResponseEntity<String> submitLoginForm(@RequestBody Employer employer){
+//        Employer existingEmployer = employerService.login(employer.getEmail(),employer.getPassword());
+//        if (existingEmployer != null) {
+//            // Perform login logic
+//            return new ResponseEntity<>("Login successful.",
+//                    HttpStatus.OK);
+//        } else {
+//            return new ResponseEntity<>("Invalid email or password.",
+//                    HttpStatus.BAD_REQUEST);
+//        }
+//
+//    }
 
 
 }
