@@ -4,8 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.time.LocalDateTime;
+import java.util.Date;
 
 @Entity
 @Table(name = "candidate_experience")
@@ -18,8 +17,10 @@ public class CandidateExperience {
     private String position;
     private String companyName;
     private String location;
-    private LocalDateTime startDate;
-    private LocalDateTime endDate;
+    @Temporal(TemporalType.DATE)
+    private Date startDate;
+    @Temporal(TemporalType.DATE)
+    private Date endDate;
     private String industry;
     @Column(length = 2000)
     private String description;

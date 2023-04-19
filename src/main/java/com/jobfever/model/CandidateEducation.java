@@ -3,7 +3,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import java.time.LocalDateTime;
+import java.util.Date;
 
 @Entity
 @Table(name = "candidate_education")
@@ -16,8 +16,10 @@ public class CandidateEducation {
     private String school;
     private String degree;
     private String fieldOfStudy;
-    private LocalDateTime startDate;
-    private LocalDateTime endDate;
+    @Temporal(TemporalType.DATE)
+    private Date startDate;
+    @Temporal(TemporalType.DATE)
+    private Date endDate;
     @Column(length = 2000)
     private String description;
     @ManyToOne
