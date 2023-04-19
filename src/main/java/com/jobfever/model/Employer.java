@@ -27,11 +27,6 @@ public class Employer {
     private String nameAndSurname;
     @Min(value=9)
     private int phoneNumber;
-//    @NotEmpty
-//    @Email
-//    private String email;
-//    @NotEmpty
-//    private String password;
     @Enumerated(EnumType.STRING)
     private RoleType roleType;
     @Column(length = 2000)
@@ -43,7 +38,4 @@ public class Employer {
     @OneToMany
     private List<Job> job;
 
-//    public Employer(String email, String password) {
-//        this.roleType = RoleType.EMPLOYER;
-//    }
 }

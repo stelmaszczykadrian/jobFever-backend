@@ -1,9 +1,12 @@
 package com.jobfever.controller;
 
 import com.jobfever.model.Candidate;
+import com.jobfever.model.User;
 import com.jobfever.repository.CandidateRepository;
+import com.jobfever.repository.UserRepository;
 import com.jobfever.service.CandidateService;
 import com.jobfever.service.JobService;
+import com.jobfever.service.UserService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,12 +16,12 @@ import java.util.Objects;
 @CrossOrigin(origins = {"http://localhost:3000/"}, allowedHeaders = "*", allowCredentials = "true")
 public class MainController {
 
-    private CandidateService candidateService;
-    private CandidateRepository candidateRepository;
+    private UserService userService;
+    private UserRepository userRepository;
     private JobService jobService;
 
-    public MainController(CandidateService candidateService, JobService jobService) {
-        this.candidateService = candidateService;
+    public MainController(JobService jobService) {
+//        this.candidateService = candidateService;
         this.jobService = jobService;
     }
     @GetMapping("/")
@@ -31,11 +34,10 @@ public class MainController {
         return "login";
     }
     @PostMapping("/login")
-    public String submitLoginForm(@RequestBody Candidate candidate) throws Exception {
-        List<Candidate> candidates = candidateRepository.findAll();
-        for (Candidate i : candidates){
-            if (Objects.equals(candidate.getEmail(), i.getEmail()) && candidate.getPassword() == i.getPassword()){
-                System.out.println("jest");
+    public String submitLoginForm(@RequestBody User user) throws Exception {
+        List<User> users = userRepository.findAll();
+        for (User i : users){
+            if (Objects.equals(user.getEmail(), i.getEmail()) && Objects.equals(user.getPassword(), i.getPassword())){
                 return "Logging successful";
             }
         }

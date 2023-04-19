@@ -1,5 +1,6 @@
 package com.jobfever.token;
 import com.jobfever.model.Candidate;
+import com.jobfever.model.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -28,7 +29,7 @@ public class Token {
     public boolean expired;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "candidate_id")
-    public Candidate candidate;
+    @JoinColumn(name = "user_id")
+    public User user;
 }
 
