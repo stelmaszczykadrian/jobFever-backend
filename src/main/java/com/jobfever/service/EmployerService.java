@@ -19,9 +19,6 @@ public class EmployerService {
         return employerRepository.findById(employerId);
     }
 
-    public void addEmployer(Employer employer){
-        employerRepository.save(employer);
-    }
 
     public boolean deleteEmployerById(int employerId) {
         if(getEmployerById(employerId).isPresent()){
@@ -50,26 +47,6 @@ public class EmployerService {
     public String getApplicantsByJobOfferId(int employerId, int jobId) {
         return "";
     }
-
-//    public boolean isEmployerExists(String email) {
-//        Employer employer = employerRepository.findByEmail(email);
-//        return employer != null;
-//    }
-
-
-//    public Employer login(String email, String password) {
-//        Employer existingEmployer = employerRepository.findByEmailAndPassword(email,password);
-//        if(existingEmployer != null){
-//            return existingEmployer;
-//        }else{
-//            return null;
-//        }
-//    }
-////TODO nie wiem czy to bedzie potrzebne
-//    public Employer getEmployerByEmail(String email) {
-//        return employerRepository.findByEmail(email);
-//    }
-
     public Employer getEmployerByName(String companyName) {
         return employerRepository.findByCompanyName(companyName);
     }

@@ -25,9 +25,6 @@ public class CandidateService {
         return candidateRepository.findById(candidateId);
     }
 
-    public void addCandidate(Candidate candidate) {
-        candidateRepository.save(candidate);
-    }
 
     public boolean deleteCandidateById(int candidateId) {
         if (getCandidateById(candidateId).isPresent()) {
@@ -59,22 +56,6 @@ public class CandidateService {
     public String getFavouritesJobsByCandidateId(int candidateId) {
         return "Favourite job offers of candidate: " + candidateId;
     }
-
-//    public boolean isCandidateExists(String email) {
-//        Candidate candidate = candidateRepository.findByEmail(email);
-//        return candidate != null;
-//    }
-
-//    public Candidate login(String email, String password) {
-//        Candidate existingCandidate = candidateRepository.findByEmailAndPassword(email, password);
-//
-//        if (existingCandidate != null) {
-//            return existingCandidate;
-//        } else {
-//            return null;
-//        }
-//
-//    }
 
     public void editCandidateEducation(int candidateId, int educationId, CandidateEducation candidateEducation) {
         Optional<Candidate> candidateToUpdate = getCandidateById(candidateId);
