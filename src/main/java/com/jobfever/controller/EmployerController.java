@@ -51,30 +51,6 @@ public class EmployerController {
         return employerService.deleteEmployerById(employerId);
     }
 
-    @PostMapping("/")
-    public ResponseEntity<String> addEmployer(
-            @RequestBody ObjectNode json
-    ) {
-//        if(employerService.isEmployerExists(employer.getEmail())){
-//            return new ResponseEntity<>("Employer already exists.",
-//                    HttpStatus.BAD_REQUEST);
-//        }
-//        userService.addUser(employer);
-        employerService.addEmployer(Employer.builder()
-                .companyName(json.get("companyName").asText())
-                .nameAndSurname(json.get("nameAndSurname").asText())
-                .phoneNumber(json.get("phoneNumber").asInt()).build());
-        Employer savedEmployer = employerService.getEmployerByName(json.get("companyName").asText());
-        userService.addUser(User.builder()
-                .employer_id(savedEmployer.getId())
-                .email(json.get("email").asText())
-                .candidate_id(null)
-                .roleType(RoleType.EMPLOYER)
-                .password(json.get("password").asText())
-                .build());
-        return new ResponseEntity<>("Employer added successfully.",
-                HttpStatus.OK);
-    }
 
     @PutMapping("/")
     public void editProfileById(
