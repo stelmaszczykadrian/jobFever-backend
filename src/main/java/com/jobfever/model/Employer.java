@@ -20,7 +20,6 @@ public class Employer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
     @NotEmpty
     private String companyName;
     @NotEmpty

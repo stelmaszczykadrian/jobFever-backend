@@ -1,14 +1,9 @@
 package com.jobfever.controller;
-import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.jobfever.model.Employer;
-import com.jobfever.model.User;
-import com.jobfever.role.RoleType;
 import com.jobfever.service.EmployerService;
 import com.jobfever.service.JobService;
 import com.jobfever.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
@@ -51,7 +46,6 @@ public class EmployerController {
         return employerService.deleteEmployerById(employerId);
     }
 
-
     @PutMapping("/")
     public void editProfileById(
             @RequestParam("id") int employerId,
@@ -59,21 +53,4 @@ public class EmployerController {
     ){
         employerService.editProfileById(employerId, employer);
     }
-
-
-//    @PostMapping("/login")
-//    public ResponseEntity<String> submitLoginForm(@RequestBody Employer employer){
-//        Employer existingEmployer = employerService.login(employer.getEmail(),employer.getPassword());
-//        if (existingEmployer != null) {
-//            // Perform login logic
-//            return new ResponseEntity<>("Login successful.",
-//                    HttpStatus.OK);
-//        } else {
-//            return new ResponseEntity<>("Invalid email or password.",
-//                    HttpStatus.BAD_REQUEST);
-//        }
-//
-//    }
-
-
 }
