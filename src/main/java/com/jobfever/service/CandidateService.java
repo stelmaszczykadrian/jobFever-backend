@@ -106,4 +106,5 @@ public class CandidateService {
             candidateRepository.save(c);
         });
     }
+
 }
