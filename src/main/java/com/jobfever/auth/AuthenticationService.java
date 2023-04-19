@@ -2,7 +2,9 @@ package com.jobfever.auth;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jobfever.config.JwtService;
 import com.jobfever.model.Candidate;
+import com.jobfever.model.User;
 import com.jobfever.repository.CandidateRepository;
+import com.jobfever.repository.UserRepository;
 import com.jobfever.role.RoleType;
 import com.jobfever.token.Token;
 import com.jobfever.token.TokenRepository;
@@ -10,6 +12,7 @@ import com.jobfever.token.TokenType;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import org.apache.catalina.Store;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -20,17 +23,23 @@ import java.io.IOException;
 @Service
 @RequiredArgsConstructor
 public class AuthenticationService {
-    private final CandidateRepository repository;
+    private final UserRepository repository;
+    private final CandidateRepository candidateRepository;
     private final TokenRepository tokenRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
 
     public AuthenticationResponse register(RegisterRequest request) {
-        var user = Candidate.builder()
+        var candidate = Candidate.builder()
+                .build();
+        candidateRepository.save(candidate);
+
+        var user = User.builder()
                 .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
                 .roleType(RoleType.CANDIDATE)
+                .candidate_id(repository.findCandidateLastId())
                 .build();
         var savedUser = repository.save(user);
         var jwtToken = jwtService.generateToken(user);
@@ -65,9 +74,9 @@ public class AuthenticationService {
                 .build();
     }
 
-    private void saveUserToken(Candidate candidate, String jwtToken) {
+    private void saveUserToken(User user, String jwtToken) {
         var token = Token.builder()
-                .candidate(candidate)
+                .user(user)
                 .token(jwtToken)
                 .tokenType(TokenType.BEARER)
                 .expired(false)
@@ -76,8 +85,8 @@ public class AuthenticationService {
         tokenRepository.save(token);
     }
 
-    private void revokeAllUserTokens(Candidate candidate) {
-        var validUserTokens = tokenRepository.findAllValidTokenByUser(candidate.getId());
+    private void revokeAllUserTokens(User user) {
+        var validUserTokens = tokenRepository.findAllValidTokenByUser(user.getId());
         if (validUserTokens.isEmpty())
             return;
         validUserTokens.forEach(token -> {

@@ -65,16 +65,16 @@ public class CandidateService {
 //        return candidate != null;
 //    }
 
-    public Candidate login(String email, String password) {
-        Candidate existingCandidate = candidateRepository.findByEmailAndPassword(email, password);
-
-        if (existingCandidate != null) {
-            return existingCandidate;
-        } else {
-            return null;
-        }
-
-    }
+//    public Candidate login(String email, String password) {
+//        Candidate existingCandidate = candidateRepository.findByEmailAndPassword(email, password);
+//
+//        if (existingCandidate != null) {
+//            return existingCandidate;
+//        } else {
+//            return null;
+//        }
+//
+//    }
 
     public void editCandidateEducation(int candidateId, int educationId, CandidateEducation candidateEducation) {
         Optional<Candidate> candidateToUpdate = getCandidateById(candidateId);

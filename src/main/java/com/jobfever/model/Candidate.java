@@ -20,16 +20,16 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Candidate  implements UserDetails{
+public class Candidate{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @NotEmpty
-    @Email
-    private String email;
-    @NotEmpty
-    private String password;
+//    @NotEmpty
+//    @Email
+//    private String email;
+//    @NotEmpty
+//    private String password;
 
     @Enumerated(EnumType.STRING)
     private RoleType roleType = RoleType.CANDIDATE;
@@ -44,40 +44,5 @@ public class Candidate  implements UserDetails{
     @ToString.Exclude
     @OneToMany(mappedBy = "candidate", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CandidateExperience> candidateExperiences = new ArrayList<>();
-    @OneToMany(mappedBy = "candidate")
-    private List<Token> tokens;
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority(roleType.name()));
-    }
 
-    @Override
-    public String getUsername() {
-        return email;
-    }
-
-    @Override
-    public String getPassword() {
-        return password;
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return true;
-    }
 }

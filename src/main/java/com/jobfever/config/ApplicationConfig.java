@@ -1,5 +1,6 @@
 package com.jobfever.config;
 import com.jobfever.repository.CandidateRepository;
+import com.jobfever.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -17,7 +18,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
     @RequiredArgsConstructor
     public class ApplicationConfig {
         @Autowired
-        private final CandidateRepository repository;
+        private final UserRepository repository;
 
         @Bean
         public UserDetailsService userDetailsService() {
