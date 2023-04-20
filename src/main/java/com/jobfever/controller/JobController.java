@@ -1,5 +1,6 @@
 package com.jobfever.controller;
 
+import com.jobfever.auth.AuthenticationResponse;
 import com.jobfever.model.Job;
 import com.jobfever.model.dto.JobDto;
 import com.jobfever.service.JobService;
@@ -70,9 +71,8 @@ public class JobController {
     }
 
     @GetMapping("/")
-    public Page<Job> getJobsByPage(@RequestParam int page, String sortBy, String field){
-
-        return jobService.findJobWithPaginationSortedByResponsibilities(page, sortBy, field);
+    public ResponseEntity<Page<Job>> getJobsByPage(@RequestParam int page, String sortBy, String field){
+        return ResponseEntity.ok(jobService.findJobWithPaginationSortedByResponsibilities(page, sortBy, field));
     }
     @GetMapping("/by-employer")
     public Page<Job> getJobsByEmployerId(@RequestParam int id){
