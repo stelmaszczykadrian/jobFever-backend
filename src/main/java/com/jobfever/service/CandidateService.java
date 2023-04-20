@@ -8,6 +8,8 @@ import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -114,5 +116,24 @@ public class CandidateService {
 
         entityManager.persist(candidateExperience);
         return candidateExperience.getId();
+    }
+
+    public boolean deleteCandidateExperienceById(int candidateId, int experienceId) {
+        Optional<Candidate> candidateToUpdate = getCandidateById(candidateId);
+        if (candidateToUpdate.isPresent()) {
+            Candidate candidate = candidateToUpdate.get();
+            List<CandidateExperience> experiences = candidate.getCandidateExperiences();
+            CandidateExperience experienceToDelete = experiences.stream()
+                    .filter(e -> e.getId() == experienceId)
+                    .findFirst()
+                    .orElse(null);
+
+            if (experienceToDelete != null) {
+                experiences.remove(experienceToDelete);
+                candidateRepository.save(candidate);
+                return true;
+            }
+        }
+        return false;
     }
 }

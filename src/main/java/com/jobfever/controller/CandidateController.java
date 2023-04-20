@@ -73,6 +73,14 @@ public class CandidateController {
         return candidateService.addCandidateExperience(candidateId, candidateExperience);
     }
 
+    @DeleteMapping("/{candidate-id}/experience/{experience-id}")
+    public boolean deleteCandidateExperienceById(
+            @PathVariable("candidate-id") int candidateId,
+            @PathVariable("experience-id") int experienceId
+    ) {
+        return candidateService.deleteCandidateExperienceById(candidateId, experienceId);
+    }
+
     @DeleteMapping("/{candidate_id}")
     public boolean deleteCandidateById(@PathVariable("candidate_id") int candidateId) {
         return candidateService.deleteCandidateById(candidateId);
