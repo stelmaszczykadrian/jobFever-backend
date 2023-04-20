@@ -1,4 +1,5 @@
 package com.jobfever.auth;
+import com.jobfever.role.RoleType;
 import com.jobfever.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -28,11 +29,18 @@ public class AuthenticationController {
     }
 
 
-    @PostMapping("/authenticate")
-    public ResponseEntity<AuthenticationResponse> authenticate(
+    @PostMapping("/authenticate/candidate")
+    public ResponseEntity<AuthenticationResponse> authenticateCandidate(
             @RequestBody AuthenticationRequest request
     ) {
-        return ResponseEntity.ok(service.authenticate(request));
+        return ResponseEntity.ok(service.authenticate(request, RoleType.CANDIDATE));
+    }
+
+    @PostMapping("/authenticate/employer")
+    public ResponseEntity<AuthenticationResponse> authenticateEmployer(
+            @RequestBody AuthenticationRequest request
+    ) {
+        return ResponseEntity.ok(service.authenticate(request, RoleType.EMPLOYER));
     }
 
 
@@ -41,7 +49,7 @@ public class AuthenticationController {
         if(userService.isUserExists(request.getEmail())){
             return new ResponseEntity<>("Employer already exists.", HttpStatus.BAD_REQUEST);
         }
-        service.register(request);
+        service.registerEmployer(request);
         return new ResponseEntity<>("Employer added successfully.", HttpStatus.OK);
     }
 
