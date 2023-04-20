@@ -81,6 +81,14 @@ public class CandidateController {
         return candidateService.deleteCandidateExperienceById(candidateId, experienceId);
     }
 
+    @DeleteMapping("/{candidate-id}/education/{education-id}")
+    public boolean deleteCandidateEducationById(
+            @PathVariable("candidate-id") int candidateId,
+            @PathVariable("education-id") int educationId
+    ) {
+        return candidateService.deleteCandidateEducationById(candidateId, educationId);
+    }
+
     @DeleteMapping("/{candidate_id}")
     public boolean deleteCandidateById(@PathVariable("candidate_id") int candidateId) {
         return candidateService.deleteCandidateById(candidateId);

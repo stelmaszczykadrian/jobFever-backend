@@ -136,4 +136,23 @@ public class CandidateService {
         }
         return false;
     }
+
+    public boolean deleteCandidateEducationById(int candidateId, int educationId) {
+        Optional<Candidate> candidateToUpdate = getCandidateById(candidateId);
+        if (candidateToUpdate.isPresent()) {
+            Candidate candidate = candidateToUpdate.get();
+            List<CandidateEducation> educations = candidate.getCandidateEducations();
+            CandidateEducation educationToDelete = educations.stream()
+                    .filter(e -> e.getId() == educationId)
+                    .findFirst()
+                    .orElse(null);
+
+            if (educationToDelete != null) {
+                educations.remove(educationToDelete);
+                candidateRepository.save(candidate);
+                return true;
+            }
+        }
+        return false;
+    }
 }
