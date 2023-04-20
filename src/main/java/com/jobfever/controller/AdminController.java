@@ -24,18 +24,10 @@ public class AdminController {
     }
     @GetMapping("/{id}")
     public Optional<Admin> getAdmin(
-        @PathVariable("id") int id
-    ){
+        @PathVariable("id") int id){
         return adminService.getAdminById(id);
     }
-//TODO this root is to discuss!.
-    @PostMapping("/add")
-    public void addAdmin(
-            @RequestParam("login") String login,
-            @RequestParam("password") String password
-    ){
-        adminService.addAdmin(login, password);
-    }
+
     @GetMapping("/statistics")
     public String getStatistics(){
         return "Statistics";
