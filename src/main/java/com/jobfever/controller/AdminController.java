@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.Optional;
 @RequestMapping("/api/admin")
 @RestController
-@CrossOrigin(origins = {"http://localhost:3000/"}, allowedHeaders = "*", allowCredentials = "true")
 public class AdminController {
 
     private JobService jobService;

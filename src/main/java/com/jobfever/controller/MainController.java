@@ -1,10 +1,7 @@
 package com.jobfever.controller;
 
-import com.jobfever.model.Candidate;
 import com.jobfever.model.User;
-import com.jobfever.repository.CandidateRepository;
 import com.jobfever.repository.UserRepository;
-import com.jobfever.service.CandidateService;
 import com.jobfever.service.JobService;
 import com.jobfever.service.UserService;
 import org.springframework.web.bind.annotation.*;
@@ -13,7 +10,6 @@ import java.util.List;
 import java.util.Objects;
 
 @RestController
-@CrossOrigin(origins = {"http://localhost:3000/"}, allowedHeaders = "*", allowCredentials = "true")
 public class MainController {
 
     private UserService userService;

@@ -13,7 +13,6 @@ import java.util.Optional;
 
 @RequestMapping("/api/candidates")
 @RestController
-@CrossOrigin(origins = {"http://localhost:3000/"}, allowedHeaders = "*", allowCredentials = "true")
 public class CandidateController {
     private JobService jobService;
     private CandidateService candidateService;

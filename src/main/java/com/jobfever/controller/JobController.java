@@ -15,7 +15,6 @@ import java.util.Optional;
 
 @RequestMapping("/api/jobs")
 @RestController
-//@CrossOrigin(origins = {"http://localhost:3000/"}, allowedHeaders = "*", allowCredentials = "true", maxAge = 3600)
 public class JobController {
 
     private JobService jobService;
@@ -78,7 +77,6 @@ public class JobController {
     @PutMapping("/{id}/apply")
     public void applyForJobOffer(@PathVariable int id, @RequestParam int candidateId) {
         jobService.applyForJobOffer(id, candidateId);
-
     }
 
 

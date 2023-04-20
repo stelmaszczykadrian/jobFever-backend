@@ -9,7 +9,6 @@ import java.util.Optional;
 
 @RequestMapping("/api/employers")
 @RestController
-@CrossOrigin(origins = {"http://localhost:3000/"}, allowedHeaders = "*", allowCredentials = "true", maxAge = 3600)
 public class EmployerController {
 
     private JobService jobService;
