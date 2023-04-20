@@ -1,15 +1,11 @@
 package com.jobfever.controller;
-
-import com.jobfever.auth.AuthenticationResponse;
 import com.jobfever.model.Job;
 import com.jobfever.model.dto.JobDto;
 import com.jobfever.service.JobService;
-import com.jobfever.token.Token;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +15,7 @@ import java.util.Optional;
 
 @RequestMapping("/api/jobs")
 @RestController
-@CrossOrigin(origins = {"http://localhost:3000/"}, allowedHeaders = "*", allowCredentials = "true", maxAge = 3600)
+//@CrossOrigin(origins = {"http://localhost:3000/"}, allowedHeaders = "*", allowCredentials = "true", maxAge = 3600)
 public class JobController {
 
     private JobService jobService;
@@ -35,7 +31,7 @@ public class JobController {
     @PostMapping
     public ResponseEntity<String> createJob(
             @Valid @RequestBody JobDto job, BindingResult bindingResult){
-
+        System.out.println("asdfasdf");
         if (bindingResult.hasErrors()) {
             StringBuilder errorMessageBuilder = new StringBuilder();
             for (ObjectError error : bindingResult.getAllErrors()) {
