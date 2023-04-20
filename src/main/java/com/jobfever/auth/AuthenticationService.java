@@ -8,6 +8,7 @@ import com.jobfever.model.User;
 import com.jobfever.repository.CandidateRepository;
 import com.jobfever.repository.EmployerRepository;
 import com.jobfever.repository.UserRepository;
+import com.jobfever.role.Role;
 import com.jobfever.role.RoleType;
 import com.jobfever.token.Token;
 import com.jobfever.token.TokenRepository;
@@ -59,7 +60,7 @@ public class AuthenticationService {
                 .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
                 .roleType(RoleType.EMPLOYER)
-                .candidate_id(repository.findEmployerLastId())
+                .employer_id(repository.findEmployerLastId())
                 .build();
         return getAuthenticationResponse(user);
     }
@@ -77,7 +78,7 @@ public class AuthenticationService {
                 .build();
     }
 
-    public AuthenticationResponse authenticate(AuthenticationRequest request) {
+    public AuthenticationResponse authenticate(AuthenticationRequest request, RoleType roleType) {
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         request.getEmail(),
@@ -94,7 +95,7 @@ public class AuthenticationService {
                 .accessToken(jwtToken)
                 .refreshToken(refreshToken)
                 .name(user.getEmail())
-                .role(RoleType.CANDIDATE)
+                .role(roleType)
                 .build();
     }
 
