@@ -1,4 +1,5 @@
 package com.jobfever.service;
+
 import com.jobfever.model.Job;
 import com.jobfever.model.dto.JobDto;
 import com.jobfever.model.enums.CurrencyType;
@@ -11,6 +12,8 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,13 +21,10 @@ import java.util.Optional;
 public class JobService {
 
     private JobRepository jobRepository;
+
     @Autowired
     public JobService(JobRepository jobRepository) {
         this.jobRepository = jobRepository;
-    }
-
-    public List<Job> getAllJobsOffer() {
-        return jobRepository.findAll();
     }
 
     public void addJobOffer(JobDto jobDto) {
@@ -41,6 +41,7 @@ public class JobService {
                 .jobType(JobType.from(jobDto.getJobType()))
                 .currencyType(CurrencyType.from(jobDto.getCurrencyType()))
                 .workType(WorkType.from(jobDto.getWorkType()))
+                .postingDate(LocalDateTime.now())
                 .build();
 
         jobRepository.save(job);
@@ -75,12 +76,7 @@ public class JobService {
     }
 
 
-    public Page<Job> findJobWithPaginationSortedByResponsibilities(int page, String sortBy, String field){
-        return new PageImpl<>(jobRepository.findAll(PageRequest.of(page, 10, Sort.by(sortBy))).stream()
-                .filter(i -> i.getResponsibilities().contains(field)).toList());
-
-    }
-    public Page<Job> findJobByEmployer(int employerId){
+    public Page<Job> findJobByEmployer(int employerId) {
         return new PageImpl<>(jobRepository.findAll()
                 .stream()
                 .filter(i ->
@@ -88,12 +84,21 @@ public class JobService {
                 .toList());
     }
 
-    public void applyForJobOffer(int id, int candidateId){
+    public void applyForJobOffer(int id, int candidateId) {
         Optional<Job> jobToUpdate = jobRepository.findById(id);
         jobToUpdate.ifPresent(j -> {
             j.getCandidateIds().add(candidateId);
         });
         jobRepository.save(jobToUpdate.orElseThrow(() -> new IllegalArgumentException("Job Offer not found with id: " + id)));
+    }
+
+    public Page<Job> findJobsByPageAndSizeDescendingPostingDate(int page, int size) {
+        return jobRepository.findAll(PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "postingDate")));
+    }
+
+    public Page<Job> findJobsByTechnicalRequirementsAndPageAndSize(String language, int page, int size) {
+        return jobRepository.findByTechnicalRequirementsContainingIgnoreCase(language,
+                PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "postingDate")));
     }
 }
 

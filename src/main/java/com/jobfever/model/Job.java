@@ -1,4 +1,5 @@
 package com.jobfever.model;
+
 import com.jobfever.model.enums.CurrencyType;
 import com.jobfever.model.enums.JobType;
 import com.jobfever.model.enums.WorkType;
@@ -22,7 +23,7 @@ public class Job {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int jobId;
-    private LocalDateTime postingDate = LocalDateTime.now();
+    private LocalDateTime postingDate;
 
     @ManyToOne
     private Employer employer;
