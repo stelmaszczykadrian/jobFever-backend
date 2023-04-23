@@ -25,8 +25,8 @@ public class Job {
     private int jobId;
     private LocalDateTime postingDate;
 
-    @ManyToOne
-    private Employer employer;
+    @Column
+    private Integer employer_id;
 
     @NotEmpty
     private String title;

@@ -1,11 +1,13 @@
 package com.jobfever.service;
 
 import com.jobfever.model.Job;
+import com.jobfever.model.User;
 import com.jobfever.model.dto.JobDto;
 import com.jobfever.model.enums.CurrencyType;
 import com.jobfever.model.enums.JobType;
 import com.jobfever.model.enums.WorkType;
 import com.jobfever.repository.JobRepository;
+import com.jobfever.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -14,20 +16,23 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Optional;
 
 @Service
 public class JobService {
 
     private JobRepository jobRepository;
+    private UserRepository userRepository;
 
     @Autowired
-    public JobService(JobRepository jobRepository) {
+    public JobService(JobRepository jobRepository, UserRepository userRepository) {
         this.jobRepository = jobRepository;
+        this.userRepository = userRepository;
     }
 
-    public void addJobOffer(JobDto jobDto) {
+    public void addJobOffer(JobDto jobDto, String email) {
+
+        User user = userRepository.findByEmail(email).orElse(null);
         Job job = Job.builder()
                 .title(jobDto.getTitle())
                 .description(jobDto.getDescription())
@@ -42,6 +47,7 @@ public class JobService {
                 .currencyType(CurrencyType.from(jobDto.getCurrencyType()))
                 .workType(WorkType.from(jobDto.getWorkType()))
                 .postingDate(LocalDateTime.now())
+                .employer_id(user.getEmployer_id())
                 .build();
 
         jobRepository.save(job);
@@ -80,7 +86,7 @@ public class JobService {
         return new PageImpl<>(jobRepository.findAll()
                 .stream()
                 .filter(i ->
-                        i.getEmployer().getId() == employerId)
+                        i.getEmployer_id() == employerId)
                 .toList());
     }
 

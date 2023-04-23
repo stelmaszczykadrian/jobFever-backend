@@ -24,7 +24,7 @@ public class JobController {
 
     @PostMapping
     public ResponseEntity<String> createJob(
-            @Valid @RequestBody JobDto job, BindingResult bindingResult) {
+            @Valid @RequestBody JobDto job, BindingResult bindingResult, @RequestParam String email) {
 
         if (bindingResult.hasErrors()) {
             StringBuilder errorMessageBuilder = new StringBuilder();
@@ -34,7 +34,7 @@ public class JobController {
             String errorMessage = errorMessageBuilder.toString();
             return ResponseEntity.badRequest().body(errorMessage);
         }
-        jobService.addJobOffer(job);
+        jobService.addJobOffer(job, email);
         return ResponseEntity.ok("Job added successfully.");
     }
 
