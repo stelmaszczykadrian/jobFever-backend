@@ -55,7 +55,6 @@ public class JwtService {
             UserDetails userDetails,
             long expiration
     ) {
-        System.out.println(expiration);
         return Jwts
                 .builder()
                 .setClaims(extraClaims)

@@ -26,7 +26,6 @@ public class EmployerController {
     public Optional<Employer> getEmployer(
             @RequestParam("id") int id
     ){
-        System.out.println("jestem tu");
         return employerService.getEmployerById(id);
     }
 
