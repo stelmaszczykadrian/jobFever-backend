@@ -20,4 +20,8 @@ public class AuthenticationResponse {
     private String name;
     @JsonProperty("role")
     private RoleType role;
+    @JsonProperty("employer_id")
+    private int employer_id;
+    @JsonProperty("candidate_id")
+    private int candidate_id;
 }

@@ -75,6 +75,7 @@ public class AuthenticationService {
                 .refreshToken(refreshToken)
                 .name(user.getEmail())
                 .role(user.getRoleType())
+                .employer_id(user.getEmployer_id())
                 .build();
     }
 
@@ -96,6 +97,7 @@ public class AuthenticationService {
                 .refreshToken(refreshToken)
                 .name(user.getEmail())
                 .role(roleType)
+                .employer_id(user.getEmployer_id())
                 .build();
     }
 
