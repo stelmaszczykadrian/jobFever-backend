@@ -1,6 +1,5 @@
 package com.jobfever.auth;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.jobfever.config.JwtService;
 import com.jobfever.model.Candidate;
 import com.jobfever.model.Employer;
@@ -8,7 +7,6 @@ import com.jobfever.model.User;
 import com.jobfever.repository.CandidateRepository;
 import com.jobfever.repository.EmployerRepository;
 import com.jobfever.repository.UserRepository;
-import com.jobfever.role.Role;
 import com.jobfever.role.RoleType;
 import com.jobfever.token.Token;
 import com.jobfever.token.TokenRepository;
@@ -16,7 +14,6 @@ import com.jobfever.token.TokenType;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
-import org.apache.catalina.Store;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -70,12 +67,30 @@ public class AuthenticationService {
         var jwtToken = jwtService.generateToken(user);
         var refreshToken = jwtService.generateRefreshToken(user);
         saveUserToken(savedUser, jwtToken);
+        if (user.getEmployer_id() == null) {
+            return buildCandidateAuthenticationResponse(user, jwtToken, refreshToken);
+        }else{
+            return buildEmployerAuthenticationResponse(user, jwtToken, refreshToken);
+        }
+    }
+
+    private static AuthenticationResponse buildEmployerAuthenticationResponse(User user, String jwtToken, String refreshToken) {
         return AuthenticationResponse.builder()
                 .accessToken(jwtToken)
                 .refreshToken(refreshToken)
                 .name(user.getEmail())
                 .role(user.getRoleType())
                 .employer_id(user.getEmployer_id())
+                .build();
+    }
+
+    private static AuthenticationResponse buildCandidateAuthenticationResponse(User user, String jwtToken, String refreshToken) {
+        return AuthenticationResponse.builder()
+                .accessToken(jwtToken)
+                .refreshToken(refreshToken)
+                .name(user.getEmail())
+                .role(user.getRoleType())
+                .candidate_id(user.getCandidate_id())
                 .build();
     }
 
@@ -92,13 +107,11 @@ public class AuthenticationService {
         var refreshToken = jwtService.generateRefreshToken(user);
         revokeAllUserTokens(user);
         saveUserToken(user, jwtToken);
-        return AuthenticationResponse.builder()
-                .accessToken(jwtToken)
-                .refreshToken(refreshToken)
-                .name(user.getEmail())
-                .role(roleType)
-                .employer_id(user.getEmployer_id())
-                .build();
+        if (user.getEmployer_id() == null) {
+            return buildCandidateAuthenticationResponse(user, jwtToken, refreshToken);
+        }else{
+            return buildEmployerAuthenticationResponse(user, jwtToken, refreshToken);
+        }
     }
 
     private void saveUserToken(User user, String jwtToken) {
