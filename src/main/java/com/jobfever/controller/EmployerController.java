@@ -51,4 +51,11 @@ public class EmployerController {
     ){
         employerService.editProfileById(employerId, employer);
     }
+    @PutMapping("/add-image")
+    public void addImageName(
+            @RequestParam("id") int id,
+            @RequestParam String filename
+    ){
+        employerService.addFilename(id,filename);
+    }
 }

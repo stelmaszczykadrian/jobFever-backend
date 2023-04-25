@@ -34,6 +34,8 @@ public class Employer {
     private String whyWorthWorkingWithUs;
     @Column(length = 500)
     private String localization;
+    @Column(length = 500)
+    private String imgFileName;
     @OneToMany
     private List<Job> job;
 
