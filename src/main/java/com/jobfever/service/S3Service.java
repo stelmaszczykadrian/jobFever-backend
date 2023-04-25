@@ -2,14 +2,14 @@ package com.jobfever.service;
 
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.*;
-import com.amazonaws.util.IOUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 @Service
@@ -41,19 +41,6 @@ public class S3Service implements FileService{
     }
 
     @Override
-    public byte[] downloadFile(String filename) {
-        S3Object object = s3.getObject(bucketName, filename);
-        S3ObjectInputStream objectContent = object.getObjectContent();
-        try {
-            return IOUtils.toByteArray(objectContent);
-        } catch (IOException e) {
-            throw  new RuntimeException(e);
-        }
-
-
-    }
-
-    @Override
     public String deleteFile(String filename) {
 
         s3.deleteObject(bucketName,filename);
@@ -76,5 +63,12 @@ public class S3Service implements FileService{
         fos.write( file.getBytes() );
         fos.close();
         return convFile;
+    }
+    @Override
+    public String getUrl(String filename) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(new Date());
+        calendar.add(Calendar.DATE, 1); // Generated URL will be valid for 24 hours
+        return s3.generatePresignedUrl(bucketName, filename, calendar.getTime()).toString();
     }
 }

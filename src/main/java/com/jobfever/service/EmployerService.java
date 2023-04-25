@@ -50,4 +50,12 @@ public class EmployerService {
     public Employer getEmployerByName(String companyName) {
         return employerRepository.findByCompanyName(companyName);
     }
+
+    public void addFilename(int id, String filename) {
+        Optional<Employer> employerToUpdate = getEmployerById(id);
+        employerToUpdate.ifPresent(e -> {
+            e.setImgFileName(filename);
+        });
+        employerRepository.save(employerToUpdate.orElseThrow(() -> new IllegalArgumentException("Cannot find employer with id: " + id)));
+    }
 }

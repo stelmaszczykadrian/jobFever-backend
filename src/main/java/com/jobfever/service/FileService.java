@@ -7,8 +7,7 @@ import java.util.List;
 public interface FileService {
     String saveFile(MultipartFile file);
 
-    byte[] downloadFile(String filename);
-
+    String getUrl(String filename);
 
     String deleteFile(String filename);
 
