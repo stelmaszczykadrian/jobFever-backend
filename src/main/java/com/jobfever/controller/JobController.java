@@ -1,5 +1,4 @@
 package com.jobfever.controller;
-
 import com.jobfever.model.Job;
 import com.jobfever.model.dto.JobDto;
 import com.jobfever.service.JobService;
