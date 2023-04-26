@@ -44,7 +44,7 @@ import java.util.Collections;
                     .csrf()
                     .disable()
                     .authorizeHttpRequests()
-                    .requestMatchers("/api/authentication/**", "/api/jobs/**", "/api/file/**")
+                    .requestMatchers("/api/authentication/**", "/api/jobs/**", "/api/file/**", "/api/employers/")
                     .permitAll()
                     .anyRequest()
                     .authenticated()
