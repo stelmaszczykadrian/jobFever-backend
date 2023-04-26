@@ -57,24 +57,27 @@ public class JobService {
         return jobRepository.findById(id);
     }
 
-    public void updateJobOffer(int id, Job job) {
-//        Optional<Job> jobToUpdate = getJobById(id);
-//
-//        jobToUpdate.ifPresent(j -> {
-//            j.setTitle(job.getTitle());
-//            j.setDescription(job.getDescription());
-//            j.setTechnicalRequirements(job.getTechnicalRequirements());
-//            j.setResponsibilities(job.getResponsibilities());
-//            j.setWhoWeAreLookingFor(job.getWhoWeAreLookingFor());
-//            j.setBenefits(job.getBenefits());
-//            j.setCity(job.getCity());
-//            j.setAddress(job.getAddress());
-//            j.setSalary(job.getSalary());
-//            j.setCurrency(job.getCurrency());
-//            j.setPostingDate(job.getPostingDate());
-//        });
-//
-//        jobRepository.save(jobToUpdate.orElseThrow(() -> new IllegalArgumentException("Job Offer not found with id: " + id)));
+    public void updateJobOffer(int id, JobDto job) {
+
+        System.out.println("FETCH OK");
+        Optional<Job> jobToUpdate = getJobById(id);
+
+        jobToUpdate.ifPresent(j -> {
+            j.setTitle(job.getTitle());
+            j.setDescription(job.getDescription());
+            j.setTechnicalRequirements(job.getTechnicalRequirements());
+            j.setResponsibilities(job.getResponsibilities());
+            j.setWhoWeAreLookingFor(job.getWhoWeAreLookingFor());
+            j.setBenefits(job.getBenefits());
+            j.setLocation(job.getLocation());
+            j.setSalaryTo(job.getSalaryTo());
+            j.setSalaryFrom(job.getSalaryFrom());
+            j.setJobType(JobType.from(job.getJobType()));
+            j.setCurrencyType(CurrencyType.from(job.getCurrencyType()));
+            j.setWorkType(WorkType.from(job.getWorkType()));
+            jobRepository.save(j);
+
+        });
     }
 
     public void deleteJobOfferById(int id) {
