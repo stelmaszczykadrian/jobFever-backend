@@ -46,7 +46,8 @@ public class JobController {
     @PutMapping("/{id}") // zabezpieczyć żeby employer, employerowi nie zmieniał opisu oferty
     public void updateJobOfferById(
             @PathVariable int id,
-            @RequestBody Job job) {
+            @RequestBody JobDto job
+    ){
         jobService.updateJobOffer(id, job);
     }
 
