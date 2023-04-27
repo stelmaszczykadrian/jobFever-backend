@@ -46,10 +46,12 @@ public class AuthenticationService {
         return getAuthenticationResponse(user);
     }
     public AuthenticationResponse registerEmployer(RegisterRequest request) {
+        String defaultImgFilename = "looogo.png";
         var employer = Employer.builder()
                 .companyName(request.getCompanyName())
                 .nameAndSurname(request.getNameAndSurname())
                 .phoneNumber(request.getPhoneNumber())
+                .imgFileName(defaultImgFilename)
                 .build();
         employerRepository.save(employer);
 
