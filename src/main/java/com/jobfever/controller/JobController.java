@@ -69,6 +69,13 @@ public class JobController {
         }
     }
 
+    @GetMapping("/search")
+    public Page<Job> getJobsBySearchTerm(@RequestParam String searchTerm,
+                                         @RequestParam(defaultValue = "0") int page,
+                                         @RequestParam(defaultValue = "10") int size) {
+        return jobService.getJobsBySearchTerm(searchTerm, page, size);
+    }
+
 
     @GetMapping("/by-employer")
     public Page<Job> getJobsByEmployerId(@RequestParam int id) {
