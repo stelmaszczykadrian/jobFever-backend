@@ -9,10 +9,7 @@ import com.jobfever.model.enums.WorkType;
 import com.jobfever.repository.JobRepository;
 import com.jobfever.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -108,6 +105,12 @@ public class JobService {
     public Page<Job> findJobsByTechnicalRequirementsAndPageAndSize(String language, int page, int size) {
         return jobRepository.findByTechnicalRequirementsContainingIgnoreCase(language,
                 PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "postingDate")));
+    }
+
+    public Page<Job> getJobsBySearchTerm(String searchTerm, int page, int size) {
+        Pageable pageable = PageRequest.of(page, size,Sort.by(Sort.Direction.DESC, "postingDate"));
+        Page<Job> jobsPage = jobRepository.findByTitleContainingIgnoreCase(searchTerm, pageable);
+        return jobsPage;
     }
 }
 
