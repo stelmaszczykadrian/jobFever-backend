@@ -33,7 +33,9 @@ public class AuthenticationService {
     private final AuthenticationManager authenticationManager;
 
     public AuthenticationResponse register(RegisterRequest request) {
+        String defaultImgFilename = "looogo.png";
         var candidate = Candidate.builder()
+                .imgFileName(defaultImgFilename)
                 .build();
         candidateRepository.save(candidate);
 
