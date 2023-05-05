@@ -102,4 +102,12 @@ public class CandidateController {
     public String getFavouritesJobs(@PathVariable("candidate_id") int candidateId) {
         return candidateService.getFavouritesJobsByCandidateId(candidateId);
     }
+
+    @PutMapping("/add-image")
+    public void addImageName(
+            @RequestParam("id") int id,
+            @RequestParam String filename
+    ){
+        candidateService.addFilename(id,filename);
+    }
 }

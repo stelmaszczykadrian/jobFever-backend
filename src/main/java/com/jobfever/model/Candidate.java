@@ -25,4 +25,6 @@ public class Candidate{
     @OneToMany(mappedBy = "candidate", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CandidateExperience> candidateExperiences = new ArrayList<>();
 
+    @Column(length = 500)
+    private String imgFileName;
 }
