@@ -155,4 +155,12 @@ public class CandidateService {
         }
         return false;
     }
+
+    public void addFilename(int id, String filename) {
+        Optional<Candidate> candidateToUpdate = getCandidateById(id);
+        candidateToUpdate.ifPresent(e -> {
+            e.setImgFileName(filename);
+        });
+        candidateRepository.save(candidateToUpdate.orElseThrow(() -> new IllegalArgumentException("Cannot find candidate with id: " + id)));
+    }
 }
