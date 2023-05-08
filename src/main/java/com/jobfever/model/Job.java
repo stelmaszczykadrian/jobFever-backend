@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "jobs")
@@ -27,7 +28,6 @@ public class Job {
 
     @Column
     private Integer employer_id;
-
     @NotEmpty
     private String title;
     @NotEmpty
@@ -39,7 +39,7 @@ public class Job {
     private List<String> technicalRequirements;
 
     @ElementCollection
-    private List<Integer> candidateIds;
+    private Set<Integer> candidateIds;
 
     @NotEmpty
     @Size(max = 2000)
