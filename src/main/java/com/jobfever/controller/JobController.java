@@ -4,6 +4,7 @@ import com.jobfever.model.dto.JobDto;
 import com.jobfever.service.JobService;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
@@ -75,9 +76,11 @@ public class JobController {
         return jobService.findJobByEmployer(id);
     }
 
-    @PutMapping("/{id}/apply")
-    public void applyForJobOffer(@PathVariable int id, @RequestParam int candidateId) {
+    @PutMapping("/apply")
+    public ResponseEntity<?> applyForJobOffer(@RequestParam int id, @RequestParam int candidateId) {
         jobService.applyForJobOffer(id, candidateId);
+        return new ResponseEntity<>("Successfully applied for job.", HttpStatus.OK);
+
     }
 
 
