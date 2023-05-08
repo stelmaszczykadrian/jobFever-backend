@@ -83,6 +83,11 @@ public class JobController {
         return jobService.findJobByEmployer(id);
     }
 
+    @GetMapping("/applied-jobs")
+    public Page<Job> getJobsByCandidateId(@RequestParam int id) {
+        return jobService.findJobByCandidateId(id);
+    }
+
     @PutMapping("/apply")
     public ResponseEntity<?> applyForJobOffer(@RequestParam int id, @RequestParam int candidateId) {
         jobService.applyForJobOffer(id, candidateId);

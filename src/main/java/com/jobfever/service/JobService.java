@@ -112,6 +112,14 @@ public class JobService {
         Page<Job> jobsPage = jobRepository.findByTitleContainingIgnoreCase(searchTerm, pageable);
         return jobsPage;
     }
+
+    public Page<Job> findJobByCandidateId(int candidateId) {
+        return new PageImpl<>(jobRepository.findAll()
+                .stream()
+                .filter(i ->
+                        i.getCandidateIds().contains(candidateId))
+                .toList());
+    }
 }
 
 
