@@ -25,7 +25,7 @@ public class Job {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int jobId;
     private LocalDateTime postingDate;
-
+    private LocalDateTime expirationDate;
     @Column
     private Integer employer_id;
     @NotEmpty

@@ -52,6 +52,7 @@ public class JobService {
                 .currencyType(CurrencyType.from(jobDto.getCurrencyType()))
                 .workType(WorkType.from(jobDto.getWorkType()))
                 .postingDate(LocalDateTime.now())
+                .expirationDate(LocalDateTime.now().plusDays(30))
                 .employer_id(user.getEmployer_id())
                 .build();
 
@@ -64,7 +65,6 @@ public class JobService {
 
     public void updateJobOffer(int id, JobDto job) {
 
-        System.out.println("FETCH OK");
         Optional<Job> jobToUpdate = getJobById(id);
 
         jobToUpdate.ifPresent(j -> {
