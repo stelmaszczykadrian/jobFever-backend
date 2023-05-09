@@ -1,6 +1,8 @@
 package com.jobfever.controller;
+import com.jobfever.model.Candidate;
 import com.jobfever.model.Job;
 import com.jobfever.model.dto.JobDto;
+import com.jobfever.service.CandidateService;
 import com.jobfever.service.JobService;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
@@ -11,15 +13,18 @@ import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
+import java.util.Set;
 
 
 @RequestMapping("/api/jobs")
 @RestController
 public class JobController {
     private JobService jobService;
+    private CandidateService candidateService;
 
-    public JobController(JobService jobService) {
+    public JobController(JobService jobService, CandidateService candidateService) {
         this.jobService = jobService;
+        this.candidateService = candidateService;
     }
 
     @PostMapping
@@ -92,6 +97,19 @@ public class JobController {
     public ResponseEntity<?> applyForJobOffer(@RequestParam int id, @RequestParam int candidateId) {
         jobService.applyForJobOffer(id, candidateId);
         return new ResponseEntity<>("Successfully applied for job.", HttpStatus.OK);
+
+    }
+
+
+    @GetMapping("/{jobId}/candidates")
+    public ResponseEntity<Set<Candidate>> getCandidatesByJobId(
+            @PathVariable int jobId) {
+
+        System.out.println(jobId);
+        Set<Integer> candidateIds = jobService.findCandidatesByJobId(jobId);
+        Set<Candidate> candidates = candidateService.findCandidatesByIds(candidateIds);
+        return new ResponseEntity<>(candidates, HttpStatus.OK);
+
 
     }
 
