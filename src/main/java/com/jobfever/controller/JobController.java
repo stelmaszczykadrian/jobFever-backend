@@ -95,9 +95,7 @@ public class JobController {
 
     @PutMapping("/apply")
     public ResponseEntity<?> applyForJobOffer(@RequestParam int id, @RequestParam int candidateId) {
-        jobService.applyForJobOffer(id, candidateId);
-        return new ResponseEntity<>("Successfully applied for job.", HttpStatus.OK);
-
+        return jobService.applyForJobOffer(id, candidateId);
     }
 
 
