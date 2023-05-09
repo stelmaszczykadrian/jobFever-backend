@@ -9,11 +9,15 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class CandidateService {
+
+
     private EntityManager entityManager;
     private CandidateRepository candidateRepository;
 
@@ -162,5 +166,16 @@ public class CandidateService {
             e.setImgFileName(filename);
         });
         candidateRepository.save(candidateToUpdate.orElseThrow(() -> new IllegalArgumentException("Cannot find candidate with id: " + id)));
+    }
+
+    public Set<Candidate> findCandidatesByIds(Set<Integer> candidateIds) {
+        Set<Candidate> candidates = new HashSet<>();
+        for (Integer id : candidateIds) {
+            Optional<Candidate> optionalCandidate = candidateRepository.findById(id);
+            if (optionalCandidate.isPresent()) {
+                candidates.add(optionalCandidate.get());
+            }
+        }
+        return candidates;
     }
 }

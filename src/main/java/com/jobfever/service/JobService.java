@@ -13,7 +13,9 @@ import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.Collections;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class JobService {
@@ -119,6 +121,17 @@ public class JobService {
                 .filter(i ->
                         i.getCandidateIds().contains(candidateId))
                 .toList());
+    }
+
+
+    public Set<Integer> findCandidatesByJobId(int jobId) {
+        Optional<Job> jobOptional = jobRepository.findById(jobId);
+        if (jobOptional.isPresent()) {
+            Job job = jobOptional.get();
+            return job.getCandidateIds();
+        } else {
+            return Collections.emptySet();
+        }
     }
 }
 
