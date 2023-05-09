@@ -168,6 +168,14 @@ public class CandidateService {
         candidateRepository.save(candidateToUpdate.orElseThrow(() -> new IllegalArgumentException("Cannot find candidate with id: " + id)));
     }
 
+    public void addCvFile(int id, String filename) {
+        Optional<Candidate> candidateToUpdate = getCandidateById(id);
+        candidateToUpdate.ifPresent(e -> {
+            e.setCvFile(filename);
+        });
+        candidateRepository.save(candidateToUpdate.orElseThrow(() -> new IllegalArgumentException("Cannot find candidate with id: " + id)));
+    }
+
     public Set<Candidate> findCandidatesByIds(Set<Integer> candidateIds) {
         Set<Candidate> candidates = new HashSet<>();
         for (Integer id : candidateIds) {
