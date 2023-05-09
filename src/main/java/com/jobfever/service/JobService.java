@@ -1,15 +1,19 @@
 package com.jobfever.service;
 
+import com.jobfever.model.Candidate;
 import com.jobfever.model.Job;
 import com.jobfever.model.User;
 import com.jobfever.model.dto.JobDto;
 import com.jobfever.model.enums.CurrencyType;
 import com.jobfever.model.enums.JobType;
 import com.jobfever.model.enums.WorkType;
+import com.jobfever.repository.CandidateRepository;
 import com.jobfever.repository.JobRepository;
 import com.jobfever.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -22,11 +26,13 @@ public class JobService {
 
     private JobRepository jobRepository;
     private UserRepository userRepository;
+    private CandidateRepository candidateRepository;
 
     @Autowired
-    public JobService(JobRepository jobRepository, UserRepository userRepository) {
+    public JobService(JobRepository jobRepository, UserRepository userRepository, CandidateRepository candidateRepository) {
         this.jobRepository = jobRepository;
         this.userRepository = userRepository;
+        this.candidateRepository = candidateRepository;
     }
 
     public void addJobOffer(JobDto jobDto, String email) {
@@ -92,12 +98,18 @@ public class JobService {
                 .toList());
     }
 
-    public void applyForJobOffer(int id, int candidateId) {
+    public ResponseEntity<String> applyForJobOffer(int id, int candidateId) {
         Optional<Job> jobToUpdate = jobRepository.findById(id);
+        Optional<Candidate> candidate = candidateRepository.findById(candidateId);
+        if (candidate.get().getName() == null){
+            return new ResponseEntity<>("You have to complete personal information first!", HttpStatus.OK);
+        }
         jobToUpdate.ifPresent(j -> {
             j.getCandidateIds().add(candidateId);
         });
         jobRepository.save(jobToUpdate.orElseThrow(() -> new IllegalArgumentException("Job Offer not found with id: " + id)));
+        return new ResponseEntity<>("Successfully applied for job.", HttpStatus.OK);
+
     }
 
     public Page<Job> findJobsByPageAndSizeDescendingPostingDate(int page, int size) {
