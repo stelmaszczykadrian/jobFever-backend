@@ -27,4 +27,7 @@ public class Candidate{
 
     @Column(length = 500)
     private String imgFileName;
+
+    @Column(length = 500)
+    private String cvFile;
 }

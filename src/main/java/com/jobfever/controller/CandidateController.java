@@ -110,4 +110,12 @@ public class CandidateController {
     ){
         candidateService.addFilename(id,filename);
     }
+
+    @PutMapping("/add-cv-file")
+    public void addCvFile(
+            @RequestParam("id") int id,
+            @RequestParam String filename
+    ){
+        candidateService.addCvFile(id, filename);
+    }
 }
