@@ -36,7 +36,8 @@ public class Employer {
     private String localization;
     @Column(length = 500)
     private String imgFileName;
+    @Column(length = 10)
+    private long nip;
     @OneToMany
     private List<Job> job;
-
 }
