@@ -20,6 +20,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import java.io.IOException;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -96,6 +97,36 @@ public class AuthenticationService {
                 .role(user.getRoleType())
                 .candidate_id(user.getCandidate_id())
                 .build();
+    }
+
+    public String forgotPassword(String email){
+        Optional<User> userOptional = repository.findByEmail(email);
+        if (!userOptional.isPresent()) {
+            return "Invalid email id.";
+        }
+        User user = userOptional.get();
+        var jwtToken = jwtService.generateToken(user);
+        revokeAllUserTokens(user);
+        saveUserToken(user, jwtToken);
+        return jwtToken;
+    }
+
+    public String resetPassword(String token, String password) {
+        System.out.println(token);
+        System.out.println(password);
+        Optional<Token> tokenObj = tokenRepository.findByToken(token);
+        Optional<User> userOptional = repository.findByTokensContains(tokenObj.get());
+
+        if (!userOptional.isPresent()) {
+            return "Invalid token.";
+        }
+
+        User user = userOptional.get();
+
+        user.setPassword(passwordEncoder.encode(password));
+
+        repository.save(user);
+        return "Your password successfully updated.";
     }
 
     public AuthenticationResponse authenticate(AuthenticationRequest request, RoleType roleType) {
