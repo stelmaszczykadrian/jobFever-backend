@@ -12,6 +12,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -82,7 +83,6 @@ public class JobController {
         return jobService.getJobsBySearchTerm(searchTerm, page, size);
     }
 
-
     @GetMapping("/by-employer")
     public Page<Job> getJobsByEmployerId(@RequestParam int id) {
         return jobService.findJobByEmployer(id);
@@ -91,6 +91,12 @@ public class JobController {
     @GetMapping("/applied-jobs")
     public Page<Job> getJobsByCandidateId(@RequestParam int id) {
         return jobService.findJobByCandidateId(id);
+    }
+
+    @GetMapping("/job-applications")
+    public List<Job> getJobApplications(@RequestParam(value = "candidateId") int candidateId,
+                                        @RequestParam(value = "jobId") int jobId) {
+        return jobService.findByCandidateIdAndJobId(candidateId, jobId);
     }
 
     @PutMapping("/apply")
@@ -102,8 +108,6 @@ public class JobController {
     @GetMapping("/{jobId}/candidates")
     public ResponseEntity<Set<Candidate>> getCandidatesByJobId(
             @PathVariable int jobId) {
-
-        System.out.println(jobId);
         Set<Integer> candidateIds = jobService.findCandidatesByJobId(jobId);
         Set<Candidate> candidates = candidateService.findCandidatesByIds(candidateIds);
         return new ResponseEntity<>(candidates, HttpStatus.OK);
