@@ -14,6 +14,7 @@ public class Candidate{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    private String email;
     private String name;
     private String city;
     private String linkedin;
