@@ -8,6 +8,7 @@ import com.jobfever.repository.CandidateRepository;
 import com.jobfever.repository.EmployerRepository;
 import com.jobfever.repository.UserRepository;
 import com.jobfever.role.RoleType;
+import com.jobfever.service.SendingEmailService;
 import com.jobfever.token.Token;
 import com.jobfever.token.TokenRepository;
 import com.jobfever.token.TokenType;
@@ -32,6 +33,7 @@ public class AuthenticationService {
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
+    private final SendingEmailService sendingEmailService;
 
     public AuthenticationResponse register(RegisterRequest request) {
         String defaultImgFilename = "looogo.png";
@@ -108,6 +110,7 @@ public class AuthenticationService {
         var jwtToken = jwtService.generateToken(user);
         revokeAllUserTokens(user);
         saveUserToken(user, jwtToken);
+        sendingEmailService.sendSimpleMessage(email,"Password recovery", "http://localhost:3000/recovery?token=" +jwtToken);
         return jwtToken;
     }
 
