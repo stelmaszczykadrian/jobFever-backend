@@ -48,6 +48,7 @@ public class CandidateService {
             c.setCity(candidate.getCity());
             c.setLinkedin(candidate.getLinkedin());
             c.setGithub(candidate.getGithub());
+            c.setEmail(candidate.getEmail());
 
             candidateRepository.save(c);
         });

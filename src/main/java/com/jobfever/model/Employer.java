@@ -12,8 +12,6 @@ import java.util.List;
 
 @Entity
 @Table(name = "employers")
-@SecondaryTable(name = "users", pkJoinColumns = @PrimaryKeyJoinColumn(name = "employer_id"))
-
 @Data
 @Builder
 @AllArgsConstructor
@@ -22,7 +20,6 @@ public class Employer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Column(name="email", table = "users")
     private String email;
     @NotEmpty
     private String companyName;
