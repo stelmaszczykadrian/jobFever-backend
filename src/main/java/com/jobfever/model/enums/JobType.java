@@ -10,28 +10,25 @@ import lombok.Getter;
 public enum JobType {
     @JsonEnumDefaultValue
     NONE,
-    FULL_TIME,
-    PART_TIME,
-    CONTRACT,
-    FREELANCE,
-    INTERNSHIP,
-    TEMPORARY;
+    EMPLOYMENT,
+    COMMISSION,
+    SPECIFIC,
+    B2B,
+    INTERNSHIP;
 
 
 
     public static JobType from(String s){
-        if(s.equals("FULL_TIME")){
-            return FULL_TIME;
-        } else if (s.equals("PART_TIME")) {
-            return PART_TIME;
-        } else if (s.equals("CONTRACT")) {
-            return CONTRACT;
-        } else if (s.equals("FREELANCE")) {
-            return FREELANCE;
+        if(s.equals("EMPLOYMENT")){
+            return EMPLOYMENT;
+        } else if (s.equals("COMMISSION")) {
+            return COMMISSION;
+        } else if (s.equals("SPECIFIC")) {
+            return SPECIFIC;
+        } else if (s.equals("B2B")) {
+            return B2B;
         } else if (s.equals("INTERNSHIP")) {
             return INTERNSHIP;
-        }else if (s.equals("TEMPORARY")){
-            return TEMPORARY;
         }
 
         throw new RuntimeException("Unknown job type.");
