@@ -1,7 +1,7 @@
 package com.jobfever.repository;
 
-import com.jobfever.model.Candidate;
 import com.jobfever.model.User;
+import com.jobfever.token.Token;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -15,4 +15,5 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     Integer findCandidateLastId();
     @Query("SELECT max(ch.id) FROM Employer ch")
     Integer findEmployerLastId();
+    Optional<User> findByTokensContains(Token token);
 }

@@ -28,6 +28,23 @@ public class AuthenticationController {
         return new ResponseEntity<>("Candidate added successfully.", HttpStatus.OK);
     }
 
+    @PostMapping("/forgot-password")
+    public String checkEmail(@RequestParam String email){
+        String response = service.forgotPassword(email);
+
+        if (!response.startsWith("Invalid")) {
+            response = "http://localhost:8080/api/authentication/reset-password?token=" + response;
+        }
+        return response;
+    }
+
+    @PutMapping("/reset-password")
+    public String resetPassword(@RequestParam String token,
+                                @RequestParam String password) {
+
+        return service.resetPassword(token, password);
+    }
+
 
     @PostMapping("/authenticate/candidate")
     public ResponseEntity<AuthenticationResponse> authenticateCandidate(
