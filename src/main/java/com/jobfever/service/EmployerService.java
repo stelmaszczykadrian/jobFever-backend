@@ -37,6 +37,7 @@ public class EmployerService {
                 e.setPhoneNumber(employer.getPhoneNumber());
                 e.setLocalization(employer.getLocalization());
                 e.setNip(employer.getNip());
+                e.setLinkedin(employer.getLinkedin());
             }else{
                 e.setAboutUs(employer.getAboutUs());
             }
