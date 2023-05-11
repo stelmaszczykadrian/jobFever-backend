@@ -110,13 +110,11 @@ public class AuthenticationService {
         var jwtToken = jwtService.generateToken(user);
         revokeAllUserTokens(user);
         saveUserToken(user, jwtToken);
-        sendingEmailService.sendSimpleMessage(email,"Password recovery", "http://localhost:3000/recovery?token=" +jwtToken);
+        sendingEmailService.sendSimpleMessage(email,"Password recovery", "http://localhost:3000/change-password/" +jwtToken);
         return jwtToken;
     }
 
     public String resetPassword(String token, String password) {
-        System.out.println(token);
-        System.out.println(password);
         Optional<Token> tokenObj = tokenRepository.findByToken(token);
         Optional<User> userOptional = repository.findByTokensContains(tokenObj.get());
 
