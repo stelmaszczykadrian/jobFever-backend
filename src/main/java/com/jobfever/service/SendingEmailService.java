@@ -10,15 +10,13 @@ public class SendingEmailService {
     @Autowired
     private JavaMailSender emailSender;
 
-    public void sendSimpleMessage(
-            String to, String subject, String text) {
-
+    public void sendSimpleMessage(String to, String subject, String text) {
         SimpleMailMessage message = new SimpleMailMessage();
+        String messageHeader = "Link to password recovery: ";
         message.setFrom("job.fever.contact@gmail.com");
         message.setTo(to);
         message.setSubject(subject);
-        message.setText(text);
+        message.setText(messageHeader + text);
         emailSender.send(message);
-
     }
 }
