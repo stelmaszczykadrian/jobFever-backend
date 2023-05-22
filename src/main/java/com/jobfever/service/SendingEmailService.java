@@ -10,7 +10,7 @@ public class SendingEmailService {
     @Autowired
     private JavaMailSender emailSender;
 
-    public void sendSimpleMessage(String to, String subject, String text) {
+    public void sendRecoveryMessage(String to, String subject, String text) {
         SimpleMailMessage message = new SimpleMailMessage();
         String messageHeader = "Link to password recovery: ";
         message.setFrom("job.fever.contact@gmail.com");
@@ -18,5 +18,16 @@ public class SendingEmailService {
         message.setSubject(subject);
         message.setText(messageHeader + text);
         emailSender.send(message);
+    }
+    public void sendContactMessage(String name, String email, String phoneNumber, String message){
+        SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
+        simpleMailMessage.setFrom("job.fever.contact@gmail.com");
+        simpleMailMessage.setTo("job.fever.contact@gmail.com");
+        simpleMailMessage.setSubject("Name: " + name + " Email: " + email);
+        simpleMailMessage.setText("Name: " + name +
+                "\nEmail: " + email +
+                "\nPhone number: " + phoneNumber +
+                "\n" + message);
+        emailSender.send(simpleMailMessage);
     }
 }
