@@ -1,6 +1,7 @@
 package com.jobfever.model;
 import jakarta.persistence.*;
 import lombok.*;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,4 +32,7 @@ public class Candidate{
 
     @Column(length = 500)
     private String cvFile;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Rating> rating;
 }
