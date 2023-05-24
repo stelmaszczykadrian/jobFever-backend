@@ -190,16 +190,12 @@ public class CandidateService {
         Optional<Candidate> candidateToUpdate = getCandidateById(id);
         candidateToUpdate.ifPresent(employer -> {
             List<Rating> ratingListToUpdate = employer.getRating();
-            boolean candidateIdExist = ratingListToUpdate.stream().noneMatch(r -> r.getEmployerId() == employerId);
-            System.out.println(candidateIdExist);
-//            if (candidateIdExist) {
                 ratingListToUpdate.add(Rating.builder()
                         .ratingValue(rating)
                                 .employerId(employerId)
                                 .jobId(jobId)
                         .build());
                 employer.setRating(ratingListToUpdate);
-//            }
         });
         candidateRepository.save(candidateToUpdate.orElseThrow(() -> new IllegalArgumentException("Cannot find employer with id:" + id)));
     }
@@ -211,32 +207,14 @@ public class CandidateService {
             candidate = optionalCandidate.get();
         }
         List<Rating> ratingList = candidate.getRating();
-        System.out.println(ratingList.size() + "size");
         if (ratingList.size() > 0) {
             Optional<Integer> sumOfRatings = ratingList.stream()
                     .filter(rating -> rating.getEmployerId() == employerId && rating.getJobId() == jobId)
                     .map(Rating::getRatingValue)
                     .findFirst();
-            return sumOfRatings.get();
-
-//        optionalCandidate.ifPresent(candidate -> {
-//            List<Rating> ratingList = candidate.getRating();
-//            if (ratingList.size() > 0){
-//                float sumOfRatings = ratingList.stream()
-//                        .map(Rating::getRating)
-//                        .mapToInt(Integer::intValue)
-//                        .sum();
-//                return sumOfRatings / ratingList.size();
-//            }
-//        });
-//        AtomicReference<Integer> i = new AtomicReference<>(0);
-//        optionalCandidate.ifPresent(() ->
-//        {
-//            i.set(optionalCandidate.get().getRating().stream()
-//                    .map(Rating::getRatingValue)
-//                    .mapToInt(Integer::intValue)
-//                    .sum());
-//        });
+            if (sumOfRatings.isPresent()){
+                return sumOfRatings.get();
+            }
         }
             return 0;
         }
