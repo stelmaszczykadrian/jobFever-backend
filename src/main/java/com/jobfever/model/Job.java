@@ -33,46 +33,33 @@ public class Job {
     @NotEmpty
     @Size(max = 2000)
     private String description;
-
     @ElementCollection
     @Size(min = 1)
     private List<String> technicalRequirements;
-
     @ElementCollection
     private Set<Integer> candidateIds;
-
     @NotEmpty
     @Size(max = 2000)
     private String responsibilities;
-
     @NotEmpty
     @Size(max = 2000)
     private String whoWeAreLookingFor;
-
     @NotEmpty
     @Size(max = 2000)
     private String benefits;
-
     @NotEmpty
     private String location;
-
     @NotNull
     private float salaryFrom;
-
     @NotNull
     private float salaryTo;
-
     @NotNull
     @Enumerated(EnumType.STRING)
     private JobType jobType;
-
     @NotNull
     @Enumerated(EnumType.STRING)
     private CurrencyType currencyType;
-
     @NotNull
     @Enumerated(EnumType.STRING)
     private WorkType workType;
-
-
 }

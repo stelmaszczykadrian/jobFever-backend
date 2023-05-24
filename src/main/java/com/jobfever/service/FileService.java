@@ -11,6 +11,5 @@ public interface FileService {
 
     String deleteFile(String filename);
 
-
     List<String> listAllFiles();
 }

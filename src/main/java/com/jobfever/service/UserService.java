@@ -10,14 +10,14 @@ import java.util.Optional;
 @Service
 public class UserService {
     UserRepository userRepository;
-    @Autowired
-    public UserService(UserRepository userRepository){
-        this.userRepository =userRepository;}
 
+    @Autowired
+    public UserService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     public boolean isUserExists(String email) {
         Optional<User> user = userRepository.findByEmail(email);
         return user.isPresent();
     }
-
 }

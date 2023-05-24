@@ -19,7 +19,8 @@ public class SendingEmailService {
         message.setText(messageHeader + text);
         emailSender.send(message);
     }
-    public void sendContactMessage(String name, String email, String phoneNumber, String message){
+
+    public void sendContactMessage(String name, String email, String phoneNumber, String message) {
         SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
         simpleMailMessage.setFrom("job.fever.contact@gmail.com");
         simpleMailMessage.setTo("job.fever.contact@gmail.com");

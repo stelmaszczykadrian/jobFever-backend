@@ -1,4 +1,5 @@
 package com.jobfever.auth;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jobfever.config.JwtService;
 import com.jobfever.model.Candidate;
@@ -20,6 +21,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
 import java.io.IOException;
 import java.util.Optional;
 
@@ -50,6 +52,7 @@ public class AuthenticationService {
                 .build();
         return getAuthenticationResponse(user);
     }
+
     public AuthenticationResponse registerEmployer(RegisterRequest request) {
         String defaultImgFilename = "looogo.png";
         var employer = Employer.builder()
@@ -76,7 +79,7 @@ public class AuthenticationService {
         saveUserToken(savedUser, jwtToken);
         if (user.getEmployer_id() == null) {
             return buildCandidateAuthenticationResponse(user, jwtToken, refreshToken);
-        }else{
+        } else {
             return buildEmployerAuthenticationResponse(user, jwtToken, refreshToken);
         }
     }
@@ -101,7 +104,7 @@ public class AuthenticationService {
                 .build();
     }
 
-    public String forgotPassword(String email){
+    public String forgotPassword(String email) {
         Optional<User> userOptional = repository.findByEmail(email);
         if (!userOptional.isPresent()) {
             return "Invalid email id.";
@@ -110,7 +113,7 @@ public class AuthenticationService {
         var jwtToken = jwtService.generateToken(user);
         revokeAllUserTokens(user);
         saveUserToken(user, jwtToken);
-        sendingEmailService.sendRecoveryMessage(email,"Password recovery", "http://localhost:3000/change-password/" +jwtToken);
+        sendingEmailService.sendRecoveryMessage(email, "Password recovery", "http://localhost:3000/change-password/" + jwtToken);
         return jwtToken;
     }
 
@@ -145,7 +148,7 @@ public class AuthenticationService {
         saveUserToken(user, jwtToken);
         if (user.getEmployer_id() == null) {
             return buildCandidateAuthenticationResponse(user, jwtToken, refreshToken);
-        }else{
+        } else {
             return buildEmployerAuthenticationResponse(user, jwtToken, refreshToken);
         }
     }
@@ -179,7 +182,7 @@ public class AuthenticationService {
         final String authHeader = request.getHeader(HttpHeaders.AUTHORIZATION);
         final String refreshToken;
         final String userEmail;
-        if (authHeader == null ||!authHeader.startsWith("Bearer ")) {
+        if (authHeader == null || !authHeader.startsWith("Bearer ")) {
             return;
         }
         refreshToken = authHeader.substring(7);

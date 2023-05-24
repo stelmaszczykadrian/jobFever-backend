@@ -39,6 +39,7 @@ public class User implements UserDetails {
     private Integer employer_id;
     @OneToMany(mappedBy = "user")
     private List<Token> tokens;
+
     @Override
     public String getUsername() {
         return email;
@@ -48,6 +49,7 @@ public class User implements UserDetails {
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority(roleType.name()));
     }
+
     @Override
     public boolean isAccountNonExpired() {
         return true;

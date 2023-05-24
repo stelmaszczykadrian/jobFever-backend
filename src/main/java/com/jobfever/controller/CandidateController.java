@@ -33,8 +33,7 @@ public class CandidateController {
     @PutMapping("/")
     public void editProfileById(
             @RequestParam("id") int candidateId,
-            @RequestBody Candidate candidate
-    ) {
+            @RequestBody Candidate candidate) {
         candidateService.editProfileById(candidateId, candidate);
     }
 
@@ -42,16 +41,14 @@ public class CandidateController {
     public void editCandidateEducationById(
             @PathVariable("candidate-id") int candidateId,
             @RequestBody CandidateEducation candidateEducation,
-            @PathVariable("education-id") int educationId
-    ) {
+            @PathVariable("education-id") int educationId) {
         candidateService.editCandidateEducation(candidateId, educationId, candidateEducation);
     }
 
     @PostMapping("/{candidate-id}/education")
     public int addCandidateEducation(
             @PathVariable("candidate-id") int candidateId,
-            @RequestBody CandidateEducation candidateEducation
-    ) {
+            @RequestBody CandidateEducation candidateEducation) {
         return candidateService.addCandidateEducation(candidateId, candidateEducation);
     }
 
@@ -59,32 +56,28 @@ public class CandidateController {
     public void editCandidateExperienceById(
             @PathVariable("candidate-id") int candidateId,
             @RequestBody CandidateExperience candidateExperience,
-            @PathVariable("experience-id") int experienceId
-    ) {
+            @PathVariable("experience-id") int experienceId) {
         candidateService.editCandidateExperience(candidateId, experienceId, candidateExperience);
     }
 
     @PostMapping("/{candidate-id}/experience")
     public int addCandidateExperience(
             @PathVariable("candidate-id") int candidateId,
-            @RequestBody CandidateExperience candidateExperience
-    ) {
+            @RequestBody CandidateExperience candidateExperience) {
         return candidateService.addCandidateExperience(candidateId, candidateExperience);
     }
 
     @DeleteMapping("/{candidate-id}/experience/{experience-id}")
     public boolean deleteCandidateExperienceById(
             @PathVariable("candidate-id") int candidateId,
-            @PathVariable("experience-id") int experienceId
-    ) {
+            @PathVariable("experience-id") int experienceId) {
         return candidateService.deleteCandidateExperienceById(candidateId, experienceId);
     }
 
     @DeleteMapping("/{candidate-id}/education/{education-id}")
     public boolean deleteCandidateEducationById(
             @PathVariable("candidate-id") int candidateId,
-            @PathVariable("education-id") int educationId
-    ) {
+            @PathVariable("education-id") int educationId) {
         return candidateService.deleteCandidateEducationById(candidateId, educationId);
     }
 
@@ -106,33 +99,31 @@ public class CandidateController {
     @PutMapping("/add-image")
     public void addImageName(
             @RequestParam("id") int id,
-            @RequestParam String filename
-    ){
-        candidateService.addFilename(id,filename);
+            @RequestParam String filename) {
+        candidateService.addFilename(id, filename);
     }
 
     @PutMapping("/add-cv-file")
     public void addCvFile(
             @RequestParam("id") int id,
-            @RequestParam String filename
-    ){
+            @RequestParam String filename) {
         candidateService.addCvFile(id, filename);
     }
+
     @PutMapping("/rating")
     public void addRating(
             @RequestParam("id") int id,
             @RequestParam("rating") int rating,
             @RequestParam("employerId") int employerId,
-            @RequestParam("jobId") int jobId
-    ){
+            @RequestParam("jobId") int jobId) {
         candidateService.addRating(id, rating, employerId, jobId);
     }
+
     @GetMapping("/rating")
     public int getRating(
             @RequestParam("id") int id,
             @RequestParam("employerId") int employerId,
-            @RequestParam("jobId") int jobId
-    ){
+            @RequestParam("jobId") int jobId) {
         return candidateService.getRating(id, employerId, jobId);
     }
 }

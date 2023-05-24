@@ -1,4 +1,5 @@
 package com.jobfever.config;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,13 +19,13 @@ import java.util.Arrays;
 import java.util.Collections;
 
 @Configuration
-    @EnableWebSecurity
-    @RequiredArgsConstructor
-    public class SecurityConfiguration {
+@EnableWebSecurity
+@RequiredArgsConstructor
+public class SecurityConfiguration {
+    private final JwtAuthenticationFilter jwtAuthFilter;
+    private final AuthenticationProvider authenticationProvider;
+    private final LogoutHandler logoutHandler;
 
-        private final JwtAuthenticationFilter jwtAuthFilter;
-        private final AuthenticationProvider authenticationProvider;
-        private final LogoutHandler logoutHandler;
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
@@ -38,32 +39,30 @@ import java.util.Collections;
         source.registerCorsConfiguration("/**", configuration);
         return source;
     }
-        @Bean
-        public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-            http
-                    .csrf()
-                    .disable()
-                    .authorizeHttpRequests()
-                    .requestMatchers("/api/authentication/**", "/api/jobs/**", "/api/file/**", "/api/employers/", "/api/contact/")
-                    .permitAll()
-                    .anyRequest()
-                    .authenticated()
-                    .and()
-                    .sessionManagement()
-                    .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                    .and()
-                    .authenticationProvider(authenticationProvider)
-                    .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
-                    .logout()
-                    .logoutUrl("/api/auth/logout")
-                    .addLogoutHandler(logoutHandler)
-                    .logoutSuccessHandler((request, response, authentication) -> SecurityContextHolder.clearContext())
-                    .and().cors().configurationSource(corsConfigurationSource())
-            ;
 
-            return http.build();
-        }
-
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        http
+                .csrf()
+                .disable()
+                .authorizeHttpRequests()
+                .requestMatchers("/api/authentication/**", "/api/jobs/**", "/api/file/**", "/api/employers/", "/api/contact/")
+                .permitAll()
+                .anyRequest()
+                .authenticated()
+                .and()
+                .sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and()
+                .authenticationProvider(authenticationProvider)
+                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
+                .logout()
+                .logoutUrl("/api/auth/logout")
+                .addLogoutHandler(logoutHandler)
+                .logoutSuccessHandler((request, response, authentication) -> SecurityContextHolder.clearContext())
+                .and().cors().configurationSource(corsConfigurationSource());
+        return http.build();
     }
+}
 
 

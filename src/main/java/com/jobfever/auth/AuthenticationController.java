@@ -1,4 +1,5 @@
 package com.jobfever.auth;
+
 import com.jobfever.role.RoleType;
 import com.jobfever.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -12,16 +13,14 @@ import java.io.IOException;
 
 @RestController
 @RequestMapping("/api/authentication")
-//@CrossOrigin(origins = {"http://localhost:3000/"}, allowedHeaders = "*", allowCredentials = "true")
 @RequiredArgsConstructor
 public class AuthenticationController {
-
     private final AuthenticationService service;
     private final UserService userService;
 
     @PostMapping("/candidates/register")
     public ResponseEntity<?> registerCandidate(@RequestBody RegisterRequest request) {
-        if(userService.isUserExists(request.getEmail())){
+        if (userService.isUserExists(request.getEmail())) {
             return new ResponseEntity<>("Candidate already exists.", HttpStatus.BAD_REQUEST);
         }
         service.register(request);
@@ -29,7 +28,7 @@ public class AuthenticationController {
     }
 
     @PostMapping("/forgot-password")
-    public String checkEmail(@RequestParam String email){
+    public String checkEmail(@RequestParam String email) {
         String response = service.forgotPassword(email);
 
         if (!response.startsWith("Invalid")) {
@@ -41,29 +40,26 @@ public class AuthenticationController {
     @PutMapping("/reset-password")
     public String resetPassword(@RequestParam String token,
                                 @RequestParam String password) {
-
         return service.resetPassword(token, password);
     }
 
 
     @PostMapping("/authenticate/candidate")
     public ResponseEntity<AuthenticationResponse> authenticateCandidate(
-            @RequestBody AuthenticationRequest request
-    ) {
+            @RequestBody AuthenticationRequest request) {
         return ResponseEntity.ok(service.authenticate(request, RoleType.CANDIDATE));
     }
 
     @PostMapping("/authenticate/employer")
     public ResponseEntity<AuthenticationResponse> authenticateEmployer(
-            @RequestBody AuthenticationRequest request
-    ) {
+            @RequestBody AuthenticationRequest request) {
         return ResponseEntity.ok(service.authenticate(request, RoleType.EMPLOYER));
     }
 
 
     @PostMapping("/employers/register")
     public ResponseEntity<?> registerEmployer(@RequestBody RegisterRequest request) {
-        if(userService.isUserExists(request.getEmail())){
+        if (userService.isUserExists(request.getEmail())) {
             return new ResponseEntity<>("Employer already exists.", HttpStatus.BAD_REQUEST);
         }
         service.registerEmployer(request);
@@ -74,10 +70,7 @@ public class AuthenticationController {
     @PostMapping("/refresh-token")
     public void refreshToken(
             HttpServletRequest request,
-            HttpServletResponse response
-    ) throws IOException {
+            HttpServletResponse response) throws IOException {
         service.refreshToken(request, response);
     }
-
-
 }
