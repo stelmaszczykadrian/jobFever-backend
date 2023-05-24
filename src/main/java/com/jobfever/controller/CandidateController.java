@@ -118,4 +118,19 @@ public class CandidateController {
     ){
         candidateService.addCvFile(id, filename);
     }
+    @PutMapping("/rating")
+    public void addRating(
+            @RequestParam("id") int id,
+            @RequestParam("rating") int rating,
+            @RequestParam("employerId") int employerId
+    ){
+        candidateService.addRating(id, rating, employerId);
+    }
+    @GetMapping("/rating")
+    public int getRating(
+            @RequestParam("id") int id,
+            @RequestParam("employerId") int employerId
+    ){
+        return candidateService.getRating(id, employerId);
+    }
 }

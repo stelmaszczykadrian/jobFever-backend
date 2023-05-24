@@ -1,6 +1,7 @@
 package com.jobfever.service;
 
 import com.jobfever.model.Employer;
+import com.jobfever.model.Rating;
 import com.jobfever.repository.EmployerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

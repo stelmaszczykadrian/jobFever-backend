@@ -1,14 +1,11 @@
 package com.jobfever.service;
 
-import com.jobfever.model.Candidate;
-import com.jobfever.model.CandidateEducation;
-import com.jobfever.model.CandidateExperience;
+import com.jobfever.model.*;
 import com.jobfever.repository.CandidateRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
@@ -187,4 +184,60 @@ public class CandidateService {
         }
         return candidates;
     }
-}
+
+    public void addRating(int id, int rating, int employerId) {
+
+        Optional<Candidate> candidateToUpdate = getCandidateById(id);
+        candidateToUpdate.ifPresent(employer -> {
+            List<Rating> ratingListToUpdate = employer.getRating();
+            boolean candidateIdExist = ratingListToUpdate.stream().noneMatch(r -> r.getEmployerId() == employerId);
+            System.out.println(candidateIdExist);
+//            if (candidateIdExist) {
+                ratingListToUpdate.add(Rating.builder()
+                        .ratingValue(rating)
+                                .employerId(employerId)
+                        .build());
+                employer.setRating(ratingListToUpdate);
+//            }
+        });
+        candidateRepository.save(candidateToUpdate.orElseThrow(() -> new IllegalArgumentException("Cannot find employer with id:" + id)));
+    }
+
+    public int getRating(int id, int employerId) {
+        Optional<Candidate> optionalCandidate = getCandidateById(id);
+        Candidate candidate = new Candidate();
+        if (optionalCandidate.isPresent()) {
+            candidate = optionalCandidate.get();
+        }
+        List<Rating> ratingList = candidate.getRating();
+        System.out.println(ratingList.size() + "size");
+        if (ratingList.size() > 0) {
+            Optional<Integer> sumOfRatings = ratingList.stream()
+                    .filter(rating -> rating.getEmployerId() == employerId)
+                    .map(Rating::getRatingValue)
+                    .findFirst();
+            return sumOfRatings.get().intValue();
+
+//        optionalCandidate.ifPresent(candidate -> {
+//            List<Rating> ratingList = candidate.getRating();
+//            if (ratingList.size() > 0){
+//                float sumOfRatings = ratingList.stream()
+//                        .map(Rating::getRating)
+//                        .mapToInt(Integer::intValue)
+//                        .sum();
+//                return sumOfRatings / ratingList.size();
+//            }
+//        });
+//        AtomicReference<Integer> i = new AtomicReference<>(0);
+//        optionalCandidate.ifPresent(() ->
+//        {
+//            i.set(optionalCandidate.get().getRating().stream()
+//                    .map(Rating::getRatingValue)
+//                    .mapToInt(Integer::intValue)
+//                    .sum());
+//        });
+        }
+            return 0;
+        }
+    }
+
