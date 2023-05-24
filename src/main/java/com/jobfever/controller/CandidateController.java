@@ -122,15 +122,17 @@ public class CandidateController {
     public void addRating(
             @RequestParam("id") int id,
             @RequestParam("rating") int rating,
-            @RequestParam("employerId") int employerId
+            @RequestParam("employerId") int employerId,
+            @RequestParam("jobId") int jobId
     ){
-        candidateService.addRating(id, rating, employerId);
+        candidateService.addRating(id, rating, employerId, jobId);
     }
     @GetMapping("/rating")
     public int getRating(
             @RequestParam("id") int id,
-            @RequestParam("employerId") int employerId
+            @RequestParam("employerId") int employerId,
+            @RequestParam("jobId") int jobId
     ){
-        return candidateService.getRating(id, employerId);
+        return candidateService.getRating(id, employerId, jobId);
     }
 }

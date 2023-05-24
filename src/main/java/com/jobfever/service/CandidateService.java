@@ -185,7 +185,7 @@ public class CandidateService {
         return candidates;
     }
 
-    public void addRating(int id, int rating, int employerId) {
+    public void addRating(int id, int rating, int employerId, int jobId) {
 
         Optional<Candidate> candidateToUpdate = getCandidateById(id);
         candidateToUpdate.ifPresent(employer -> {
@@ -196,6 +196,7 @@ public class CandidateService {
                 ratingListToUpdate.add(Rating.builder()
                         .ratingValue(rating)
                                 .employerId(employerId)
+                                .jobId(jobId)
                         .build());
                 employer.setRating(ratingListToUpdate);
 //            }
@@ -203,7 +204,7 @@ public class CandidateService {
         candidateRepository.save(candidateToUpdate.orElseThrow(() -> new IllegalArgumentException("Cannot find employer with id:" + id)));
     }
 
-    public int getRating(int id, int employerId) {
+    public int getRating(int id, int employerId, int jobId) {
         Optional<Candidate> optionalCandidate = getCandidateById(id);
         Candidate candidate = new Candidate();
         if (optionalCandidate.isPresent()) {
@@ -213,10 +214,10 @@ public class CandidateService {
         System.out.println(ratingList.size() + "size");
         if (ratingList.size() > 0) {
             Optional<Integer> sumOfRatings = ratingList.stream()
-                    .filter(rating -> rating.getEmployerId() == employerId)
+                    .filter(rating -> rating.getEmployerId() == employerId && rating.getJobId() == jobId)
                     .map(Rating::getRatingValue)
                     .findFirst();
-            return sumOfRatings.get().intValue();
+            return sumOfRatings.get();
 
 //        optionalCandidate.ifPresent(candidate -> {
 //            List<Rating> ratingList = candidate.getRating();
