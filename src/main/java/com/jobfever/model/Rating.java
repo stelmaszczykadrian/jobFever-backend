@@ -17,5 +17,5 @@ public class Rating {
     private int id;
     int ratingValue;
     int employerId;
-
+    int jobId;
 }
