@@ -6,6 +6,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
@@ -13,8 +14,6 @@ import java.util.Set;
 
 @Service
 public class CandidateService {
-
-
     private EntityManager entityManager;
     private CandidateRepository candidateRepository;
 
@@ -129,7 +128,6 @@ public class CandidateService {
                     .filter(e -> e.getId() == experienceId)
                     .findFirst()
                     .orElse(null);
-
             if (experienceToDelete != null) {
                 experiences.remove(experienceToDelete);
                 candidateRepository.save(candidate);
@@ -148,7 +146,6 @@ public class CandidateService {
                     .filter(e -> e.getId() == educationId)
                     .findFirst()
                     .orElse(null);
-
             if (educationToDelete != null) {
                 educations.remove(educationToDelete);
                 candidateRepository.save(candidate);
@@ -186,16 +183,15 @@ public class CandidateService {
     }
 
     public void addRating(int id, int rating, int employerId, int jobId) {
-
         Optional<Candidate> candidateToUpdate = getCandidateById(id);
         candidateToUpdate.ifPresent(employer -> {
             List<Rating> ratingListToUpdate = employer.getRating();
-                ratingListToUpdate.add(Rating.builder()
-                        .ratingValue(rating)
-                                .employerId(employerId)
-                                .jobId(jobId)
-                        .build());
-                employer.setRating(ratingListToUpdate);
+            ratingListToUpdate.add(Rating.builder()
+                    .ratingValue(rating)
+                    .employerId(employerId)
+                    .jobId(jobId)
+                    .build());
+            employer.setRating(ratingListToUpdate);
         });
         candidateRepository.save(candidateToUpdate.orElseThrow(() -> new IllegalArgumentException("Cannot find employer with id:" + id)));
     }
@@ -212,11 +208,11 @@ public class CandidateService {
                     .filter(rating -> rating.getEmployerId() == employerId && rating.getJobId() == jobId)
                     .map(Rating::getRatingValue)
                     .findFirst();
-            if (sumOfRatings.isPresent()){
+            if (sumOfRatings.isPresent()) {
                 return sumOfRatings.get();
             }
         }
-            return 0;
-        }
+        return 0;
     }
+}
 

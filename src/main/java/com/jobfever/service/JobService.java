@@ -25,7 +25,6 @@ import java.util.stream.Collectors;
 
 @Service
 public class JobService {
-
     private JobRepository jobRepository;
     private UserRepository userRepository;
     private CandidateRepository candidateRepository;
@@ -38,7 +37,6 @@ public class JobService {
     }
 
     public void addJobOffer(JobDto jobDto, String email) {
-
         User user = userRepository.findByEmail(email).orElse(null);
         Job job = Job.builder()
                 .title(jobDto.getTitle())
@@ -57,7 +55,6 @@ public class JobService {
                 .expirationDate(LocalDateTime.now().plusDays(30))
                 .employer_id(user.getEmployer_id())
                 .build();
-
         jobRepository.save(job);
     }
 
@@ -66,9 +63,7 @@ public class JobService {
     }
 
     public void updateJobOffer(int id, JobDto job) {
-
         Optional<Job> jobToUpdate = getJobById(id);
-
         jobToUpdate.ifPresent(j -> {
             j.setTitle(job.getTitle());
             j.setDescription(job.getDescription());
@@ -83,14 +78,12 @@ public class JobService {
             j.setCurrencyType(CurrencyType.from(job.getCurrencyType()));
             j.setWorkType(WorkType.from(job.getWorkType()));
             jobRepository.save(j);
-
         });
     }
 
     public void deleteJobOfferById(int id) {
         jobRepository.deleteById(id);
     }
-
 
     public Page<Job> findJobByEmployer(int employerId) {
         return new PageImpl<>(jobRepository.findAll()
@@ -103,7 +96,7 @@ public class JobService {
     public ResponseEntity<String> applyForJobOffer(int id, int candidateId) {
         Optional<Job> jobToUpdate = jobRepository.findById(id);
         Optional<Candidate> candidate = candidateRepository.findById(candidateId);
-        if (candidate.get().getName() == null){
+        if (candidate.get().getName() == null) {
             return new ResponseEntity<>("You have to complete personal information first!", HttpStatus.OK);
         }
         jobToUpdate.ifPresent(j -> {
@@ -111,7 +104,6 @@ public class JobService {
         });
         jobRepository.save(jobToUpdate.orElseThrow(() -> new IllegalArgumentException("Job Offer not found with id: " + id)));
         return new ResponseEntity<>("Successfully applied for job.", HttpStatus.OK);
-
     }
 
     public Page<Job> findJobsByPageAndSizeDescendingPostingDate(int page, int size) {
@@ -124,7 +116,7 @@ public class JobService {
     }
 
     public Page<Job> getJobsBySearchTerm(String searchTerm, int page, int size) {
-        Pageable pageable = PageRequest.of(page, size,Sort.by(Sort.Direction.DESC, "postingDate"));
+        Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "postingDate"));
         Page<Job> jobsPage = jobRepository.findByTitleContainingIgnoreCase(searchTerm, pageable);
         return jobsPage;
     }
@@ -152,7 +144,6 @@ public class JobService {
         Optional<Job> foundJob = jobRepository.findById(jobId);
         return foundJob.filter(job -> job.getCandidateIds().contains(candidateId)).stream().collect(Collectors.toList());
     }
-
 }
 
 

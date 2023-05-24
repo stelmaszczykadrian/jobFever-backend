@@ -17,9 +17,8 @@ public enum JobType {
     INTERNSHIP;
 
 
-
-    public static JobType from(String s){
-        if(s.equals("EMPLOYMENT")){
+    public static JobType from(String s) {
+        if (s.equals("EMPLOYMENT")) {
             return EMPLOYMENT;
         } else if (s.equals("COMMISSION")) {
             return COMMISSION;
@@ -30,7 +29,6 @@ public enum JobType {
         } else if (s.equals("INTERNSHIP")) {
             return INTERNSHIP;
         }
-
         throw new RuntimeException("Unknown job type.");
     }
 }

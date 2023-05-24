@@ -1,4 +1,5 @@
 package com.jobfever.controller;
+
 import com.jobfever.model.Candidate;
 import com.jobfever.model.Job;
 import com.jobfever.model.dto.JobDto;
@@ -31,7 +32,6 @@ public class JobController {
     @PostMapping
     public ResponseEntity<String> createJob(
             @Valid @RequestBody JobDto job, BindingResult bindingResult, @RequestParam String email) {
-
         if (bindingResult.hasErrors()) {
             StringBuilder errorMessageBuilder = new StringBuilder();
             for (ObjectError error : bindingResult.getAllErrors()) {
@@ -50,11 +50,10 @@ public class JobController {
         return jobService.getJobById(id);
     }
 
-    @PutMapping("/{id}") // zabezpieczyć żeby employer, employerowi nie zmieniał opisu oferty
+    @PutMapping("/{id}")
     public void updateJobOfferById(
             @PathVariable int id,
-            @RequestBody JobDto job
-    ){
+            @RequestBody JobDto job) {
         jobService.updateJobOffer(id, job);
     }
 
@@ -111,9 +110,5 @@ public class JobController {
         Set<Integer> candidateIds = jobService.findCandidatesByJobId(jobId);
         Set<Candidate> candidates = candidateService.findCandidatesByIds(candidateIds);
         return new ResponseEntity<>(candidates, HttpStatus.OK);
-
-
     }
-
-
 }

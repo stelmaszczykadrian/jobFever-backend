@@ -10,16 +10,14 @@ public enum CurrencyType {
     EURO,
     DOLLAR;
 
-
-    public static CurrencyType from(String s){
-        if(s.equals("PLN")){
+    public static CurrencyType from(String s) {
+        if (s.equals("PLN")) {
             return PLN;
         } else if (s.equals("EURO")) {
             return EURO;
         } else if (s.equals("DOLLAR")) {
             return DOLLAR;
         }
-
         throw new RuntimeException("Unknown currency type.");
     }
 }

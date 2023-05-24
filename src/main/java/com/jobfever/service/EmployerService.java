@@ -1,7 +1,6 @@
 package com.jobfever.service;
 
 import com.jobfever.model.Employer;
-import com.jobfever.model.Rating;
 import com.jobfever.repository.EmployerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,7 +18,6 @@ public class EmployerService {
     public Optional<Employer> getEmployerById(int employerId){
         return employerRepository.findById(employerId);
     }
-
 
     public boolean deleteEmployerById(int employerId) {
         if(getEmployerById(employerId).isPresent()){

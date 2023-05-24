@@ -10,10 +10,10 @@ import org.springframework.web.bind.annotation.*;
 public class ContactController {
     @Autowired
     SendingEmailService sendingEmailService;
+
     @PostMapping("/")
     public void sendContactMessage(
-            @RequestBody ContactUs contact
-    ) {
+            @RequestBody ContactUs contact) {
         sendingEmailService.sendContactMessage(contact.getName(), contact.getEmail(), contact.getPhoneNumber(),
                 contact.getMessage());
     }

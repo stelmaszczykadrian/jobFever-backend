@@ -7,8 +7,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import java.util.List;
 
+import java.util.List;
 
 @Entity
 @Table(name = "employers")
@@ -26,7 +26,7 @@ public class Employer {
     @NotEmpty
     private String nameAndSurname;
     private String linkedin;
-    @Min(value=9)
+    @Min(value = 9)
     private int phoneNumber;
     @Enumerated(EnumType.STRING)
     private RoleType roleType;
