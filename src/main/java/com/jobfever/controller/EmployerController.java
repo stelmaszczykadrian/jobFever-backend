@@ -29,13 +29,6 @@ public class EmployerController {
         return employerService.getEmployerById(id);
     }
 
-    @GetMapping("/{employer_id}/job/{job_id}/applicants")
-    public String getJobOfferApplicants(
-            @PathVariable("job_id") int jobId,
-            @PathVariable("employer_id") int employerId) {
-        return employerService.getApplicantsByJobOfferId(employerId, jobId);
-    }
-
     @DeleteMapping("/{employer_id}")
     public boolean deleteEmployerById(
             @PathVariable("employer_id") int employerId) {

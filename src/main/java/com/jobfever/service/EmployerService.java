@@ -45,14 +45,6 @@ public class EmployerService {
         employerRepository.save(employerToUpdate.orElseThrow(() -> new IllegalArgumentException("Cannot find employer with id: " + employerId)));
     }
 
-    //    change this method to use Hibernate! (getApplicantsByJobOfferId)
-    public String getApplicantsByJobOfferId(int employerId, int jobId) {
-        return "";
-    }
-    public Employer getEmployerByName(String companyName) {
-        return employerRepository.findByCompanyName(companyName);
-    }
-
     public void addFilename(int id, String filename) {
         Optional<Employer> employerToUpdate = getEmployerById(id);
         employerToUpdate.ifPresent(e -> {
