@@ -86,16 +86,6 @@ public class CandidateController {
         return candidateService.deleteCandidateById(candidateId);
     }
 
-    @GetMapping("/{candidate_id}/my-jobs")
-    public String getJobsOffersAppliedFor(@PathVariable("candidate_id") int candidateId) {
-        return candidateService.getJobOffersAppliedForByCandidateId(candidateId);
-    }
-
-    @GetMapping("/{candidate_id}/favourites")
-    public String getFavouritesJobs(@PathVariable("candidate_id") int candidateId) {
-        return candidateService.getFavouritesJobsByCandidateId(candidateId);
-    }
-
     @PutMapping("/add-image")
     public void addImageName(
             @RequestParam("id") int id,

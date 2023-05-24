@@ -50,16 +50,6 @@ public class CandidateService {
         });
     }
 
-    //    change this method to use Hibernate!
-    public String getJobOffersAppliedForByCandidateId(int candidateId) {
-        return "Job offers for which applied candidate: " + candidateId;
-    }
-
-    //    change this method to use Hibernate!
-    public String getFavouritesJobsByCandidateId(int candidateId) {
-        return "Favourite job offers of candidate: " + candidateId;
-    }
-
     public void editCandidateEducation(int candidateId, int educationId, CandidateEducation candidateEducation) {
         Optional<Candidate> candidateToUpdate = getCandidateById(candidateId);
         candidateToUpdate.ifPresent(c -> {
