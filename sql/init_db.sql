@@ -1,41 +1,229 @@
-INSERT INTO employers (company_name, name_and_surname, phone_number, email, password, role_type, about_us, why_worth_working_with_us, localization)
-VALUES ('ACME Corp', 'John Doe', 123456789, 'johndoe@example.com', 'password123', 'EMPLOYER', 'We are a software development company specializing in web applications and mobile apps.', 'We offer a great work-life balance and opportunities for growth within the company.', 'New York, NY'),
-('FULLSTACK Corp', 'Jane Smith', 987654321, 'janesmith@example.com', 'password123', 'EMPLOYER', 'We are a technology consulting firm with expertise in data analytics and cloud solutions.', 'We offer flexible work hours and a collaborative team environment.', 'San Francisco, CA'),
-('WEB Inc', 'Bob Johnson', 555555555, 'bjohnson@example.com', 'password123', 'EMPLOYER', 'We are a software company specializing in enterprise resource planning (ERP) systems.', 'We provide great benefits and opportunities for professional development.', 'Chicago, IL'),
-('BACKEND Corp', 'Lisa Wang', 111222333, 'lisawang@example.com', 'password123', 'EMPLOYER', 'We are a startup developing cutting-edge artificial intelligence (AI) software.', 'We offer a dynamic and challenging work environment for those passionate about AI.', 'Boston, MA'),
-('FRONT LLC', 'David Lee', 111888777, 'davidlee@example.com', 'password123', 'EMPLOYER', 'We are a software development company creating mobile apps and custom software solutions.', 'We provide a supportive and fun work culture with opportunities for creativity and innovation.', 'Austin, TX');
+-- Important information:
+--     1. Run this file
+--     2. Password for all created employers is : 111111
 
--- INSERT INTO jobs (title, job_type, location, posting_date, salary_from, salary_to, currency_type, benefits, description, technical_requirements, responsibilities, who_we_are_looking_for, work_options, employer_id)
--- VALUES ('React Developer', 'Full-time', 'New York, USA', '2023-03-29 08:00:00', 10000.0, 14000.0, 'USD', 'Healthcare, 401k matching', 'We are seeking a skilled React Developer to join our team. You will be responsible for developing and maintaining web applications using React and Node.js.', 'React, Node.js', 'Develop and maintain web applications, write clean and maintainable code, collaborate with other developers and stakeholders', 'We are looking for a candidate with a degree in Computer Science or a related field and at least 2 years of experience in web development. Strong skills in React and Node.js are required.', 'On-site', 3),
---        ('Python Developer', 'Full-time', 'London, UK', '2023-03-30 10:00:00', 7000.0, 10000.0, 'EURO', 'Health insurance, pension plan', 'We are seeking a skilled Python Developer to join our team. You will be responsible for developing and maintaining web applications using Python and Django.', 'Python, Django', 'Develop and maintain web applications, write clean and maintainable code, collaborate with other developers and stakeholders', 'We are looking for a candidate with a degree in Computer Science or a related field and at least 3 years of experience in web development. Strong skills in Python and Django are required.', 'On-site', 4),
---        ('Full Stack Developer', 'Contract', 'Berlin, Germany', '2023-03-31 12:00:00', 4000.0, 6000.0, 'EURO', 'Flexible working hours, remote work', 'We are seeking a skilled Full Stack Developer to join our team for a 6-month contract. You will be responsible for developing and maintaining web applications using React and Node.js.', 'React, Node.js', 'Develop and maintain web applications, write clean and maintainable code, collaborate with other developers and stakeholders', 'We are looking for a candidate with at least 2 years of experience in web development. Strong skills in React and Node.js are required. The ability to work independently is a plus.', 'Remote', 2),
---        ('Java Developer', 'Full-time', 'Tokyo, Japan', '2023-04-01 09:00:00', 8000.0, 12000.0, 'USD', 'Medical insurance, transportation allowance', 'We are looking for a talented Java Developer to join our team. You will be responsible for developing and maintaining enterprise-level web applications using Java and Spring.', 'Java, Spring', 'Develop and maintain enterprise-level web applications, write clean and maintainable code, collaborate with other developers and stakeholders', 'We are seeking a candidate with a degree in Computer Science or a related field and at least 3 years of experience in web development. Strong skills in Java and Spring are required.', 'On-site', 1),
---        ('Ruby Developer', 'Full-time', 'Paris, France', '2023-04-02 14:00:00', 5000.0, 8000.0, 'EURO', 'Health insurance, gym membership', 'We are seeking a skilled Ruby Developer to join our team. You will be responsible for developing and maintaining web applications using Ruby on Rails.', 'Ruby on Rails', 'Develop and maintain web applications, write clean and maintainable code, collaborate with other developers and stakeholders', 'We are looking for a candidate with a degree in Computer Science or a related field and at least 2 years of experience in web development. Strong skills in Ruby on Rails are required.', 'On-site', 4),
---        ('PHP Developer', 'Part-time', 'Sydney, Australia', '2023-04-03 16:00:00', 3000.0, 4000.0, 'USD', 'Flexible working hours, remote work', 'We are seeking a skilled PHP Developer to join our team part-time. You will be responsible for developing and maintaining web applications using PHP and Laravel.', 'PHP, Laravel', 'Develop and maintain web applications, write clean and maintainable code, collaborate with other developers and stakeholders', 'We are looking for a candidate with at least 2 years of experience in web development. Strong skills in PHP and Laravel are required.', 'Remote', 5),
---        ('Data Analyst', 'Contract', 'Los Angeles, USA', '2023-04-04 13:00:00', 6000.0, 8000.0, 'USD', 'Paid time off, 401k matching', 'We are looking for a skilled Data Analyst to join our team for a 12-month contract. You will be responsible for collecting, processing, and performing statistical analyses on large datasets using Python and SQL.', 'Python, SQL', 'Collect and process data, perform statistical analyses, collaborate with other analysts and stakeholders', 'We are seeking a candidate with a degree in Data Science, Statistics, Mathematics, or a related field and at least 3 years of experience in data analysis. Strong skills in Python and SQL are required.', 'On-site', 3),
---        ('Java Developer', 'Full-time', 'Tokyo, Japan', '2023-04-01 14:00:00', 60000.0, 90000.0, 'EURO', 'Health insurance, annual bonus', 'We are seeking a skilled Java Developer to join our team. You will be responsible for developing and maintaining web applications using Java and Spring.', 'Java, Spring', 'Develop and maintain web applications, write clean and maintainable code, collaborate with other developers and stakeholders', 'We are looking for a candidate with a degree in Computer Science or a related field and at least 5 years of experience in web development. Strong skills in Java and Spring are required.', 'On-site', 2),
---        ('Front-end Developer', 'Freelance', 'Los Angeles, USA', '2023-04-02 16:00:00', 5000.0, 8000.0, 'EURO', 'Flexible working hours, remote work', 'We are seeking a skilled Front-end Developer to work with us on a freelance basis. You will be responsible for developing and maintaining web applications using React and Vue.js.', 'React, Vue.js', 'Develop and maintain web applications, write clean and maintainable code, collaborate with other developers and stakeholders', 'We are looking for a candidate with at least 2 years of experience in web development. Strong skills in React and Vue.js are required. The ability to work independently is a plus.', 'Remote', 5),
---        ('Database Administrator', 'Full-time', 'Sydney, Australia', '2023-04-03 09:00:00', 8000.0, 12000.0, 'USD', 'Health insurance, gym membership', 'We are seeking a skilled Database Administrator to join our team. You will be responsible for managing and maintaining our database systems.', 'SQL, Oracle', 'Manage and maintain database systems, ensure data security and privacy, collaborate with other IT professionals and stakeholders', 'We are looking for a candidate with a degree in Computer Science or a related field and at least 3 years of experience in database administration. Strong skills in SQL and Oracle are required.', 'On-site', 1),
---        ('Java Developer', 'Full-time', 'Warsaw, Poland', '2023-04-05 09:00:00', 8000.0, 12000.0, 'PLN', 'Private healthcare, Multisport card', 'We are looking for a Java Developer to join our team. You will be responsible for developing and maintaining web applications using Java and Spring.', 'Java, Spring', 'Develop and maintain web applications, write clean and maintainable code, collaborate with other developers and stakeholders', 'We are looking for a candidate with a degree in Computer Science or a related field and at least 3 years of experience in web development. Strong skills in Java and Spring are required.', 'On-site', 4),
---        ('PHP Developer', 'Full-time', 'Krakow, Poland', '2023-04-06 11:00:00', 6000.0, 9000.0, 'PLN', 'Private healthcare, Gym membership', 'We are looking for a PHP Developer to join our team. You will be responsible for developing and maintaining web applications using PHP and Laravel.', 'PHP, Laravel', 'Develop and maintain web applications, write clean and maintainable code, collaborate with other developers and stakeholders', 'We are looking for a candidate with a degree in Computer Science or a related field and at least 2 years of experience in web development. Strong skills in PHP and Laravel are required.', 'On-site', 4),
---        ('React Native Developer', 'Full-time', 'Gdansk, Poland', '2023-04-07 13:00:00', 9000.0, 13000.0, 'PLN', 'Private healthcare, Parking spot', 'We are seeking a skilled React Native Developer to join our team. You will be responsible for developing and maintaining mobile applications using React Native and Node.js.', 'React Native, Node.js', 'Develop and maintain mobile applications, write clean and maintainable code, collaborate with other developers and stakeholders', 'We are looking for a candidate with a degree in Computer Science or a related field and at least 3 years of experience in mobile development. Strong skills in React Native and Node.js are required.', 'On-site', 3),
---        ('C++ Developer', 'Full-time', 'Poznan, Poland', '2023-04-08 14:00:00', 10000.0, 15000.0, 'PLN', 'Private healthcare, Stock options', 'We are seeking a skilled C++ Developer to join our team. You will be responsible for developing and maintaining software applications using C++.', 'C++', 'Develop and maintain software applications, write clean and maintainable code, collaborate with other developers and stakeholders', 'We are looking for a candidate with a degree in Computer Science or a related field and at least 5 years of experience in software development. Strong skills in C++ are required.', 'On-site', 2),
---        ('Java Developer', 'Full-time', 'Paris, France', '2023-04-01 09:00:00', 5000.0, 8000.0, 'EURO', 'Health insurance, gym membership', 'We are looking for an experienced Java Developer to join our team. You will be responsible for developing and maintaining Java-based applications.', 'Java, Spring', 'Develop and maintain Java-based applications, write clean and maintainable code, collaborate with other developers and stakeholders', 'The ideal candidate will have a degree in Computer Science or a related field, with at least 3 years of experience in Java development. Strong skills in Spring are required.', 'On-site', 5),
---        ('PHP Developer', 'Full-time', 'Krakow, Poland', '2023-04-02 11:00:00', 4000.0, 7000.0, 'PLN', 'Private medical care, free parking', 'We are seeking a talented PHP Developer to join our team. You will be responsible for developing and maintaining web applications using PHP and Laravel.', 'PHP, Laravel', 'Develop and maintain web applications, write clean and maintainable code, collaborate with other developers and stakeholders', 'We are looking for a candidate with at least 2 years of experience in web development. Strong skills in PHP and Laravel are required.', 'On-site', 1),
---        ('Software Engineer', 'Part-time', 'San Francisco, USA', '2023-04-03 13:00:00', 6000.0, 9000.0, 'USD', 'Flexible hours, remote work', 'We are seeking a skilled Software Engineer to join our team on a part-time basis. You will be responsible for developing and maintaining software applications using various programming languages and technologies.', 'Python, JavaScript, C++', 'Develop and maintain software applications, write clean and maintainable code, collaborate with other developers and stakeholders', 'The ideal candidate will have a degree in Computer Science or a related field, with at least 4 years of experience in software development. Strong skills in Python, JavaScript, and C++ are required.', 'Remote', 4),
---        ('Mobile App Developer', 'Contract', 'Tokyo, Japan', '2023-04-04 15:00:00', 8000.0, 12000.0, 'USD', 'Housing allowance, transportation subsidy', 'We are seeking a skilled Mobile App Developer to join our team for a 12-month contract. You will be responsible for developing and maintaining mobile applications for Android and iOS platforms.', 'Java, Kotlin, Swift', 'Develop and maintain mobile applications, write clean and maintainable code, collaborate with other developers and stakeholders', 'We are looking for a candidate with at least 3 years of experience in mobile app development. Strong skills in Java, Kotlin, and Swift are required. The ability to work in a team is a plus.', 'On-site', 3),
---        ('Frontend Developer', 'Full-time', 'Madrid, Spain', '2023-04-05 09:00:00', 2500.0, 3500.0, 'EUR', 'Health insurance, gym membership', 'We are looking for a skilled Frontend Developer to join our team. You will be responsible for designing, building, and maintaining web applications using HTML, CSS, and JavaScript.', 'HTML, CSS, JavaScript', 'Design and build web applications, write clean and maintainable code, collaborate with other developers and stakeholders', 'The ideal candidate has a degree in Computer Science or a related field and at least 2 years of experience in web development. Strong skills in HTML, CSS, and JavaScript are required.', 'On-site', 1),
---        ('Java Developer', 'Full-time', 'Warsaw, Poland', '2023-04-05 10:00:00', 8000.0, 12000.0, 'PLN', 'Private medical care, life insurance', 'We are looking for a talented Java Developer to join our team. You will be responsible for developing and maintaining web applications using Java and Spring.', 'Java, Spring', 'Develop and maintain web applications, write clean and maintainable code, collaborate with other developers and stakeholders', 'We are looking for a candidate with a degree in Computer Science or a related field and at least 2 years of experience in web development. Strong skills in Java and Spring are required.', 'Hybrid', 2);
+-- example employers
+WITH inserted_employers AS (
+    INSERT INTO employers (company_name, name_and_surname, phone_number, email, about_us, why_worth_working_with_us, localization, nip, linkedin, role_type, img_file_name)
+        VALUES
+            ('ACME Corp', 'John Doe', 123456789, 'johndoe@example.com', 'We are a software development company specializing in web applications and mobile apps.', 'We offer a great work-life balance and opportunities for growth within the company.', 'New York', 1111111111, '/acme-corp', 'EMPLOYER', 'looogo.png'),
+            ('FULLSTACK Corp', 'Jane Smith', 987654321, 'janesmith@example.com', 'We are a technology consulting firm with expertise in data analytics and cloud solutions.', 'We offer flexible work hours and a collaborative team environment.', 'San Francisco', 2222222222, '/fullstack-corp', 'EMPLOYER', 'looogo.png'),
+            ('WEB Inc', 'Bob Johnson', 555555555, 'bjohnson@example.com', 'We are a software company specializing in enterprise resource planning (ERP) systems.', 'We provide great benefits and opportunities for professional development.', 'Warsaw', 3333333333, '/web-inc', 'EMPLOYER', 'looogo.png'),
+            ('BACKEND Corp', 'Lisa Wang', 111222333, 'lisawang@example.com', 'We are a startup developing cutting-edge artificial intelligence (AI) software.', 'We offer a dynamic and challenging work environment for those passionate about AI.', 'Cracow', 4444444444, '/backend-corp', 'EMPLOYER', 'looogo.png'),
+            ('FRONT LLC', 'David Lee', 111888777, 'davidlee@example.com', 'We are a software development company creating mobile apps and custom software solutions.', 'We provide a supportive and fun work culture with opportunities for creativity and innovation.', 'Tokio', 5555555555, '/front-lcc', 'EMPLOYER', 'looogo.png')
+        RETURNING id, email
+)
+INSERT INTO users (email, password, role_type, employer_id)
+SELECT
+    e.email,
+    '$2a$10$.I0QYwo1jNRPwmY8YjhOauPErcNC041FjFOFmN8U876qzphEas.JO',
+    'EMPLOYER',
+    e.id
+FROM inserted_employers e;
 
 
+-- EMPLOYER 1 job 1
+INSERT INTO jobs (posting_date, expiration_date, employer_id, title, description, responsibilities, who_we_are_looking_for, benefits, location, salary_from, salary_to, job_type, currency_type, work_type)
+        VALUES (
+                   NOW(),
+                   NOW() + INTERVAL '20 days',
+                   (SELECT id FROM employers WHERE company_name = 'ACME Corp' AND name_and_surname = 'John Doe' LIMIT 1),
+                   'Software Developer',
+                   'We are seeking a skilled software developer to join our team.',
+                   'Responsibilities include developing and maintaining software applications, debugging and troubleshooting issues, and collaborating with the team to deliver high-quality code.',
+                   'We are looking for someone with a strong passion for software development, excellent problem-solving skills, and a desire to learn and grow in a dynamic environment.',
+                   'We offer competitive salary, flexible work hours, and opportunities for professional development.',
+                   'New York',
+                   5000.0,
+                   8000.0,
+                   'EMPLOYMENT',
+                   'DOLLAR',
+                   'REMOTE'
+               );
 
-insert into jobs (benefits, currency_type, description, job_type, location, posting_date, responsibilities, salary_from, salary_to, title, who_we_are_looking_for, work_type, employer_id)
-values ('Test1','EURO','TEST123','FULL_TIME','WARSAW','2023-04-05 09:00:00','TEST123', 5000,10000,'CZY DZIAŁA? TEST1', 'NIKOGO', 'REMOTE',1),
-        ('Test2','EURO','TEST123','FULL_TIME','WARSAW','2023-04-05 09:00:00','TEST123', 5000,10000,'CZY DZIAŁA? TEST2', 'NIKOGO', 'REMOTE',1);
 
-INSERT INTO job_technical_requirements(JOB_JOB_ID, TECHNICAL_REQUIREMENTS)
-VALUES (1,'JAVA'),
-       (1,'PYTHON'),
-       (2,'RUBY');
+INSERT INTO employers_job (employer_id, job_job_id)
+SELECT
+    (SELECT id FROM employers WHERE company_name = 'ACME Corp' AND name_and_surname = 'John Doe'),
+    (SELECT max(job_id) FROM jobs);
 
-INSERT INTO candidates VALUES (1, 'Cracow', 'test@test.com', null, null, 'John Doe', '111111', 'CANDIDATE');
+INSERT INTO job_technical_requirements (job_job_id, technical_requirements)
+VALUES
+    ((SELECT max(job_id) FROM jobs), 'Python');
+INSERT INTO job_technical_requirements (job_job_id, technical_requirements)
+VALUES
+    ((SELECT max(job_id) FROM jobs), 'Java');
+INSERT INTO job_technical_requirements (job_job_id, technical_requirements)
+VALUES
+    ((SELECT max(job_id) FROM jobs), 'SQL');
+
+-- EMPLOYER 1 job 2
+INSERT INTO jobs (posting_date, expiration_date, employer_id, title, description, responsibilities, who_we_are_looking_for, benefits, location, salary_from, salary_to, job_type, currency_type, work_type)
+VALUES (
+           NOW(),
+           NOW() + INTERVAL '25 days',
+           (SELECT id FROM employers WHERE company_name = 'ACME Corp' AND name_and_surname = 'John Doe' LIMIT 1),
+           'Web Developer',
+           'ACME Corp is seeking a talented web developer to join our team. As a web developer, you will be responsible for creating and maintaining web applications using cutting-edge technologies. Join us in shaping the digital landscape and delivering innovative solutions to our clients.',
+           'Your responsibilities will include developing and implementing web-based solutions, collaborating with cross-functional teams, and ensuring the scalability and performance of web applications.',
+           'We are looking for a passionate web developer with a strong understanding of front-end and back-end technologies. The ideal candidate should have experience with HTML, CSS, JavaScript, and web frameworks like React or Angular. A keen eye for design and the ability to work collaboratively are essential.',
+           'ACME Corp offers competitive compensation, a great work-life balance, and opportunities for professional growth. Join our team and be part of a dynamic and innovative company.',
+           'Warsaw',
+           6000.0,
+           8000.0,
+           'EMPLOYMENT',
+           'PLN',
+           'REMOTE'
+       );
+
+INSERT INTO employers_job (employer_id, job_job_id)
+SELECT
+    (SELECT id FROM employers WHERE company_name = 'ACME Corp' AND name_and_surname = 'John Doe'),
+    (SELECT max(job_id) FROM jobs);
+
+INSERT INTO job_technical_requirements (job_job_id, technical_requirements)
+VALUES
+    ((SELECT max(job_id) FROM jobs), 'JS');
+INSERT INTO job_technical_requirements (job_job_id, technical_requirements)
+VALUES
+    ((SELECT max(job_id) FROM jobs), '.Net');
+INSERT INTO job_technical_requirements (job_job_id, technical_requirements)
+VALUES
+    ((SELECT max(job_id) FROM jobs), 'SQL');
+
+-- EMPLOYER 1 job 3
+INSERT INTO jobs (posting_date, expiration_date, employer_id, title, description, responsibilities, who_we_are_looking_for, benefits, location, salary_from, salary_to, job_type, currency_type, work_type)
+VALUES (
+           NOW(),
+           NOW() + INTERVAL '26 days',
+           (SELECT id FROM employers WHERE company_name = 'ACME Corp' AND name_and_surname = 'John Doe' LIMIT 1),
+           'Mobile App Developer',
+           'ACME Corp is looking for a skilled mobile app developer to join our team. As a mobile app developer, you will be responsible for creating innovative and user-friendly mobile applications for iOS and Android platforms.',
+           'Your responsibilities will include developing mobile applications from concept to deployment, collaborating with designers and product managers, and ensuring the performance and usability of the apps.',
+           'We are seeking a highly motivated individual with a strong background in mobile app development. The ideal candidate should have experience with iOS and Android frameworks, knowledge of mobile UI/UX principles, and proficiency in programming languages such as Swift or Kotlin.',
+           'ACME Corp offers competitive compensation, flexible work hours, and a supportive work environment. Join our team and contribute to the development of cutting-edge mobile applications.',
+           'Cracow',
+           10000.0,
+           12000.0,
+           'EMPLOYMENT',
+           'PLN',
+           'REMOTE'
+       );
+
+
+INSERT INTO employers_job (employer_id, job_job_id)
+SELECT
+    (SELECT id FROM employers WHERE company_name = 'ACME Corp' AND name_and_surname = 'John Doe'),
+    (SELECT max(job_id) FROM jobs);
+
+INSERT INTO job_technical_requirements (job_job_id, technical_requirements)
+VALUES
+    ((SELECT max(job_id) FROM jobs), 'Swift');
+INSERT INTO job_technical_requirements (job_job_id, technical_requirements)
+VALUES
+    ((SELECT max(job_id) FROM jobs), 'JS');
+INSERT INTO job_technical_requirements (job_job_id, technical_requirements)
+VALUES
+    ((SELECT max(job_id) FROM jobs), 'Java');
+
+-- EMPLOYER 1 job 4
+INSERT INTO jobs (posting_date, expiration_date, employer_id, title, description, responsibilities, who_we_are_looking_for, benefits, location, salary_from, salary_to, job_type, currency_type, work_type)
+VALUES (
+           NOW(),
+           NOW() + INTERVAL '22 days',
+           (SELECT id FROM employers WHERE company_name = 'ACME Corp' AND name_and_surname = 'John Doe' LIMIT 1),
+           'Full Stack Developer',
+           'ACME Corp is seeking a talented full stack developer to join our team. As a full stack developer, you will have the opportunity to work on a wide range of projects, from developing web applications to implementing complex database systems.',
+           'Your responsibilities will include designing and implementing server-side architecture, developing front-end interfaces, and collaborating with cross-functional teams to deliver high-quality software solutions.',
+           'We are looking for a highly skilled full stack developer with expertise in both front-end and back-end development. The ideal candidate should have experience with modern web technologies, databases, and frameworks such as React, Node.js, and MongoDB.',
+           'ACME Corp offers competitive compensation, a collaborative work environment, and opportunities for professional growth. Join our team and make a significant impact on our diverse projects.',
+           'New York',
+           7000.0,
+           9000.0,
+           'EMPLOYMENT',
+           'DOLLAR',
+           'HYBRID'
+       );
+
+INSERT INTO employers_job (employer_id, job_job_id)
+SELECT
+    (SELECT id FROM employers WHERE company_name = 'ACME Corp' AND name_and_surname = 'John Doe'),
+    (SELECT max(job_id) FROM jobs);
+
+INSERT INTO job_technical_requirements (job_job_id, technical_requirements)
+VALUES
+    ((SELECT max(job_id) FROM jobs), 'Scala');
+INSERT INTO job_technical_requirements (job_job_id, technical_requirements)
+VALUES
+    ((SELECT max(job_id) FROM jobs), 'JS');
+INSERT INTO job_technical_requirements (job_job_id, technical_requirements)
+VALUES
+    ((SELECT max(job_id) FROM jobs), 'Pascal');
+
+-- EMPLOYER 1 job 5
+INSERT INTO jobs (posting_date, expiration_date, employer_id, title, description, responsibilities, who_we_are_looking_for, benefits, location, salary_from, salary_to, job_type, currency_type, work_type)
+VALUES (
+           NOW(),
+           NOW() + INTERVAL '20 days',
+           (SELECT id FROM employers WHERE company_name = 'ACME Corp' AND name_and_surname = 'John Doe' LIMIT 1),
+           'UX Designer',
+           'ACME Corp is looking for a talented UX designer to join our team. As a UX designer, you will play a crucial role in creating intuitive and engaging user experiences for our web and mobile applications.',
+           'Your responsibilities will include conducting user research, creating wireframes and prototypes, and collaborating with cross-functional teams to deliver exceptional design solutions.',
+           'We are seeking a creative and detail-oriented UX designer with a strong portfolio showcasing user-centered design solutions. The ideal candidate should have expertise in design tools such as Sketch or Figma, knowledge of UX best practices, and the ability to translate complex concepts into simple and elegant designs.',
+           'ACME Corp offers competitive compensation, a supportive work environment, and opportunities to work on exciting projects. Join our team and contribute to the development of user-centric digital experiences.',
+           'San Francisco',
+           500.0,
+           7000.0,
+           'EMPLOYMENT',
+           'DOLLAR',
+           'ONSITE'
+       );
+
+
+INSERT INTO employers_job (employer_id, job_job_id)
+SELECT
+    (SELECT id FROM employers WHERE company_name = 'ACME Corp' AND name_and_surname = 'John Doe'),
+    (SELECT max(job_id) FROM jobs);
+
+INSERT INTO job_technical_requirements (job_job_id, technical_requirements)
+VALUES
+    ((SELECT max(job_id) FROM jobs), 'Python');
+INSERT INTO job_technical_requirements (job_job_id, technical_requirements)
+VALUES
+    ((SELECT max(job_id) FROM jobs), 'DATA');
+
+-- EMPLOYER 2 job 1
+INSERT INTO jobs (posting_date, expiration_date, employer_id, title, description, responsibilities, who_we_are_looking_for, benefits, location, salary_from, salary_to, job_type, currency_type, work_type)
+VALUES (
+           NOW(),
+           NOW() + INTERVAL '20 days',
+           (SELECT id FROM employers WHERE company_name = 'FULLSTACK Corp' AND name_and_surname = 'Jane Smith' LIMIT 1),
+           'TEST',
+           'We are seeking a skilled software developer to join our team.',
+           'Responsibilities include developing and maintaining software applications, debugging and troubleshooting issues, and collaborating with the team to deliver high-quality code.',
+           'We are looking for someone with a strong passion for software development, excellent problem-solving skills, and a desire to learn and grow in a dynamic environment.',
+           'We offer competitive salary, flexible work hours, and opportunities for professional development.',
+           'New York, NY',
+           2000.0,
+           6000.0,
+           'COMMISSION',
+           'PLN',
+           'REMOTE'
+       );
+
+
+INSERT INTO employers_job (employer_id, job_job_id)
+SELECT
+    (SELECT id FROM employers WHERE company_name = 'FULLSTACK Corp' AND name_and_surname = 'Jane Smith'),
+    (SELECT max(job_id) FROM jobs);
+
+INSERT INTO job_technical_requirements (job_job_id, technical_requirements)
+VALUES
+    ((SELECT max(job_id) FROM jobs), 'C#');
+INSERT INTO job_technical_requirements (job_job_id, technical_requirements)
+VALUES
+    ((SELECT max(job_id) FROM jobs), 'PowerShell');
+
+
+
+
