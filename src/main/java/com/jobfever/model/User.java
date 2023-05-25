@@ -1,6 +1,6 @@
 package com.jobfever.model;
 
-import com.jobfever.role.RoleType;
+import com.jobfever.model.enums.RoleType;
 import com.jobfever.token.Token;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;

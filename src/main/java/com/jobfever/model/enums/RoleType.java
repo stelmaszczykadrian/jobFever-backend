@@ -1,4 +1,4 @@
-package com.jobfever.role;
+package com.jobfever.model.enums;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

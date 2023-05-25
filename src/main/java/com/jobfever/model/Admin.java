@@ -1,6 +1,6 @@
 package com.jobfever.model;
 
-import com.jobfever.role.RoleType;
+import com.jobfever.model.enums.RoleType;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;

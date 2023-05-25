@@ -14,7 +14,6 @@ import java.util.Optional;
 @Service
 public class AdminService {
     private AdminRepository adminRepository;
-    private CandidateRepository candidateRepository;
     private EmployerRepository employerRepository;
 
     @Autowired

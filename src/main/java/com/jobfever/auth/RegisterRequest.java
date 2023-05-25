@@ -15,6 +15,5 @@ public class RegisterRequest {
     private String companyName;
     private String nameAndSurname;
     private int phoneNumber;
-
 }
 

@@ -2,7 +2,6 @@ package com.jobfever.model.enums;
 
 import com.fasterxml.jackson.annotation.JsonEnumDefaultValue;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 
 @Getter
