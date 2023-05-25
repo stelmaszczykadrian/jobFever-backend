@@ -1,7 +1,7 @@
 package com.jobfever.auth;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.jobfever.role.RoleType;
+import com.jobfever.model.enums.RoleType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

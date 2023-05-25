@@ -8,7 +8,7 @@ import com.jobfever.model.User;
 import com.jobfever.repository.CandidateRepository;
 import com.jobfever.repository.EmployerRepository;
 import com.jobfever.repository.UserRepository;
-import com.jobfever.role.RoleType;
+import com.jobfever.model.enums.RoleType;
 import com.jobfever.service.SendingEmailService;
 import com.jobfever.token.Token;
 import com.jobfever.token.TokenRepository;

@@ -1,6 +1,6 @@
 package com.jobfever.auth;
 
-import com.jobfever.role.RoleType;
+import com.jobfever.model.enums.RoleType;
 import com.jobfever.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
