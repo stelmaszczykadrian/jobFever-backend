@@ -4,9 +4,9 @@
 
 <br><br>
 
-## 📖 About this Software
+## 📖 Description
 
-**Job Fever** is an innovative web application that is revolutionizing the job search process in the programming field. Our platform allows users to quickly find the perfect position in their preferred location and field, and it also offers additional features that make the recruiting experience even more comprehensive and interactive.
+**Job Fever** is a web application that supports the job search process in the programming field. Our platform allows users to quickly find the perfect position in their preferred location and field, and it also offers additional features that make the recruiting experience even more comprehensive and interactive.
 
 <br>
 
@@ -29,15 +29,14 @@
 
 ### :star: Technologies
 <ul>
-  <li>React</li></li>
-  <li>Material-UI</li>
-  <li>JavaScript</li>
-  <li>CSS</li>
-  <li>Styled Components</li>
-  <li>HTML</li>
+  <li>Java</li>
+  <li>Spring</li>
+  <li>Hibernate</li>
+  <li>PostgreSQL</li>
 </ul>
 
-<br><br>
+
+<br>
 
 ## 🖼️ Screenshots
 
