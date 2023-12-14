@@ -12,12 +12,9 @@
 
 ### Features:
 <ul>
-  <li>Implementation of authentication and authorization for candidate and employer accounts.</li>
-  <li>Employer Panel: Enables addition, editing, and removal of job postings, company sections, viewing candidate numbers for specific positions, and a section for employers to complete company details.</li>
-  <li>Candidate Panel: Allows uploading and downloading resumes, a section for candidates to input personal information, previous experiences, education, and visibility of applied job offers.</li>
-  <li>Design and implementation of a candidate section allowing them to review job offers they've applied for.</li>
-  <li>Creation of a section for employers to review candidates who have applied for specific job offers.</li>
-  <li>Candidate rating using star-based assessment.</li>
+  <li>Authentication and authorization for candidate and employer using JSON Web Tokens.</li>
+  <li>Employer Panel: addition, editing, and removal of job postings, viewing candidate numbers for specific positions and rating them by star-based assessment, section for employers to complete company details.</li>
+  <li>Candidate Panel: section for candidates to input personal information, previous experiences, education. Uploading and downloading resume. View of job offers they have applied for.</li>
   <li>Storage of profile images candidates and employers and CV files on Amazon AWS.</li>
   <li>Integration of Google reCAPTCHA for security.</li>
   <li>Password reset functionality.</li>
