@@ -26,12 +26,17 @@
 
 ### :star: Technologies
 <ul>
+  <li>React</li></li>
+  <li>Styled Components</li>
+  <li>Material-UI</li>
   <li>Java</li>
   <li>Spring</li>
   <li>Hibernate</li>
   <li>PostgreSQL</li>
+  <li>AWS</li>
+  <li>JWT</li>
+  <li>Atomic Design Pattern</li>
 </ul>
-
 
 <br>
 
@@ -40,9 +45,7 @@
 https://github.com/stelmaszczykadrian/jobFever-frontend/assets/106514178/c07f49ef-ae54-4bde-a11d-8c092295d45d
 
 ### Welcome Page
-
-![JobFever3](https://github.com/stelmaszczykadrian/jobFever-backend/assets/106514178/0e04579e-70bb-4c76-a926-f005aebe3a17)
-
+![vGrX2p3q1D](https://github.com/stelmaszczykadrian/jobFever-frontend/assets/106514178/1cc46c98-016b-4e6e-81fc-215e8b82cf6d)
 ### Page with all job offers
 ![JobFever1](https://github.com/stelmaszczykadrian/jobFever-backend/assets/106514178/6ea9ba9e-568e-42b7-9102-97c9da929c52)
 
@@ -52,6 +55,10 @@ https://github.com/stelmaszczykadrian/jobFever-frontend/assets/106514178/c07f49e
 ### View of job offer
 
 ![JobFever2](https://github.com/stelmaszczykadrian/jobFever-backend/assets/106514178/ae653ff5-90cf-4936-af2c-5c5d1b3d71c2)
+
+### Register employer
+![LNWTIBHS3m](https://github.com/stelmaszczykadrian/jobFever-frontend/assets/106514178/30d1886d-c348-4972-aca0-b674f2b7e8b3)
+
 
 ### Employer profile
 ![JobFever5](https://github.com/stelmaszczykadrian/jobFever-backend/assets/106514178/fa0c1c3a-d750-4d79-a69d-c1931c5e46e4)
